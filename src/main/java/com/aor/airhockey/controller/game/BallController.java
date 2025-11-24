@@ -10,34 +10,33 @@ import java.io.IOException;
 public class BallController extends GameController {
     public BallController(Field field){ super(field); }
 
-    public void moveHeroLeft() {
-        moveHero(getModel().getBall().getPosition().getLeft());
+    public void moveBallLeft() {
+        moveBall(getModel().getBall().getPosition().getLeft());
     }
 
-    public void moveHeroRight() {
-        moveHero(getModel().getBall().getPosition().getRight());
+    public void moveBallRight() {
+        moveBall(getModel().getBall().getPosition().getRight());
     }
 
-    public void moveHeroUp() {
-        moveHero(getModel().getBall().getPosition().getUp());
+    public void moveBallUp() {
+        moveBall(getModel().getBall().getPosition().getUp());
     }
 
-    public void moveHeroDown() {
-        moveHero(getModel().getBall().getPosition().getDown());
+    public void moveBallDown() {
+        moveBall(getModel().getBall().getPosition().getDown());
     }
 
-    private void moveHero(Position position) {
+    private void moveBall(Position position) {
         if (getModel().isEmpty(position)) {
-            getModel().getHero().setPosition(position);
-            if (getModel().isMonster(position)) getModel().getHero().decreaseEnergy();
+            getModel().getBall().setPosition(position);
         }
     }
 
     @Override
     public void step(Game game, GUI.ACTION action, long time) {
-        if (action == GUI.ACTION.UP) moveHeroUp();
-        if (action == GUI.ACTION.RIGHT) moveHeroRight();
-        if (action == GUI.ACTION.DOWN) moveHeroDown();
-        if (action == GUI.ACTION.LEFT) moveHeroLeft();
+        if (action == GUI.ACTION.UP) moveBallUp();
+        if (action == GUI.ACTION.RIGHT) moveBallRight();
+        if (action == GUI.ACTION.DOWN) moveBallDown();
+        if (action == GUI.ACTION.LEFT) moveBallLeft();
     }
 }
