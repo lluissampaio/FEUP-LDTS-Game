@@ -14,7 +14,7 @@ public class FieldController extends GameController {
     private final Disk2Controller disk2Controller;
     private final BallController ballController;
 
-    public FieldController(Field field, DiskController diskController, BallController ballController) {
+    public FieldController(Field field, Disk1Controller disk1Controller, Disk2Controller disk2Controller, BallController ballController) {
         super(field);
         this.disk1Controller = new Disk1Controller(field);
         this.disk2Controller = new Disk2Controller(field);

@@ -10,19 +10,19 @@ import java.io.IOException;
 public class Disk2Controller extends GameController {
     public Disk2Controller(Field field){ super(field); }
 
-    public void moveDisk1Left() {
+    public void moveDisk2Left() {
         moveDisk2(getModel().getDisk2().getPosition().getLeft());
     }
 
-    public void moveDisk1Right() {
+    public void moveDisk2Right() {
         moveDisk2(getModel().getDisk2().getPosition().getRight());
     }
 
-    public void moveDisk1Up() {
+    public void moveDisk2Up() {
         moveDisk2(getModel().getDisk2().getPosition().getUp());
     }
 
-    public void moveDisk1Down() {
+    public void moveDisk2Down() {
         moveDisk2(getModel().getDisk2().getPosition().getDown());
     }
 
@@ -34,9 +34,9 @@ public class Disk2Controller extends GameController {
 
     @Override
     public void step(Game game, GUI.ACTION action, long time) {
-        if (action == GUI.ACTION.UP) moveDisk1Up();
-        if (action == GUI.ACTION.RIGHT) moveDisk1Right();
-        if (action == GUI.ACTION.DOWN) moveDisk1Down();
-        if (action == GUI.ACTION.LEFT) moveDisk1Left();
+        if (action == GUI.ACTION.UP) moveDisk2Up();
+        if (action == GUI.ACTION.RIGHT) moveDisk2Right();
+        if (action == GUI.ACTION.DOWN) moveDisk2Down();
+        if (action == GUI.ACTION.LEFT) moveDisk2Left();
     }
 }
