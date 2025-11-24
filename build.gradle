@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'info.solidsoft.pitest' version '1.6.0'
 }
 
 group = 'com.game.airhockey'
@@ -10,12 +11,22 @@ repositories {
     mavenCentral()
 }
 
+pitest {
+    junit5PluginVersion = '0.12'
+}
+
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.mockito:mockito-core:3.7.7'
+
+    implementation group: 'com.googlecode.lanterna', name: 'lanterna', version: '3.1.1'
+
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        includeEngines('junit-jupiter', 'jqwik')
+    }
 }
