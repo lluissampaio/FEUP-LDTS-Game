@@ -1,4 +1,4 @@
-package com.aor.airhockey.model.game.arena;
+package com.aor.airhockey.model.game.field;
 
 import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.game.elements.Ball;
@@ -7,13 +7,13 @@ import com.aor.airhockey.model.game.elements.Wall;
 
 import java.util.List;
 
-public class Arena {
+public class Field {
     private final int width;
     private final int height;
 
     private List<Wall> walls;
 
-    public Arena(int width, int height) {
+    public Field(int width, int height) {
         this.width = width;
         this.height = height;
     }
@@ -24,22 +24,6 @@ public class Arena {
 
     public int getHeight() {
         return height;
-    }
-
-    public Hero getHero() {
-        return hero;
-    }
-
-    public void setHero(Hero hero) {
-        this.hero = hero;
-    }
-
-    public List<Monster> getMonsters() {
-        return monsters;
-    }
-
-    public void setMonsters(List<Monster> monsters) {
-        this.monsters = monsters;
     }
 
     public List<Wall> getWalls() {
@@ -55,12 +39,5 @@ public class Arena {
             if (wall.getPosition().equals(position))
                 return false;
         return true;
-    }
-
-    public boolean isMonster(Position position) {
-        for (Monster monster : monsters)
-            if (monster.getPosition().equals(position))
-                return true;
-        return false;
     }
 }
