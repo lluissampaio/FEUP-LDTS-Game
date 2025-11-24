@@ -1,4 +1,43 @@
 package com.aor.airhockey.controller.game;
 
-public class BallController {
+import com.aor.airhockey.Game;
+import com.aor.airhockey.gui.GUI;
+import com.aor.airhockey.model.Position;
+import com.aor.airhockey.model.game.field.Field;
+
+import java.io.IOException;
+
+public class BallController extends GameController {
+    public BallController(Field field){ super(field); }
+
+    public void moveHeroLeft() {
+        moveHero(getModel().getBall().getPosition().getLeft());
+    }
+
+    public void moveHeroRight() {
+        moveHero(getModel().getBall().getPosition().getRight());
+    }
+
+    public void moveHeroUp() {
+        moveHero(getModel().getBall().getPosition().getUp());
+    }
+
+    public void moveHeroDown() {
+        moveHero(getModel().getBall().getPosition().getDown());
+    }
+
+    private void moveHero(Position position) {
+        if (getModel().isEmpty(position)) {
+            getModel().getHero().setPosition(position);
+            if (getModel().isMonster(position)) getModel().getHero().decreaseEnergy();
+        }
+    }
+
+    @Override
+    public void step(Game game, GUI.ACTION action, long time) {
+        if (action == GUI.ACTION.UP) moveHeroUp();
+        if (action == GUI.ACTION.RIGHT) moveHeroRight();
+        if (action == GUI.ACTION.DOWN) moveHeroDown();
+        if (action == GUI.ACTION.LEFT) moveHeroLeft();
+    }
 }
