@@ -25,6 +25,6 @@ public abstract class FieldBuilder {
     protected abstract Ball createBall();
 
     protected abstract Disk createDisk();
-
+    
     protected abstract List<Wall> createWalls();
 }
