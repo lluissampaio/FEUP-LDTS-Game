@@ -60,8 +60,12 @@ public class LoaderFieldBuilder extends FieldBuilder {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++) {
-                if (line.charAt(x) == 'D' && count == diskNumber) return new Disk(x, y, 4);
-                count++;
+                if (line.charAt(x) == 'D' ) {
+                    if (count == diskNumber) {
+                        return new Disk(x, y, 4);
+                    }
+                    count++;
+                }
             }
         }
 
