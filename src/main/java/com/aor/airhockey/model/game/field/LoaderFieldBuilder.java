@@ -15,7 +15,7 @@ public class LoaderFieldBuilder extends FieldBuilder {
     private final List<String> lines;
 
     public LoaderFieldBuilder() throws IOException {
-        URL resource = LoaderFieldBuilder.class.getResource("/field/default.fld");
+        URL resource = LoaderFieldBuilder.class.getResource("/field/fullscreen.fld");
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
 
         lines = readLines(br);
