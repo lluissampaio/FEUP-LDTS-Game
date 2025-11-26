@@ -7,7 +7,7 @@ import com.aor.airhockey.model.game.elements.Wall;
 import java.util.List;
 
 public abstract class FieldBuilder {
-    public Field createArena() {
+    public Field createField() {
         Field field = new Field(getWidth(), getHeight());
 
         field.setBall(createBall());
@@ -22,9 +22,9 @@ public abstract class FieldBuilder {
 
     protected abstract int getHeight();
 
-    protected abstract Ball createBall();
+    protected abstract List<Wall> createWalls();
 
     protected abstract Disk createDisk();
-    
-    protected abstract List<Wall> createWalls();
+
+    protected abstract Ball createBall();
 }

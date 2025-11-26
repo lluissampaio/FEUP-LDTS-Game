@@ -1,18 +1,17 @@
 plugins {
     id 'java'
     id 'application'
-    id 'info.solidsoft.pitest' version '1.6.0'
 }
 
-group = 'com.game.airhockey'
+application {
+    mainClass.set("com.aor.airhockey.Game")
+}
+
+group = 'com.aor.airhockey'
 version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-}
-
-pitest {
-    junit5PluginVersion = '0.12'
 }
 
 dependencies {

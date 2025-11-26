@@ -3,7 +3,8 @@ package com.aor.airhockey.controller.menu;
 import com.aor.airhockey.Game;
 import com.aor.airhockey.controller.Controller;
 import com.aor.airhockey.gui.GUI;
-import com.aor.airhockey.model.game.field.LoaderArenaBuilder;
+import com.aor.airhockey.model.game.field.FieldBuilder;
+import com.aor.airhockey.model.game.field.LoaderFieldBuilder;
 import com.aor.airhockey.model.menu.Menu;
 import com.aor.airhockey.states.GameState;
 
@@ -25,7 +26,8 @@ public class MenuController extends Controller<Menu> {
                 break;
             case SELECT:
                 if (getModel().isSelectedExit()) game.setState(null);
-                if (getModel().isSelectedStart()) game.setState(new GameState(new LoaderArenaBuilder(1).createArena()));
+                // if (getModel().isSelectedSingleplayer()) game.setState(new GameState(new LoaderFieldBuilder().createField()));
+                if (getModel().isSelectedMultiplayer()) game.setState(new GameState(new LoaderFieldBuilder().createField()));
         }
     }
 }
