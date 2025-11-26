@@ -20,7 +20,6 @@ public class GameViewer extends Viewer<Field> {
         drawElement(gui, getModel().getBall(), new BallViewer());
         drawElement(gui, getModel().getDisk1(), new DiskViewer());
         drawElement(gui, getModel().getDisk2(), new DiskViewer());
-
     }
 
     private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer) {

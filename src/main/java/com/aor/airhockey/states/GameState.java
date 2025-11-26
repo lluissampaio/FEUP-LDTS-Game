@@ -12,12 +12,8 @@ public class GameState extends State<Field> {
     }
 
     @Override
-    protected Viewer<Field> getViewer() {
-        return new GameViewer(getModel());
-    }
+    protected Viewer<Field> getViewer() { return new GameViewer(getModel()); }
 
     @Override
-    protected Controller<Field> getController() {
-        return new FieldController(getModel());
-    }
+    protected Controller<Field> getController() { return new FieldController(getModel()); }
 }
