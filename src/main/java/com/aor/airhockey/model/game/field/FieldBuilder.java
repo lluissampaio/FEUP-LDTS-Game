@@ -11,8 +11,8 @@ public abstract class FieldBuilder {
         Field field = new Field(getWidth(), getHeight());
 
         field.setBall(createBall());
-        field.setDisk1(createDisk());
-        field.setDisk2(createDisk());
+        field.setDisk1(createDisk(1));
+        field.setDisk2(createDisk(2));
         field.setWalls(createWalls());
 
         return field;
@@ -24,7 +24,7 @@ public abstract class FieldBuilder {
 
     protected abstract List<Wall> createWalls();
 
-    protected abstract Disk createDisk();
+    protected abstract Disk createDisk(int DiskNumber);
 
     protected abstract Ball createBall();
 }

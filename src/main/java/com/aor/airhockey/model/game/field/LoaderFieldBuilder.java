@@ -55,11 +55,14 @@ public class LoaderFieldBuilder extends FieldBuilder {
     }
 
     @Override
-    protected Disk createDisk() {
+    protected Disk createDisk(int diskNumber) {
+        int count = 1;
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
-            for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'D') return new Disk(x, y, 4);
+            for (int x = 0; x < line.length(); x++) {
+                if (line.charAt(x) == 'D' && count == diskNumber) return new Disk(x, y, 4);
+                count++;
+            }
         }
 
         return null;
