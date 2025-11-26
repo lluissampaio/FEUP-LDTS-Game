@@ -28,13 +28,14 @@ public class Disk2Controller extends GameController {
 
     private void moveDisk2(Position position) {
         if (getModel().isEmpty(position)) {
-            getModel().getDisk1().setPosition(position);
+            getModel().getDisk2().setPosition(position);
         }
     }
 
     @Override
     public void step(Game game, GUI.ACTION action, long time) {
         if (action == GUI.ACTION.UP) moveDisk2Up();
+
         if (action == GUI.ACTION.RIGHT) moveDisk2Right();
         if (action == GUI.ACTION.DOWN) moveDisk2Down();
         if (action == GUI.ACTION.LEFT) moveDisk2Left();

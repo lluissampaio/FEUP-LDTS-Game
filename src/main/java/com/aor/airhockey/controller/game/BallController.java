@@ -34,9 +34,6 @@ public class BallController extends GameController {
 
     @Override
     public void step(Game game, GUI.ACTION action, long time) {
-        if (action == GUI.ACTION.UP) moveBallUp();
-        if (action == GUI.ACTION.RIGHT) moveBallRight();
-        if (action == GUI.ACTION.DOWN) moveBallDown();
-        if (action == GUI.ACTION.LEFT) moveBallLeft();
+        //to do
     }
 }
