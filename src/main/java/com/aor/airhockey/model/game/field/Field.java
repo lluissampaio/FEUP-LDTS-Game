@@ -1,9 +1,7 @@
 package com.aor.airhockey.model.game.field;
 
 import com.aor.airhockey.model.Position;
-import com.aor.airhockey.model.game.elements.Ball;
-import com.aor.airhockey.model.game.elements.Disk;
-import com.aor.airhockey.model.game.elements.Wall;
+import com.aor.airhockey.model.game.elements.*;
 
 import java.util.List;
 
@@ -15,6 +13,8 @@ public class Field {
     private Ball ball;
     private Disk disk1;
     private Disk disk2;
+    private List<Halfline> halfline;
+    private List<Goal> goals;
 
     public Field(int width, int height) {
         this.width = width;
@@ -38,6 +38,10 @@ public class Field {
     public Disk getDisk1() { return disk1; }
     public Disk getDisk2() { return disk2; }
 
+    public List<Halfline> getHalfline() {return halfline; }
+
+    public List<Goal> getGoals() { return goals; }
+
     public void setWalls(List<Wall> walls) {
         this.walls = walls;
     }
@@ -47,9 +51,19 @@ public class Field {
     public void setDisk1(Disk disk1) {this.disk1 = disk1;}
     public void setDisk2(Disk disk2) {this.disk2 = disk2;}
 
+    public void setHalfline(List<Halfline> halfline) {this.halfline = halfline;}
+
+    public void setGoals(List<Goal> goals) {this.goals = goals;}
+
     public boolean isEmpty(Position position) {
         for (Wall wall : walls)
             if (wall.getPosition().equals(position))
+                return false;
+        for (Halfline halfline : halfline)
+            if (halfline.getPosition().equals(position))
+                return false;
+        for (Goal goal : goals)
+            if (goal.getPosition().equals(position))
                 return false;
         return true;
     }

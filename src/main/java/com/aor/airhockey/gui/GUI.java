@@ -13,6 +13,8 @@ public interface GUI {
 
     void drawDisk(Position position);
 
+    void drawHalfline(Position position);
+
     void drawText(Position position, String text, String color);
 
     void clear();
