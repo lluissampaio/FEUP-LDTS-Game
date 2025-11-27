@@ -10,13 +10,9 @@ import java.io.IOException;
 public class Disk1Controller extends GameController {
     public Disk1Controller(Field field){ super(field); }
 
-    public void moveDisk1Left() {
-        moveDisk1(getModel().getDisk1().getPosition().getLeft());
-    }
+    public void moveDisk1Left() { moveDisk1(getModel().getDisk1().getPosition().getLeft()); }
 
-    public void moveDisk1Right() {
-        moveDisk1(getModel().getDisk1().getPosition().getRight());
-    }
+    public void moveDisk1Right() { moveDisk1(getModel().getDisk1().getPosition().getRight()); }
 
     public void moveDisk1Up() {
         moveDisk1(getModel().getDisk1().getPosition().getUp());
