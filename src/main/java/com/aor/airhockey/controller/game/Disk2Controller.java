@@ -34,9 +34,9 @@ public class Disk2Controller extends GameController {
 
     @Override
     public void step(Game game, GUI.ACTION action, long time) {
-        if (action == GUI.ACTION.UP) moveDisk2Up();
-        if (action == GUI.ACTION.RIGHT) moveDisk2Right();
-        if (action == GUI.ACTION.DOWN) moveDisk2Down();
-        if (action == GUI.ACTION.LEFT) moveDisk2Left();
+        if (action == GUI.ACTION.KEY_N) moveDisk2Up();
+        if (action == GUI.ACTION.KEY_E) moveDisk2Right();
+        if (action == GUI.ACTION.KEY_S) moveDisk2Down();
+        if (action == GUI.ACTION.KEY_W) moveDisk2Left();
     }
 }
