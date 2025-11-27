@@ -71,16 +71,16 @@ public class LanternaGUI implements GUI {
         if (keyStroke.getKeyType() == KeyType.EOF) return ACTION.QUIT;
         if (keyStroke.getKeyType() == KeyType.Character && (keyStroke.getCharacter() == 'q' || keyStroke.getCharacter() == 'Q')) return ACTION.QUIT;
 
-        if (keyStroke.getKeyType() == KeyType.ArrowUp) return ACTION.KEY_N;
-        if (keyStroke.getKeyType() == KeyType.ArrowRight) return ACTION.KEY_E;
-        if (keyStroke.getKeyType() == KeyType.ArrowDown) return ACTION.KEY_S;
-        if (keyStroke.getKeyType() == KeyType.ArrowLeft) return ACTION.KEY_W;
+        if (keyStroke.getKeyType() == KeyType.ArrowUp) return ACTION.ARR_N;
+        if (keyStroke.getKeyType() == KeyType.ArrowRight) return ACTION.ARR_E;
+        if (keyStroke.getKeyType() == KeyType.ArrowDown) return ACTION.ARR_S;
+        if (keyStroke.getKeyType() == KeyType.ArrowLeft) return ACTION.ARR_W;
         // add the diagonal movements
 
-        if (keyStroke.getKeyType() == KeyType.Character && (keyStroke.getCharacter() == 'w' || keyStroke.getCharacter() == 'W')) return ACTION.ARR_N;
-        if (keyStroke.getKeyType() == KeyType.Character && (keyStroke.getCharacter() == 'a' || keyStroke.getCharacter() == 'A')) return ACTION.ARR_W;
-        if (keyStroke.getKeyType() == KeyType.Character && (keyStroke.getCharacter() == 's' || keyStroke.getCharacter() == 'S')) return ACTION.ARR_S;
-        if (keyStroke.getKeyType() == KeyType.Character && (keyStroke.getCharacter() == 'd' || keyStroke.getCharacter() == 'D')) return ACTION.ARR_E;
+        if (keyStroke.getKeyType() == KeyType.Character && (keyStroke.getCharacter() == 'w' || keyStroke.getCharacter() == 'W')) return ACTION.KEY_N;
+        if (keyStroke.getKeyType() == KeyType.Character && (keyStroke.getCharacter() == 'a' || keyStroke.getCharacter() == 'A')) return ACTION.KEY_W;
+        if (keyStroke.getKeyType() == KeyType.Character && (keyStroke.getCharacter() == 's' || keyStroke.getCharacter() == 'S')) return ACTION.KEY_S;
+        if (keyStroke.getKeyType() == KeyType.Character && (keyStroke.getCharacter() == 'd' || keyStroke.getCharacter() == 'D')) return ACTION.KEY_E;
         // add the diagonal movements
 
         if (keyStroke.getKeyType() == KeyType.Enter) return ACTION.SELECT;
