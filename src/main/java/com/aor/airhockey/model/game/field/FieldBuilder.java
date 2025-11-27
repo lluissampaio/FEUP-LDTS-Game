@@ -1,8 +1,6 @@
 package com.aor.airhockey.model.game.field;
 
-import com.aor.airhockey.model.game.elements.Ball;
-import com.aor.airhockey.model.game.elements.Disk;
-import com.aor.airhockey.model.game.elements.Wall;
+import com.aor.airhockey.model.game.elements.*;
 
 import java.util.List;
 
@@ -14,6 +12,8 @@ public abstract class FieldBuilder {
         field.setDisk1(createDisk(1));
         field.setDisk2(createDisk(2));
         field.setWalls(createWalls());
+        field.setHalfline(createHalfline());
+        field.setGoals(createGoals());
 
         return field;
     }
@@ -27,4 +27,8 @@ public abstract class FieldBuilder {
     protected abstract Disk createDisk(int DiskNumber);
 
     protected abstract Ball createBall();
+
+    protected abstract List<Halfline> createHalfline();
+
+    protected abstract List<Goal> createGoals();
 }

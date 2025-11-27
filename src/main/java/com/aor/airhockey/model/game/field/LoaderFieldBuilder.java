@@ -1,8 +1,6 @@
 package com.aor.airhockey.model.game.field;
 
-import com.aor.airhockey.model.game.elements.Ball;
-import com.aor.airhockey.model.game.elements.Wall;
-import com.aor.airhockey.model.game.elements.Disk;
+import com.aor.airhockey.model.game.elements.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -80,5 +78,31 @@ public class LoaderFieldBuilder extends FieldBuilder {
                 if (line.charAt(x) == 'B') return new Ball(x, y, 2);
         }
         return null;
+    }
+
+    @Override
+    protected List<Halfline> createHalfline() {
+        List<Halfline> halfline = new ArrayList<>();
+
+        for (int y = 0; y < lines.size(); y++) {
+            String line = lines.get(y);
+            for (int x = 0; x < line.length(); x++)
+                if (line.charAt(x) == 'L') halfline.add(new Halfline(x, y));
+        }
+
+        return halfline;
+    }
+
+    @Override
+    protected List<Goal> createGoals() {
+        List<Goal> goals = new ArrayList<>();
+
+        for (int y = 0; y < lines.size(); y++) {
+            String line = lines.get(y);
+            for (int x = 0; x < line.length(); x++)
+                if (line.charAt(x) == 'G') goals.add(new Goal(x, y));
+        }
+
+        return goals;
     }
 }
