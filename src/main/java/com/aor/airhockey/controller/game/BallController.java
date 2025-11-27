@@ -3,6 +3,7 @@ package com.aor.airhockey.controller.game;
 import com.aor.airhockey.Game;
 import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.model.Position;
+import com.aor.airhockey.model.game.elements.Ball;
 import com.aor.airhockey.model.game.field.Field;
 
 import java.io.IOException;
@@ -10,30 +11,23 @@ import java.io.IOException;
 public class BallController extends GameController {
     public BallController(Field field){ super(field); }
 
-    public void moveBallLeft() {
-        moveBall(getModel().getBall().getPosition().getLeft());
-    }
+    private void moveBall() {
 
-    public void moveBallRight() {
-        moveBall(getModel().getBall().getPosition().getRight());
-    }
+        Ball ball = getModel().getBall();
 
-    public void moveBallUp() {
-        moveBall(getModel().getBall().getPosition().getUp());
-    }
+        double velX = ball.getVelX();
+        double velY = ball.getVelY();
 
-    public void moveBallDown() {
-        moveBall(getModel().getBall().getPosition().getDown());
-    }
+        int newX = (int)Math.round(ball.getPosition().getX() + velX);
+        int newY = (int)Math.round(ball.getPosition().getY() + velY);
 
-    private void moveBall(Position position) {
-        if (getModel().isEmpty(position)) {
-            getModel().getBall().setPosition(position);
-        }
+        Position newPosition = new Position(newX, newY);
+
+        ball.setPosition(newPosition);
     }
 
     @Override
     public void step(Game game, GUI.ACTION action, long time) {
-        //to do
+        moveBall();
     }
 }
