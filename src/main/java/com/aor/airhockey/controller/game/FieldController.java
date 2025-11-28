@@ -32,6 +32,5 @@ public class FieldController extends GameController {
             disk2Controller.step(game, actionSet, time);
             ballController.step(game, actionSet, time);
         }
-       // maybe clearing the actions is
     }
 }
