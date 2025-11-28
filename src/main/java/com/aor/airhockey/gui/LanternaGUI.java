@@ -10,6 +10,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.swing.AWTTerminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
@@ -20,19 +21,26 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.Set;
 
 public class LanternaGUI implements GUI {
     private final Screen screen;
+    private final AWTTerminalFrame terminal;
+    private final Set<ACTION> actionSet = new HashSet<>();
 
-    public LanternaGUI(Screen screen) {
+    public LanternaGUI(Screen screen, Terminal terminal) {
         this.screen = screen;
+        this.terminal = (AWTTerminalFrame) terminal;
     }
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException {
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
-        Terminal terminal = createTerminal(width, height, fontConfig);
+        // Terminal terminal = createTerminal(width, height, fontConfig);
+        this.terminal = (AWTTerminalFrame) createTerminal(width, height, fontConfig);
         this.screen = createScreen(terminal);
+
+        startKeyListeners();
     }
 
     private Screen createScreen(Terminal terminal) throws IOException {
@@ -68,30 +76,51 @@ public class LanternaGUI implements GUI {
         return fontConfig;
     }
 
+    private void startKeyListeners() {
+
+        ((AWTTerminalFrame) terminal).getComponent(0).addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                addKeyEvent(e);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                removeKeyEvent(e);
+            }
+        });
+    }
+
+    private void addKeyEvent(KeyEvent e) {
+        ACTION action = keyEventToAction(e);
+        if (action != ACTION.NONE) actionSet.add(action);
+    }
+
+    private void removeKeyEvent(KeyEvent e) {
+        ACTION action = keyEventToAction(e);
+        if (action != ACTION.NONE) actionSet.remove(action);
+    }
+
+    private ACTION keyEventToAction(KeyEvent e) {
+        int keycode = e.getKeyCode();
+
+        return switch (keycode) {
+            case KeyEvent.VK_UP -> ACTION.ARR_N;
+            case KeyEvent.VK_LEFT -> ACTION.ARR_W;
+            case KeyEvent.VK_DOWN -> ACTION.ARR_S;
+            case KeyEvent.VK_RIGHT -> ACTION.ARR_E;
+            case KeyEvent.VK_Q -> ACTION.QUIT;
+            case KeyEvent.VK_W -> ACTION.KEY_N;
+            case KeyEvent.VK_A -> ACTION.KEY_W;
+            case KeyEvent.VK_S -> ACTION.KEY_S;
+            case KeyEvent.VK_D -> ACTION.KEY_E;
+            case KeyEvent.VK_ENTER -> ACTION.SELECT;
+            default -> ACTION.NONE;
+        };
+    }
+
     public Set<ACTION> getNextActions() throws IOException {
-
-
-        KeyStroke keyStroke = screen.pollInput();
-        if (keyStroke == null) return ACTION.NONE;
-
-        if (keyStroke.getKeyType() == KeyType.EOF) return ACTION.QUIT;
-        if (keyStroke.getKeyType() == KeyType.Character && (keyStroke.getCharacter() == 'q' || keyStroke.getCharacter() == 'Q')) return ACTION.QUIT;
-
-        if (keyStroke.getKeyType() == KeyType.ArrowUp) return ACTION.ARR_N;
-        if (keyStroke.getKeyType() == KeyType.ArrowRight) return ACTION.ARR_E;
-        if (keyStroke.getKeyType() == KeyType.ArrowDown) return ACTION.ARR_S;
-        if (keyStroke.getKeyType() == KeyType.ArrowLeft) return ACTION.ARR_W;
-        // add the diagonal movements
-
-        if (keyStroke.getKeyType() == KeyType.Character && (keyStroke.getCharacter() == 'w' || keyStroke.getCharacter() == 'W')) return ACTION.KEY_N;
-        if (keyStroke.getKeyType() == KeyType.Character && (keyStroke.getCharacter() == 'a' || keyStroke.getCharacter() == 'A')) return ACTION.KEY_W;
-        if (keyStroke.getKeyType() == KeyType.Character && (keyStroke.getCharacter() == 's' || keyStroke.getCharacter() == 'S')) return ACTION.KEY_S;
-        if (keyStroke.getKeyType() == KeyType.Character && (keyStroke.getCharacter() == 'd' || keyStroke.getCharacter() == 'D')) return ACTION.KEY_E;
-        // add the diagonal movements
-
-        if (keyStroke.getKeyType() == KeyType.Enter) return ACTION.SELECT;
-
-        return ACTION.NONE;
+        return new HashSet<>(actionSet); // we need to return of the current state of actionSet
     }
 
     @Override

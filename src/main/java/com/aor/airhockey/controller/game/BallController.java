@@ -7,6 +7,7 @@ import com.aor.airhockey.model.game.elements.Ball;
 import com.aor.airhockey.model.game.field.Field;
 
 import java.io.IOException;
+import java.util.Set;
 
 public class BallController extends GameController {
     public BallController(Field field){ super(field); }
@@ -27,7 +28,7 @@ public class BallController extends GameController {
     }
 
     @Override
-    public void step(Game game, GUI.ACTION action, long time) {
+    public void step(Game game, Set<GUI.ACTION> actionSet, long time) {
         moveBall();
     }
 }

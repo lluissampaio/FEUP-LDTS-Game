@@ -26,11 +26,9 @@ public interface GUI {
 
     // ARR -> stands for the arrow keys actions
     // KEY -> stands for the "wasd" keys actions
-    enum ACTION { ARR_N, ARR_NE , ARR_E, ARR_SE, ARR_S, ARR_SW, ARR_W, ARR_NW,
-            KEY_N, KEY_NE, KEY_E, KEY_SE, KEY_S, KEY_SW, KEY_W, KEY_NW,
-                NONE, QUIT, SELECT}
+    enum ACTION { ARR_N, ARR_E, ARR_S, ARR_W, KEY_N, KEY_E, KEY_S, KEY_W, NONE, QUIT, SELECT}
 }
 
-// NW  N  NE
-// W      E
-// SW  S  SE
+//    N
+// W     E
+//    S
