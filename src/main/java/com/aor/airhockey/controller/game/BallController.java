@@ -26,6 +26,10 @@ public class BallController extends GameController {
         ball.setPosition(newPosition);
     }
 
+    private bool collisionWithWall(Position position) {
+        if ()
+    }
+
     @Override
     public void step(Game game, GUI.ACTION action, long time) {
         moveBall();
