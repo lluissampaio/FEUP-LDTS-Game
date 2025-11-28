@@ -36,7 +36,6 @@ public class Disk1Controller extends GameController {
            if (action == GUI.ACTION.KEY_E) moveDisk1Right();
            if (action == GUI.ACTION.KEY_S) moveDisk1Down();
            if (action == GUI.ACTION.KEY_W) moveDisk1Left();
-           // add diagonal movement
        }
     }
 }

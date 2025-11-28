@@ -40,7 +40,6 @@ public class Disk2Controller extends GameController {
             if (action == GUI.ACTION.ARR_E) moveDisk2Right();
             if (action == GUI.ACTION.ARR_S) moveDisk2Down();
             if (action == GUI.ACTION.ARR_W) moveDisk2Left();
-            // add diagonal movement
         }
     }
 }
