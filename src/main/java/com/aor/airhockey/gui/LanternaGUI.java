@@ -88,6 +88,11 @@ public class LanternaGUI implements GUI {
             public void keyReleased(KeyEvent e) {
                 removeKeyEvent(e);
             }
+//
+//            @Override
+//            public void keyTyped(KeyEvent e) {
+//                handleKeyTyped(e);
+//            }
         });
     }
 
