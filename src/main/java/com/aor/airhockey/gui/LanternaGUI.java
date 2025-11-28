@@ -89,26 +89,22 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawBall(Position position) {
-        drawCharacter(position.getX(), position.getY(), 'B', "#FFFFFF");
-    }
+    public void drawBall(Position position) {drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), 'B', "#FFFFFF");}
 
     @Override
-    public void drawWall(Position position) {
-        drawCharacter(position.getX(), position.getY(), '#', "#3333FF");
-    }
+    public void drawWall(Position position) {drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), '#', "#3333FF");}
 
     @Override
-    public void drawDisk(Position position) { drawCharacter(position.getX(), position.getY(), 'D', "#FF0000");}
+    public void drawDisk(Position position) { drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), 'D', "#FF0000");}
 
     @Override
-    public void drawHalfline(Position position) {drawCharacter(position.getX(), position.getY(), 'L', "#808080");}
+    public void drawHalfline(Position position) {drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), 'L', "#808080");}
 
     @Override
     public void drawText(Position position, String text, String color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setForegroundColor(TextColor.Factory.fromString(color));
-        tg.putString(position.getX(), position.getY(), text);
+        tg.putString((int)Math.round(position.getX()), (int)Math.round(position.getY()), text);
     }
 
     private void drawCharacter(int x, int y, char c, String color) {

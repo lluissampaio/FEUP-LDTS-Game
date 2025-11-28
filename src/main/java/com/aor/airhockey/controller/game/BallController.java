@@ -18,8 +18,8 @@ public class BallController extends GameController {
         double velX = ball.getVelX();
         double velY = ball.getVelY();
 
-        int newX = (int)Math.round(ball.getPosition().getX() + velX);
-        int newY = (int)Math.round(ball.getPosition().getY() + velY);
+        double newX = ball.getPosition().getX() + velX;
+        double newY = ball.getPosition().getY() + velY;
 
         Position newPosition = new Position(newX, newY);
 
