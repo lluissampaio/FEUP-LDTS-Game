@@ -15,6 +15,12 @@ public class BallController extends GameController {
 
         Ball ball = getModel().getBall();
 
+        if (collisionWithHorWall(ball.getPosition())) {
+            ball.setVelY(-ball.getVelY());
+        }
+        else if (collisionWithVerWall(ball.getPosition())) {
+            ball.setVelX(-ball.getVelX());
+        }
         double velX = ball.getVelX();
         double velY = ball.getVelY();
 
@@ -26,8 +32,22 @@ public class BallController extends GameController {
         ball.setPosition(newPosition);
     }
 
-    private bool collisionWithWall(Position position) {
-        if ()
+    private boolean collisionWithHorWall(Position position) {
+        Position roundDownPosition = new Position(Math.round(position.getX()), Math.round(position.getY() + 0.5));
+        Position roundUpPosition = new Position(Math.round(position.getX()), Math.round(position.getY() - 0.5));
+        if (getModel().isWall(roundUpPosition) || getModel().isWall(roundDownPosition)) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean collisionWithVerWall(Position position) {
+        Position roundLeftPosition = new Position(Math.round(position.getX() - 0.5), Math.round(position.getY()));
+        Position roundRightPosition = new Position(Math.round(position.getX() + 0.5), Math.round(position.getY()));
+        if (getModel().isWall(roundLeftPosition) || getModel().isWall(roundRightPosition)) {
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -16,7 +16,7 @@ public class Ball extends Element {
     }
 
     public Ball(int x, int y, int r) {
-        this(x, y, r, 0.0, 0.0);
+        this(x, y, r, 0.3, 0.2);
     }
 
     public double getVelX() { return this.velX; }
