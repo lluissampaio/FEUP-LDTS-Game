@@ -11,12 +11,16 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Set;
 
 public class LanternaGUI implements GUI {
     private final Screen screen;
@@ -64,7 +68,9 @@ public class LanternaGUI implements GUI {
         return fontConfig;
     }
 
-    public ACTION getNextAction() throws IOException {
+    public Set<ACTION> getNextActions() throws IOException {
+
+
         KeyStroke keyStroke = screen.pollInput();
         if (keyStroke == null) return ACTION.NONE;
 

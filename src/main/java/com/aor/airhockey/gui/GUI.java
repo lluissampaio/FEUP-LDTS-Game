@@ -3,9 +3,10 @@ package com.aor.airhockey.gui;
 import com.aor.airhockey.model.Position;
 
 import java.io.IOException;
+import java.util.Set;
 
 public interface GUI {
-    ACTION getNextAction() throws IOException;
+    Set<ACTION> getNextActions() throws IOException;
 
     void drawBall(Position position);
 

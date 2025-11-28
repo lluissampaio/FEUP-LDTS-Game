@@ -8,6 +8,7 @@ import com.aor.airhockey.model.menu.Options;
 import com.aor.airhockey.states.MenuState;
 
 import java.io.IOException;
+import java.util.Set;
 
 public class OptionsController extends Controller<Options> {
     public OptionsController(Options options) {
@@ -15,16 +16,18 @@ public class OptionsController extends Controller<Options> {
     }
 
     @Override
-    public void step(Game game, GUI.ACTION action, long time) throws IOException {
-        switch (action) {
-            case ARR_N, KEY_N:
-                getModel().previousEntry();
-                break;
-            case ARR_S, KEY_S:
-                getModel().nextEntry();
-                break;
-            case SELECT:
-                if (getModel().isSelectedExit()) game.setState(new MenuState(new Menu()));
+    public void step(Game game, Set<GUI.ACTION> actionSet, long time) throws IOException {
+        for (GUI.ACTION action : actionSet) {
+            switch (action) {
+                case ARR_N, KEY_N:
+                    getModel().previousEntry();
+                    break;
+                case ARR_S, KEY_S:
+                    getModel().nextEntry();
+                    break;
+                case SELECT:
+                    if (getModel().isSelectedExit()) game.setState(new MenuState(new Menu()));
+            }
         }
     }
 }

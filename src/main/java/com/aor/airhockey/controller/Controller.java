@@ -1,6 +1,8 @@
 package com.aor.airhockey.controller;
 
 import java.io.IOException;
+import java.util.Set;
+
 import com.aor.airhockey.Game;
 import com.aor.airhockey.gui.GUI;
 
@@ -15,5 +17,5 @@ public abstract class Controller<T> {
         return model;
     }
 
-    public abstract void step(Game game, GUI.ACTION action, long time) throws IOException;
+    public abstract void step(Game game, Set<GUI.ACTION> actionSet, long time) throws IOException;
 }

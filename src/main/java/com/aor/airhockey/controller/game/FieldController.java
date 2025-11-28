@@ -8,6 +8,7 @@ import com.aor.airhockey.model.menu.Menu;
 import com.aor.airhockey.states.MenuState;
 
 import java.io.IOException;
+import java.util.Set;
 
 public class FieldController extends GameController {
     private final Disk1Controller disk1Controller;
@@ -22,13 +23,15 @@ public class FieldController extends GameController {
         this.ballController = new BallController(field);
     }
 
-    public void step(Game game, GUI.ACTION action, long time) throws IOException {
-        if (action == GUI.ACTION.QUIT)
+    public void step(Game game, Set<GUI.ACTION> actionSet, long time) throws IOException {
+        if (actionSet.contains(GUI.ACTION.QUIT)) {
             game.setState(new MenuState(new Menu()));
-        else {
-            disk1Controller.step(game, action, time);
-            disk2Controller.step(game, action, time);
-            ballController.step(game, action, time);
         }
+        else {
+            disk1Controller.step(game, actionSet, time);
+            disk2Controller.step(game, actionSet, time);
+            ballController.step(game, actionSet, time);
+        }
+       // maybe clearing the actions is
     }
 }

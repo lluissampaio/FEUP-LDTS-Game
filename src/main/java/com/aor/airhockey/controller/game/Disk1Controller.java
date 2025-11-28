@@ -6,6 +6,7 @@ import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.game.field.Field;
 
 import java.io.IOException;
+import java.util.Set;
 
 public class Disk1Controller extends GameController {
     public Disk1Controller(Field field){ super(field); }
@@ -29,11 +30,13 @@ public class Disk1Controller extends GameController {
     }
 
     @Override
-    public void step(Game game, GUI.ACTION action, long time) {
-        if (action == GUI.ACTION.KEY_N) moveDisk1Up();
-        if (action == GUI.ACTION.KEY_E) moveDisk1Right();
-        if (action == GUI.ACTION.KEY_S) moveDisk1Down();
-        if (action == GUI.ACTION.KEY_W) moveDisk1Left();
-        // add diagonal movement
+    public void step(Game game, Set<GUI.ACTION> actionSet, long time) {
+       for (GUI.ACTION action : actionSet) {
+           if (action == GUI.ACTION.KEY_N) moveDisk1Up();
+           if (action == GUI.ACTION.KEY_E) moveDisk1Right();
+           if (action == GUI.ACTION.KEY_S) moveDisk1Down();
+           if (action == GUI.ACTION.KEY_W) moveDisk1Left();
+           // add diagonal movement
+       }
     }
 }
