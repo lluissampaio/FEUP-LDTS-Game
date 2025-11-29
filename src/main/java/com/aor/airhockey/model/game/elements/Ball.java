@@ -1,21 +1,21 @@
 package com.aor.airhockey.model.game.elements;
 
 public class Ball extends Element {
-    private int radius;
+    private double radius;
     private double velX;
     private double velY;
 
     public void setRadius(int r) { this.radius = r; }
-    public int getRadius() { return this.radius; }
+    public double getRadius() { return this.radius; }
 
-    public Ball(int x, int y, int r, double vx, double vy) {
+    public Ball(double x, double y, double r, double vx, double vy) {
         super(x, y);
         this.radius = r;
         this.velX = vx;
         this.velY = vy;
     }
 
-    public Ball(int x, int y, int r) {
+    public Ball(double x, double y, double r) {
         this(x, y, r, 0.3, 0.2);
     }
 
