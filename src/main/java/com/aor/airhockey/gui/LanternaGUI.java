@@ -71,7 +71,7 @@ public class LanternaGUI implements GUI {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         ge.registerFont(font);
 
-        Font loadedFont = font.deriveFont(Font.BOLD, 25);
+        Font loadedFont = font.deriveFont(Font.BOLD, 20);
         AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
         return fontConfig;
     }
@@ -138,7 +138,7 @@ public class LanternaGUI implements GUI {
     public void drawDisk(Position position) { drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), 'D', "#FF0000");}
 
     @Override
-    public void drawHalfline(Position position) {drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), 'L', "#808080");}
+    public void drawHalfline(Position position) {drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), '|', "#808080");}
 
     @Override
     public void drawText(Position position, String text, String color) {
