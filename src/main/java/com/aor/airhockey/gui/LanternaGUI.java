@@ -28,6 +28,7 @@ public class LanternaGUI implements GUI {
     private final Screen screen;
     private final AWTTerminalFrame terminal;
     private final Set<ACTION> actionSet = new HashSet<>();
+    private final String backgroundColor = "#0F172A";
 
     public LanternaGUI(Screen screen, Terminal terminal) {
         this.screen = screen;
@@ -36,7 +37,6 @@ public class LanternaGUI implements GUI {
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException {
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
-        // Terminal terminal = createTerminal(width, height, fontConfig);
         this.terminal = (AWTTerminalFrame) createTerminal(width, height, fontConfig);
         this.screen = createScreen(terminal);
 
@@ -148,18 +148,23 @@ public class LanternaGUI implements GUI {
     public void drawText(Position position, String text, String color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setForegroundColor(TextColor.Factory.fromString(color));
+        tg.setBackgroundColor(TextColor.Factory.fromString(this.backgroundColor));
         tg.putString(position.getX(), position.getY(), text);
     }
 
     private void drawCharacter(int x, int y, char c, String color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setForegroundColor(TextColor.Factory.fromString(color));
+        tg.setBackgroundColor(TextColor.Factory.fromString(this.backgroundColor));
         tg.putString(x, y + 1, "" + c);
     }
 
     @Override
     public void clear() {
         screen.clear();
+        TextGraphics tg = screen.newTextGraphics();
+        tg.setBackgroundColor(TextColor.Factory.fromString(this.backgroundColor));
+        tg.fill(' ');
     }
 
     @Override

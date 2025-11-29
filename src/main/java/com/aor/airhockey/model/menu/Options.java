@@ -8,7 +8,7 @@ public class Options {
     private int currentEntry = 0;
 
     public Options() {
-        this.entries = Arrays.asList("Ball color", "Disk color", "Wall color", "Exit");
+        this.entries = Arrays.asList("Ball color", "Disk color", "Wall color", "Back");
     }
 
     public void nextEntry() {
