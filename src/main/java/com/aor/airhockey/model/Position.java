@@ -3,10 +3,10 @@ package com.aor.airhockey.model;
 import java.util.Objects;
 
 public class Position {
-    private final int x;
-    private final int y;
+    private final double x;
+    private final double y;
 
-    public Position(int x, int y) {
+    public Position(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -28,9 +28,9 @@ public class Position {
     }
 
     // getters
-    public int getX() { return x; }
+    public double getX() { return x; }
 
-    public int getY() { return y; }
+    public double getY() { return y; }
 
     @Override
     public boolean equals(Object o) {

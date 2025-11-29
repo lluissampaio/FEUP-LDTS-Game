@@ -67,4 +67,11 @@ public class Field {
                 return false;
         return true;
     }
+
+    public boolean isWall(Position position) {
+        for (Wall wall : walls)
+            if (wall.getPosition().equals(position))
+                return true;
+        return false;
+    }
 }
