@@ -53,7 +53,7 @@ Our implementation of this pattern was done as follows:
 
 **Consequences**
 
-The implementation of the MVC design pattern brought us the followinig benefits:
+The implementation of the MVC design pattern brought us the following benefits:
 
 - Ease of maintaining and testing;
 - Separate responsibilities - also, it makes it more difficult the for us to break the Single Responsibility Principle from SOLID;
