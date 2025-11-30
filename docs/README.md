@@ -90,8 +90,8 @@ The implementation of the MVC design pattern brought us the following benefits:
 
 ### SELF-EVALUATION
 
-Everyone in the group contributed equally to this project.
+After considering the work done by each of us, we think this is a fair distribution of how much each of us worked. Luís did have an urgency, so he couldn´t contribute more.
 
-- João Morete: 33.3%
-- Luís Sampaio: 33.3%
-- Tomás Vieira: 33.3%
+- João Morete: 40%
+- Luís Sampaio: 20%
+- Tomás Vieira: 40%
