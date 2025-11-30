@@ -20,14 +20,7 @@ This game was developed by João Morete (up202403406@up.pt), Luís Sampaio (up20
 
 ### DESIGN
 
-> This section should be organized in different subsections, each describing a different design problem that you had to solve during the project. Each subsection should be organized in four different parts:
-
-- **Problem in Context.** The description of the design context and the concrete problem that motivated the instantiation of the pattern. Someone else other than the original developer should be able to read and understand all the motivations for the decisions made. When refering to the implementation before the pattern was applied, don’t forget to [link to the relevant lines of code](https://help.github.com/en/articles/creating-a-permanent-link-to-a-code-snippet) in the appropriate version.
-- **The Pattern.** Identify the design pattern to be applied, why it was selected and how it is a good fit considering the existing design context and the problem at hand.
-- **Implementation.** Show how the pattern roles, operations and associations were mapped to the concrete design classes. Illustrate it with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be [relative links](https://help.github.com/en/articles/about-readmes#relative-links-and-image-paths-in-readme-files)). When doing this, always point to the latest version of the code.
-- **Consequences.** Benefits and liabilities of the design after the pattern instantiation, eventually comparing these consequences with those of alternative solutions.
-
-#### GENERAL DEVELOPEMENT PATTERN - MVC
+#### GENERAL DEVELOPMENT PATTERN - MVC
 
 **Problem in Context** 
 
@@ -36,43 +29,34 @@ The game required the Model-View-Controller design pattern. Mainly to ensure eas
 **The Pattern**
 
 MVC is a very used pattern that separates the game into three components:
-- M (Model) - is responsible for the changes in the game such as creating the elements
 
-**Example of one of such subsections**:
-
-------
-
-#### THE JUMP ACTION OF THE KANGAROOBOY SHOULD BEHAVE DIFFERENTLY DEPENDING ON ITS STATE
-
-**Problem in Context**
-
-There was a lot of scattered conditional logic when deciding how the KangarooBoy should behave when jumping, as the jumps should be different depending on the items that came to his possession during the game (an helix will alow him to fly, driking a potion will allow him to jump double the height, etc.). This is a violation of the **Single Responsability Principle**. We could concentrate all the conditional logic in the same method to circumscribe the issue to that one method but the **Single Responsability Principle** would still be violated.
-
-**The Pattern**
-
-We have applied the **State** pattern. This pattern allows you to represent different states with different subclasses. We can switch to a different state of the application by switching to another implementation (i.e., another subclass). This pattern allowed to address the identified problems because […].
+- M (Model) - is responsible for the changes in the game such as creating the instances of the classes.
+- V (View) - is responsible for the visual representation of the objects created by Model.
+- C (Controller) - is responsible for the processing the elements movements during the game.
 
 **Implementation**
 
-The following figure shows how the pattern’s roles were mapped to the application classes.
+Our implementation of this pattern was done as follows: 
 
-![img](https://www.fe.up.pt/~arestivo/page/img/examples/lpoo/state.svg)
+- Model -> (model) Position;
+            (model.game.elements) Ball, Disk, Element, Goal, Halfline, Wall;
+            (model.game.field) Field, FieldBuilder, LoaderFieldBuilder;
+            (model.menu) Menu, Options.
 
-These classes can be found in the following files:
+- View -> (viewer) Viewer;
+           (viewer.game) BallViewer, DiskViewer, ElementViewer, GameViewer, HalflineViewer, WallViewer;
+           (viewer.menu) MenuViewer, OptionsViewer.
 
-- [Character](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/Character.java)
-- [JumpAbilityState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/JumpAbilityState.java)
-- [DoubleJumpState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/DoubleJumpState.java)
-- [HelicopterState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/HelicopterState.java)
-- [IncreasedGravityState](https://web.fe.up.pt/~arestivo/page/courses/2021/lpoo/template/src/main/java/IncreasedGravityState.java)
+- Controller -> (controller) Controller;
+                   (controller.game) BallController, Disk1Controller, Disk2Controller, FieldController, GameController;
+                   (controller.menu) MenuController, OptionsController.   
 
 **Consequences**
 
-The use of the State Pattern in the current design allows the following benefits:
+The implementation of the MVC design pattern brought us the followinig benefits:
 
-- The several states that represent the character’s hability to jump become explicit in the code, instead of relying on a series of flags.
-- We don’t need to have a long set of conditional if or switch statements associated with the various states; instead, polimorphism is used to activate the right behavior.
-- There are now more classes and instances to manage, but still in a reasonable number.
+- Ease of maintaining and testing;
+- Separate responsibilities - also, it makes it more difficult the for us to break the Single Responsibility Principle from SOLID;
 
 #### KNOWN CODE SMELLS
 
