@@ -27,6 +27,17 @@ This game was developed by João Morete (up202403406@up.pt), Luís Sampaio (up20
 - **Implementation.** Show how the pattern roles, operations and associations were mapped to the concrete design classes. Illustrate it with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be [relative links](https://help.github.com/en/articles/about-readmes#relative-links-and-image-paths-in-readme-files)). When doing this, always point to the latest version of the code.
 - **Consequences.** Benefits and liabilities of the design after the pattern instantiation, eventually comparing these consequences with those of alternative solutions.
 
+#### GENERAL DEVELOPEMENT PATTERN - MVC
+
+**Problem in Context** 
+
+The game required the Model-View-Controller design pattern. Mainly to ensure easier maintaining of the code in the future and also more concise testability.
+
+**The Pattern**
+
+MVC is a very used pattern that separates the game into three components:
+- M (Model) - is responsible for the changes in the game such as creating the elements
+
 **Example of one of such subsections**:
 
 ------
