@@ -1,5 +1,5 @@
 package com.aor.airhockey.model.game.elements;
 
 public class Goal extends Element {
-    public Goal(int x, int y) {super(x, y);}
+    public Goal(double x, double y) {super(x, y);}
 }

@@ -64,6 +64,20 @@ class DiskControllerTest {
     }
 
     @Test
+    void moveDiskLeftGoal(){
+        field.setGoals(Arrays.asList(new Goal(4, 5)));
+        controller.moveDisk1Left();
+        Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
+    }
+
+    @Test
+    void moveDiskRightHalfline(){
+        field.setHalfline(Arrays.asList(new Halfline(6, 5)));
+        controller.moveDisk1Right();
+        Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
+    }
+
+    @Test
     void moveDiskLeftHalfline(){
         field.setHalfline(Arrays.asList(new Halfline(4, 5)));
         controller.moveDisk1Left();
@@ -83,4 +97,19 @@ class DiskControllerTest {
         controller.moveDisk1Down();
         Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
     }
+
+    @Test
+    void moveDiskLeftWall(){
+        field.setWalls(Arrays.asList(new Wall(4, 5)));
+        controller.moveDisk1Left();
+        Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
+    }
+
+    @Test
+    void moveDiskRightWall(){
+        field.setWalls(Arrays.asList(new Wall(6, 5)));
+        controller.moveDisk1Right();
+        Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
+    }
+
 }

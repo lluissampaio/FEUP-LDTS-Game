@@ -17,10 +17,10 @@ public class BallController extends GameController {
         Ball ball = getModel().getBall();
 
         if (collisionWithHorWall(ball.getPosition())) {
-            ball.setVelY(-ball.getVelY());
+            ball.setVelY(-ball.getVelY()*0.95);
         }
         else if (collisionWithVerWall(ball.getPosition())) {
-            ball.setVelX(-ball.getVelX());
+            ball.setVelX(-ball.getVelX()*0.95);
         }
         double velX = ball.getVelX();
         double velY = ball.getVelY();

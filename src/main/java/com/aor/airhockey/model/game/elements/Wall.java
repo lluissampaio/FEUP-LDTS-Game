@@ -1,7 +1,7 @@
 package com.aor.airhockey.model.game.elements;
 
 public class Wall extends Element {
-    public Wall(int x, int y) {
+    public Wall(double x, double y) {
         super(x, y);
     }
 }

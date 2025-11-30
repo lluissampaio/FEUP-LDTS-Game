@@ -1,18 +1,18 @@
 package com.aor.airhockey.model.game.elements;
 
 public class Disk extends Element {
-    private int radius;
+    private double radius;
 
-    public Disk(int x, int y, int r) {
+    public Disk(double x, double y, double r) {
         super(x, y);
         this.radius = r;
     }
 
-    public int getRadius() {
+    public double getRadius() {
         return radius;
     }
 
-    public void setRadius(int radius) {
+    public void setRadius(double radius) {
         this.radius = radius;
     }
 }
