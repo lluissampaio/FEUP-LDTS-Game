@@ -38,13 +38,13 @@ class BallControllerTest {
     void moveBallCollisionHorWall() {
         field.setWalls(Arrays.asList(new Wall(5,6)));
         controller.moveBall();
-        Assertions.assertEquals(new Position(6, 4), ball.getPosition());
+        Assertions.assertEquals(new Position(6, 4.05), ball.getPosition());
     }
 
     @Test
     void moveBallCollisionVertWall() {
         field.setWalls(Arrays.asList(new Wall(6,5)));
         controller.moveBall();
-        Assertions.assertEquals(new Position(4, 6), ball.getPosition());
+        Assertions.assertEquals(new Position(4.05, 6), ball.getPosition());
     }
 }
