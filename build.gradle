@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'info.solidsoft.pitest' version '1.15.0'
 }
 
 application {
@@ -19,13 +20,17 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation 'org.mockito:mockito-core:3.7.7'
+    testImplementation 'net.jqwik:jqwik:1.5.1'
 
     implementation group: 'com.googlecode.lanterna', name: 'lanterna', version: '3.1.1'
-
 }
 
 test {
     useJUnitPlatform {
         includeEngines('junit-jupiter', 'jqwik')
     }
+}
+
+pitest {
+    junit5PluginVersion = '1.2.1'
 }

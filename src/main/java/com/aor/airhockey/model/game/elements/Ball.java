@@ -5,7 +5,7 @@ public class Ball extends Element {
     private double velX;
     private double velY;
 
-    public void setRadius(int r) { this.radius = r; }
+    public void setRadius(double r) { this.radius = r; }
     public double getRadius() { return this.radius; }
 
     public Ball(double x, double y, double r, double vx, double vy) {

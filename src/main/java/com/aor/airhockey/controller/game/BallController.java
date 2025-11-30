@@ -12,7 +12,7 @@ import java.util.Set;
 public class BallController extends GameController {
     public BallController(Field field){ super(field); }
 
-    private void moveBall() {
+    public void moveBall() {
 
         Ball ball = getModel().getBall();
 
