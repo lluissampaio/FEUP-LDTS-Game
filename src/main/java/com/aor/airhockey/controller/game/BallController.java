@@ -17,10 +17,10 @@ public class BallController extends GameController {
         Ball ball = getModel().getBall();
 
         if (collisionWithHorWall(ball.getPosition())) {
-            ball.setVelY(-ball.getVelY()*0.95);
+            ball.setVelY(-ball.getVelY()*0.95); //a multiplicação é só para simular atrito
         }
         else if (collisionWithVerWall(ball.getPosition())) {
-            ball.setVelX(-ball.getVelX()*0.95);
+            ball.setVelX(-ball.getVelX()*0.95); //a multiplicação é só para simular atrito
         }
         double velX = ball.getVelX();
         double velY = ball.getVelY();
