@@ -1,4 +1,4 @@
-## LDTS_<06><08> - <AirHockey>
+## LDTS_T06_G08 - <AirHockey>
 
 AirHockey is a classic arcade game for 1 or 2 players where each one of them control a disk and their goal is to score on the opponents net.
 Best of 7 goals decide the winner. If, once the timer hits 1 minute of playing, the players hold the same score, the game proceeds to an "Overtime" where the winner is the first one to score.
@@ -14,6 +14,7 @@ This game was developed by João Morete (up202403406@up.pt), Luís Sampaio (up20
 ### PLANNED FEATURES
 
 - **Singleplayer mode** - One of the disks is controller by a bot, instead of another player
+- **Pause Menu** - Players will be able to pause the game
 - **Ball collision with disks** - When a disk hits a ball, the ball will bounce off it, with accurate velocity and direction, depending on how the disk hits it
 - **Customization** - The player may use the options menu to change things like the ball, disk and wall colors
 
@@ -23,7 +24,7 @@ This game was developed by João Morete (up202403406@up.pt), Luís Sampaio (up20
 
 - **Problem in Context.** The description of the design context and the concrete problem that motivated the instantiation of the pattern. Someone else other than the original developer should be able to read and understand all the motivations for the decisions made. When refering to the implementation before the pattern was applied, don’t forget to [link to the relevant lines of code](https://help.github.com/en/articles/creating-a-permanent-link-to-a-code-snippet) in the appropriate version.
 - **The Pattern.** Identify the design pattern to be applied, why it was selected and how it is a good fit considering the existing design context and the problem at hand.
-- **Implementation.** Show how the pattern roles, operations and associations were mapped to the concrete design classes. Illustrate it with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be [relative links](https://help.github.com/en/articles/about-readmes#relative-links-and-image-paths-in-readme-files). When doing this, always point to the latest version of the code.
+- **Implementation.** Show how the pattern roles, operations and associations were mapped to the concrete design classes. Illustrate it with a UML class diagram, and refer to the corresponding source code with links to the relevant lines (these should be [relative links](https://help.github.com/en/articles/about-readmes#relative-links-and-image-paths-in-readme-files)). When doing this, always point to the latest version of the code.
 - **Consequences.** Benefits and liabilities of the design after the pattern instantiation, eventually comparing these consequences with those of alternative solutions.
 
 **Example of one of such subsections**:
@@ -64,7 +65,25 @@ The use of the State Pattern in the current design allows the following benefits
 
 #### KNOWN CODE SMELLS
 
-> This section should describe 3 to 5 different code smells that you have identified in your current implementation.
+1. Hard-coded values: Throughout our code, at times we found the need to use some constant primitive data types to be able to build the game. 
+    The problem is we started with one, and then another, and soon enough we got a lot of values that are hard-coded. 
+    Some examples would be the colors of the game, such as the background or elements' colors, also the Menu's options' positions or the 
+    constant that we use to simulate friction. We will eventually solve this problem by creating a class that holds all the constants of the game.
+
+2. Position.java: We changed the primitive data type that holds the position from int to double so that it would be easier to calculate the balls 
+    movement. The problem is that we need the position in int data type to be able to represent in the LanternaGUI.java class, so we got a fast 
+    solution by rounding the values. We plan to implement functions in Position.class that allow us to solve this problem. 
+
+3. Disk classes: We think that Disk1 and Disk2 are very similar classes and this is normally not a good sign. On the other hand
+    this was the way we thought was best for our game to work. As opposed to the previous code smells, we do not plan to make changes
+    on this one.
+
+4. The menu inputs: Since replacing the Lanterna's keystrokes for the java's key listeners as the way our game reads inputs we think that the 
+    menu inputs are not as responsive as we intended to. We changed the menu's frames per second so that it would be easier for the user to 
+    navigate. We plan to improve this.
+
+5. The game window: We found very difficult to create a game that does not break when we resize it. We would like to be able to fullscreen the game 
+    in any machine.
 
 ### TESTING
 
