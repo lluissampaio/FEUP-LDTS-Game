@@ -15,13 +15,13 @@ The following images show the general look of our game and its menus:
 
 ### Menus
 
-![Menu screenshot](docs/images/screenshots/menu.png);
+![Menu screenshot](docs/images/screenshots/menu.png)
 
-![Options screenshot](docs/images/screenshots/options.png);
+![Options screenshot](docs/images/screenshots/options.png)
 
 ### Game
 
-![Game screenshot](docs/images/screenshots/game.png);
+![Game screenshot](docs/images/screenshots/game.png)
 
 ### End Game
 

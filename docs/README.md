@@ -82,8 +82,11 @@ The implementation of the MVC design pattern brought us the following benefits:
 
 ### TESTING
 
-- Screenshot of coverage report.
-- Link to mutation testing report.
+### Screenshot of coverage report
+![CoverageReport screenshot](docs/images/screenshots/coverageReport.png)
+
+### Link to mutation testing report
+[Mutation tests](../build/reports/pitest/index.html)
 
 ### SELF-EVALUATION
 
