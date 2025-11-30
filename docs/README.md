@@ -10,16 +10,15 @@ This project was developed by *John Doe* (*john.doe*@fe.up.pt) and *Jane Doe* (*
 
 ### IMPLEMENTED FEATURES
 
-> This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
-
-**Examples**:
-
-- **Jumping** - The game character will jump when the space bar key is pressed.
-- **Getting hidden coins** - When the game character hits a platform from below (by jumping beneath it) it will smash that segment of the platform and will get any coins that may exist hidden there.
+- **Smooth in-game inputs** - Disks feel responsive, allowing for multiple key presses at the same time and key holding
+- **Ball collision with walls** - When the ball hits a wall, it will bounce off the wall, while losing some speed
+- **Disk bounds** - Disks aren't able to leave their halfcourts
 
 ### PLANNED FEATURES
 
-> This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should include GUI mock-ups for the planned features.
+- **Singleplayer mode** - One of the disks is controller by a bot, instead of another player
+- **Ball collision with disks** - When a disk hits a ball, the ball will bounce off it, with accurate velocity and direction, depending on how the disk hits it
+- **Customization** - The player may use the options menu to change things like the ball, disk and wall colors
 
 ### DESIGN
 
@@ -77,9 +76,8 @@ The use of the State Pattern in the current design allows the following benefits
 
 ### SELF-EVALUATION
 
-> In this section describe how the work regarding the project was divided between the students. In the event that members of the group do not agree on a work distribution, the group should send an email to the teacher explaining the disagreement.
+Everyone in the group contributed equally to this project.
 
-**Example**:
-
-- John Doe: 40%
-- Jane Doe: 60%
+- João Morete: 33.3%
+- Luís Sampaio: 33.3%
+- Tomás Vieira: 33.3%
