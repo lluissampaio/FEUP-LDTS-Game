@@ -8,9 +8,7 @@ import com.aor.airhockey.viewer.Viewer;
 import com.aor.airhockey.viewer.menu.OptionsViewer;
 
 public class OptionsState extends State<Options> {
-    public OptionsState(ColorSettings colorSettings) {
-        super(new Options(colorSettings));
-    }
+    public OptionsState(Options options) {super(options);}
 
     @Override
     protected Viewer<Options> getViewer() {

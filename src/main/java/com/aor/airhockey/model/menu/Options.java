@@ -110,4 +110,8 @@ public class Options {
     public int getNumberColors() {
         return this.colors.size();
     }
+
+    public ColorSettings getColorSettings() {
+        return colorSettings;
+    }
 }

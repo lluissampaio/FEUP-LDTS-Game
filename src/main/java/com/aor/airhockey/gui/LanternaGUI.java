@@ -168,6 +168,7 @@ public class LanternaGUI implements GUI {
         tg.putString(x, y + 1, "" + c);
     }
 
+    @Override
     public void drawSquare(int x, int y, String color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setForegroundColor(TextColor.Factory.fromString(color));
