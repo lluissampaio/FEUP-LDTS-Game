@@ -1,6 +1,7 @@
 package com.aor.airhockey;
 
 import com.aor.airhockey.gui.LanternaGUI;
+import com.aor.airhockey.model.ColorSettings;
 import com.aor.airhockey.model.menu.Menu;
 import com.aor.airhockey.states.GameState;
 import com.aor.airhockey.states.MenuState;
@@ -14,10 +15,16 @@ import java.net.URISyntaxException;
 public class Game {
     private final LanternaGUI gui;
     private State state;
+    private final ColorSettings  colorSettings;
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
         this.gui = new LanternaGUI(75, 39);
         this.state = new MenuState(new Menu());
+        this.colorSettings = new ColorSettings();
+    }
+
+    public ColorSettings getColorSettings() {
+        return colorSettings;
     }
 
     public static void main(String[] args) throws IOException, FontFormatException, URISyntaxException {
