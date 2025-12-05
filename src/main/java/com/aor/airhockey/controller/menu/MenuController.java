@@ -32,7 +32,7 @@ public class MenuController extends Controller<Menu> {
                     // if (getModel().isSelectedSingleplayer()) game.setState(new GameState(new LoaderFieldBuilder().createField()));
                     // SINGLEPLAYER IS YET TO IMPLEMENT
                     if (getModel().isSelectedMultiplayer()) game.setState(new GameState(new LoaderFieldBuilder().createField()));
-                    if (getModel().isSelectedOptions()) game.setState(new OptionsState(new Options(game.getColorSettings())));
+                    if (getModel().isSelectedOptions()) game.setState(new OptionsState(game.getColorSettings()));
             }
         }
     }

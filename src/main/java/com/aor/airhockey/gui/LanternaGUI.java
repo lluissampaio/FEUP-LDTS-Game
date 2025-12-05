@@ -1,5 +1,6 @@
 package com.aor.airhockey.gui;
 
+import com.aor.airhockey.model.ColorSettings;
 import com.aor.airhockey.model.Position;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -29,16 +30,19 @@ public class LanternaGUI implements GUI {
     private final AWTTerminalFrame terminal;
     private final Set<ACTION> actionSet = new HashSet<>();
     private final String backgroundColor = "#0F172A";
+    private final ColorSettings colorSettings;
 
-    public LanternaGUI(Screen screen, Terminal terminal) {
+    public LanternaGUI(Screen screen, Terminal terminal, ColorSettings colorSettings) {
         this.screen = screen;
         this.terminal = (AWTTerminalFrame) terminal;
+        this.colorSettings = colorSettings;
     }
 
-    public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException {
+    public LanternaGUI(int width, int height, ColorSettings colorSettings) throws IOException, FontFormatException, URISyntaxException {
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
         this.terminal = (AWTTerminalFrame) createTerminal(width, height, fontConfig);
         this.screen = createScreen(terminal);
+        this.colorSettings = colorSettings;
 
         startKeyListeners();
     }
@@ -129,13 +133,13 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawBall(Position position) {drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), 'B', "#FFFFFF");}
+    public void drawBall(Position position) {drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), 'B', colorSettings.getBallColor());}
 
     @Override
-    public void drawWall(Position position) {drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), '#', "#3333FF");}
+    public void drawWall(Position position) {drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), '#', colorSettings.getWallColor());}
 
     @Override
-    public void drawDisk(Position position) { drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), 'D', "#FF0000");}
+    public void drawDisk(Position position) { drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), 'D', colorSettings.getDisk1Color());}
 
     @Override
     public void drawHalfline(Position position) {drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), '|', "#808080");}

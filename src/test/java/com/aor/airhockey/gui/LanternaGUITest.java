@@ -1,5 +1,6 @@
 package com.aor.airhockey.gui;
 
+import com.aor.airhockey.model.ColorSettings;
 import com.aor.airhockey.model.Position;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -12,6 +13,7 @@ import org.mockito.Mockito;
 class LanternaGUITest {
     private Screen screen;
     private AWTTerminalFrame terminal;
+    private ColorSettings colorSettings;
     private LanternaGUI gui;
     private TextGraphics tg;
 
@@ -19,11 +21,12 @@ class LanternaGUITest {
     void setUp() {
         terminal = Mockito.mock(AWTTerminalFrame.class);
         screen = Mockito.mock(Screen.class);
+        colorSettings = Mockito.mock(ColorSettings.class);
         tg = Mockito.mock(TextGraphics.class);
 
         Mockito.when(screen.newTextGraphics()).thenReturn(tg);
 
-        gui = new LanternaGUI(screen, terminal);
+        gui = new LanternaGUI(screen, terminal, colorSettings);
     }
 
 

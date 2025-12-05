@@ -18,9 +18,9 @@ public class Game {
     private final ColorSettings  colorSettings;
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
-        this.gui = new LanternaGUI(75, 39);
-        this.state = new MenuState(new Menu());
         this.colorSettings = new ColorSettings();
+        this.gui = new LanternaGUI(75, 39, getColorSettings());
+        this.state = new MenuState(new Menu());
     }
 
     public ColorSettings getColorSettings() {

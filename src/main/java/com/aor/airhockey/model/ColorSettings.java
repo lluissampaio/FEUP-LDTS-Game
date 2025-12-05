@@ -7,10 +7,10 @@ public class ColorSettings {
     private String wallColor;
 
     public ColorSettings() {
-        this.ballColor = "FFFFFF";
-        this.disk1Color = "FF0000";
-        this.disk2Color = "0000FF";
-        this.wallColor = "808080";
+        this.ballColor = "#FFFFFF";
+        this.disk1Color = "#FF0000";
+        this.disk2Color = "#0000FF";
+        this.wallColor = "#808080";
     }
 
     public String getBallColor() {
