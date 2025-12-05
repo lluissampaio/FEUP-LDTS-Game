@@ -8,7 +8,7 @@ public class Options {
     private int currentEntry = 0;
 
     public Options() {
-        this.entries = Arrays.asList("Ball color", "Disk color", "Wall color", "Back");
+        this.entries = Arrays.asList("Ball color", "Disk1 color","Disk2 color", "Wall color", "Back");
     }
 
     public void nextEntry() {
@@ -33,11 +33,13 @@ public class Options {
 
     public boolean isSelectedBallColor() { return isSelected(0); }
 
-    public boolean isSelectedDiskColor() { return isSelected(1); }
+    public boolean isSelectedDisk1Color() { return isSelected(1); }
 
-    public boolean isSelectedWallColor() { return isSelected(2); }
+    public boolean isSelectedDisk2Color() { return isSelected(2); }
 
-    public boolean isSelectedExit() { return isSelected(3); }
+    public boolean isSelectedWallColor() { return isSelected(3); }
+
+    public boolean isSelectedExit() { return isSelected(4); }
 
     public int getNumberEntries() {
         return this.entries.size();

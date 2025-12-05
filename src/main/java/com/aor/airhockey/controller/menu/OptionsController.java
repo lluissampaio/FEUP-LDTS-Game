@@ -25,6 +25,10 @@ public class OptionsController extends Controller<Options> {
                 case ARR_S, KEY_S:
                     getModel().nextEntry();
                     break;
+                case ARR_E, KEY_E:
+                    break;
+                case ARR_W, KEY_W:
+                    break;
                 case SELECT:
                     if (getModel().isSelectedExit()) game.setState(new MenuState(new Menu()));
             }

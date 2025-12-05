@@ -17,7 +17,7 @@ public class OptionsViewer extends Viewer<Options> {
     public void drawElements(GUI gui) {
         gui.drawText(new Position(34, 7), "Options", "#018ABE");
 
-        List<Integer> positions = Arrays.asList(33, 33, 33, 36);
+        List<Integer> positions = Arrays.asList(33, 33, 33, 33, 36);
 
         for (int i = 0; i < getModel().getNumberEntries(); i++)
             gui.drawText(
