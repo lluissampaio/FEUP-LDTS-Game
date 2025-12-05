@@ -133,10 +133,10 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawBall(Position position) {drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), 'B', colorSettings.getBallColor());}
+    public void drawBall(Position position) {drawSquare((int)Math.round(position.getX()), (int)Math.round(position.getY()), colorSettings.getBallColor());}
 
     @Override
-    public void drawWall(Position position) {drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), '#', colorSettings.getWallColor());}
+    public void drawWall(Position position) {drawSquare((int)Math.round(position.getX()), (int)Math.round(position.getY()), colorSettings.getWallColor());}
 
     @Override
     public void drawDisk(Position position, int playerNumber) {
@@ -147,11 +147,11 @@ public class LanternaGUI implements GUI {
         if (playerNumber == 2) {
             color = colorSettings.getDisk2Color();
         }
-        drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), 'D', color);
+        drawSquare((int)Math.round(position.getX()), (int)Math.round(position.getY()), color);
     }
 
     @Override
-    public void drawHalfline(Position position) {drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), '|', "#808080");}
+    public void drawHalfline(Position position) {drawSquare((int)Math.round(position.getX()), (int)Math.round(position.getY()), "#808080");}
 
     @Override
     public void drawText(Position position, String text, String color) {
@@ -166,6 +166,13 @@ public class LanternaGUI implements GUI {
         tg.setForegroundColor(TextColor.Factory.fromString(color));
         tg.setBackgroundColor(TextColor.Factory.fromString(this.backgroundColor));
         tg.putString(x, y + 1, "" + c);
+    }
+
+    public void drawSquare(int x, int y, String color) {
+        TextGraphics tg = screen.newTextGraphics();
+        tg.setForegroundColor(TextColor.Factory.fromString(color));
+        tg.setBackgroundColor(TextColor.Factory.fromString(color));
+        tg.putString(x, y + 1, " ");
     }
 
     @Override
