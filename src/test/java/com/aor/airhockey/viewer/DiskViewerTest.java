@@ -14,7 +14,7 @@ class DiskViewerTest {
 
     @BeforeEach
     void setUp() {
-        disk = new Disk(10, 10, 2);
+        disk = new Disk(10, 10, 2, 1);
         viewer = new DiskViewer();
         gui = Mockito.mock(GUI.class);
     }

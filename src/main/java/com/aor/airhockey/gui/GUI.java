@@ -12,7 +12,7 @@ public interface GUI {
 
     void drawWall(Position position);
 
-    void drawDisk(Position position);
+    void drawDisk(Position position, int playerNumber);
 
     void drawHalfline(Position position);
 

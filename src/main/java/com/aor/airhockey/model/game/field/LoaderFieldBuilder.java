@@ -60,7 +60,7 @@ public class LoaderFieldBuilder extends FieldBuilder {
             for (int x = 0; x < line.length(); x++) {
                 if (line.charAt(x) == 'D' ) {
                     if (count == diskNumber) {
-                        return new Disk(x, y, 4);
+                        return new Disk(x, y, 4, count);
                     }
                     count++;
                 }

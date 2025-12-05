@@ -139,7 +139,16 @@ public class LanternaGUI implements GUI {
     public void drawWall(Position position) {drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), '#', colorSettings.getWallColor());}
 
     @Override
-    public void drawDisk(Position position) { drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), 'D', colorSettings.getDisk1Color());}
+    public void drawDisk(Position position, int playerNumber) {
+        String color = "#FFFFFF";
+        if (playerNumber == 1) {
+            color = colorSettings.getDisk1Color();
+        }
+        if (playerNumber == 2) {
+            color = colorSettings.getDisk2Color();
+        }
+        drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), 'D', color);
+    }
 
     @Override
     public void drawHalfline(Position position) {drawCharacter((int)Math.round(position.getX()), (int)Math.round(position.getY()), '|', "#808080");}

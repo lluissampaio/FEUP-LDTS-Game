@@ -22,7 +22,7 @@ class DiskControllerTest {
     void setUp() {
         field = new Field(10, 10);
 
-        disk = new Disk(5, 5, 2);
+        disk = new Disk(5, 5, 2, 1);
         field.setDisk1(disk);
 
         field.setWalls(Arrays.asList());
