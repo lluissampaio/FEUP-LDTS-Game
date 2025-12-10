@@ -50,7 +50,7 @@ public class BallController extends GameController {
             newPosition = new Position(newX, newY);
 
 
-            //para já repetimos aqui colisão com paredes para nao bugar a bola com a parede
+            /*//para já repetimos aqui colisão com paredes para nao bugar a bola com a parede
             if (collisionWithHorWall(newPosition)) {
                 ball.setVelY(-ball.getVelY()*0.95);//a multiplicação é só para simular atrito
                 newY = ball.getPosition().getY() + ball.getVelY();
@@ -60,7 +60,7 @@ public class BallController extends GameController {
                 ball.setVelX(-ball.getVelX()*0.95); //a multiplicação é só para simular atrito
                 newX = ball.getPosition().getX() + ball.getVelX();
                 newPosition = new Position(newX, newY);
-            }
+            }*/
         }
         
 
