@@ -133,7 +133,7 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawBall(Position position, double radius) {drawCircle(position, radius, colorSettings.getBallColor());}
+    public void drawBall(Position position, double radius) {drawCircle(position, (int)radius, colorSettings.getBallColor());}
 
     @Override
     public void drawWall(Position position) {drawSquare((int)Math.round(position.getX()), (int)Math.round(position.getY()), colorSettings.getWallColor());}
@@ -147,7 +147,7 @@ public class LanternaGUI implements GUI {
         if (playerNumber == 2) {
             color = colorSettings.getDisk2Color();
         }
-        drawCircle(position, radius, color);
+        drawCircle(position, (int)radius, color);
     }
 
     @Override
@@ -177,14 +177,16 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawCircle(Position center, double radius, String color){
+    public void drawCircle(Position center, int radius, String color){
         double degreesToRadians = Math.PI / 180.0;
 
-        for (int degrees = 0; degrees < 360; degrees++) {
-            double radians = degreesToRadians * degrees;
-            int x = (int) Math.round(center.getX() + Math.cos(radians) * radius);
-            int y = (int) Math.round(center.getY() + Math.sin(radians) * radius);
-            drawSquare(x, y, color);
+        for  (int r = 0; r <= radius; r++) {
+            for (int degrees = 0; degrees < 360; degrees++) {
+                double radians = degreesToRadians * degrees;
+                int x = (int) Math.round(center.getX() + Math.cos(radians) * r);
+                int y = (int) Math.round(center.getY() + Math.sin(radians) * r);
+                drawSquare(x, y, color);
+            }
         }
     }
 

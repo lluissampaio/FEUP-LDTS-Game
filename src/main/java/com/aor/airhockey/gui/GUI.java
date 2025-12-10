@@ -20,7 +20,7 @@ public interface GUI {
 
     void drawSquare(int x, int y, String color);
 
-    void drawCircle(Position position, double radius, String color);
+    void drawCircle(Position position, int radius, String color);
 
     void clear();
 
