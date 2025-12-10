@@ -8,17 +8,19 @@ import java.util.Set;
 public interface GUI {
     Set<ACTION> getNextActions() throws IOException;
 
-    void drawBall(Position position);
+    void drawBall(Position position, double radius);
 
     void drawWall(Position position);
 
-    void drawDisk(Position position, int playerNumber);
+    void drawDisk(Position position, double radius, int playerNumber);
 
     void drawHalfline(Position position);
 
     void drawText(Position position, String text, String color);
 
     void drawSquare(int x, int y, String color);
+
+    void drawCircle(Position position, double radius, String color);
 
     void clear();
 

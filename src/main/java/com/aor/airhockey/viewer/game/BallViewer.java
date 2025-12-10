@@ -5,5 +5,5 @@ import com.aor.airhockey.model.game.elements.Ball;
 
 public class BallViewer implements ElementViewer<Ball> {
     @Override
-    public void draw(Ball ball, GUI gui) {gui.drawBall(ball.getPosition());}
+    public void draw(Ball ball, GUI gui) {gui.drawBall(ball.getPosition(), ball.getRadius());}
 }
