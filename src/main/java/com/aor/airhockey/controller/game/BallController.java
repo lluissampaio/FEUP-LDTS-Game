@@ -3,6 +3,7 @@ package com.aor.airhockey.controller.game;
 import com.aor.airhockey.Game;
 import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.model.Position;
+import com.aor.airhockey.model.Velocity;
 import com.aor.airhockey.model.game.elements.Ball;
 import com.aor.airhockey.model.game.elements.Disk;
 import com.aor.airhockey.model.game.field.Field;
@@ -19,8 +20,8 @@ public class BallController extends GameController {
         Disk disk1 = getModel().getDisk1();
         Disk disk2 = getModel().getDisk2();
 
-        double velX = ball.getVelX();
-        double velY = ball.getVelY();
+        double velX = ball.getVelocity().getX();
+        double velY = ball.getVelocity().getY();
 
         double newX = ball.getPosition().getX() + velX;
         double newY = ball.getPosition().getY() + velY;
@@ -28,13 +29,15 @@ public class BallController extends GameController {
         Position newPosition = new Position(newX, newY);
 
         if (collisionWithHorWall(newPosition, ball.getRadius())) {
-            ball.setVelY(-ball.getVelY()*0.95);//a multiplicação é só para simular atrito
-            newY = ball.getPosition().getY() + ball.getVelY();
+            Velocity newVelocity = new Velocity(velX, velY * -0.95); //a multiplicação é só para simular atrito
+            ball.setVelocity(newVelocity);
+            newY = ball.getPosition().getY() + ball.getVelocity().getY();
             newPosition = new Position(newX, newY);
         }
         else if (collisionWithVerWall(newPosition, ball.getRadius())) {
-            ball.setVelX(-ball.getVelX()*0.95); //a multiplicação é só para simular atrito
-            newX = ball.getPosition().getX() + ball.getVelX();
+            Velocity newVelocity = new Velocity(velX * -0.95, velY); //a multiplicação é só para simular atrito
+            ball.setVelocity(newVelocity);
+            newX = ball.getPosition().getX() + ball.getVelocity().getX();
             newPosition = new Position(newX, newY);
         }
         Position gridPosition = new Position(Math.round(newPosition.getX()), Math.round(newPosition.getY())); //é preciso porque os discos só ocupam posições inteiras
@@ -45,8 +48,8 @@ public class BallController extends GameController {
             resolveDiskCollision(gridPosition,hitDisk,ball);
 
             // Recalcula posição final com a nova velocidade pós-choque
-            newX = ball.getPosition().getX() + ball.getVelX();
-            newY = ball.getPosition().getY() + ball.getVelY();
+            newX = ball.getPosition().getX() + ball.getVelocity().getX();
+            newY = ball.getPosition().getY() + ball.getVelocity().getY();
             newPosition = new Position(newX, newY);
 
 
@@ -105,8 +108,8 @@ public class BallController extends GameController {
         double dy = ballPos.getY() - diskPos.getY();
 
         // Velocidade atual
-        double vX = ball.getVelX();
-        double vY = ball.getVelY();
+        double vX = ball.getVelocity().getX();
+        double vY = ball.getVelocity().getY();
 
         // colisão lateral
         if (Math.abs(dx) > Math.abs(dy)) {
@@ -125,9 +128,8 @@ public class BallController extends GameController {
         }
 
 
-
-        ball.setVelX(vX*1.05);//para já, só para aumeuntar a velocidade da bola
-        ball.setVelY(vY*1.05);
+        Velocity newVelocity = new Velocity(vX*1.05,  vY*1.05); //para já, só para aumeuntar a velocidade da bola
+        ball.setVelocity(newVelocity);
     }
 
     @Override
