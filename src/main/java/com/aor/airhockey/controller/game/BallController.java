@@ -86,7 +86,7 @@ public class BallController extends GameController {
     }
 
     private boolean collisionWithDisk(Position position, double radius, Disk disk1, Disk disk2) {
-        double collisionRadius = disk1.getRadius() + radius; //para já é assim mas futuramente tem de ser a soma entre os raios do disco e da bola
+        double collisionRadius = disk1.getRadius() + radius;
 
         double dist1 = getDistance(position, disk1.getPosition());
         double dist2 = getDistance(position, disk2.getPosition());
