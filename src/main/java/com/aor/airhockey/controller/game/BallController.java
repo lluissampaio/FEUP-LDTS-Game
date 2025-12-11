@@ -27,18 +27,18 @@ public class BallController extends GameController {
 
         Position newPosition = new Position(newX, newY);
 
-        if (collisionWithHorWall(newPosition)) {
+        if (collisionWithHorWall(newPosition, ball.getRadius())) {
             ball.setVelY(-ball.getVelY()*0.95);//a multiplicação é só para simular atrito
             newY = ball.getPosition().getY() + ball.getVelY();
             newPosition = new Position(newX, newY);
         }
-        else if (collisionWithVerWall(newPosition)) {
+        else if (collisionWithVerWall(newPosition, ball.getRadius())) {
             ball.setVelX(-ball.getVelX()*0.95); //a multiplicação é só para simular atrito
             newX = ball.getPosition().getX() + ball.getVelX();
             newPosition = new Position(newX, newY);
         }
         Position gridPosition = new Position(Math.round(newPosition.getX()), Math.round(newPosition.getY())); //é preciso porque os discos só ocupam posições inteiras
-        if (collisionWithDisk(gridPosition,disk1,disk2)) {
+        if (collisionWithDisk(gridPosition, ball.getRadius(), disk1, disk2)) {
 
             Disk hitDisk = disk1.getPosition().equals(gridPosition) ? disk1 : disk2; // qual disco colidiu
 
@@ -67,26 +67,26 @@ public class BallController extends GameController {
         ball.setPosition(newPosition);
     }
 
-    private boolean collisionWithHorWall(Position position) {
-        Position roundDownPosition = new Position(Math.round(position.getX()), Math.round(position.getY() + 0.5));
-        Position roundUpPosition = new Position(Math.round(position.getX()), Math.round(position.getY() - 0.5));
+    private boolean collisionWithHorWall(Position position, double radius) {
+        Position roundDownPosition = new Position(Math.round(position.getX()), Math.round(position.getY() + 0.5 + radius));
+        Position roundUpPosition = new Position(Math.round(position.getX()), Math.round(position.getY() - 0.5 - radius));
         if (getModel().isWall(roundUpPosition) || getModel().isWall(roundDownPosition)) {
             return true;
         }
         return false;
     }
 
-    private boolean collisionWithVerWall(Position position) {
-        Position roundLeftPosition = new Position(Math.round(position.getX() - 0.5), Math.round(position.getY()));
-        Position roundRightPosition = new Position(Math.round(position.getX() + 0.5), Math.round(position.getY()));
+    private boolean collisionWithVerWall(Position position, double radius) {
+        Position roundLeftPosition = new Position(Math.round(position.getX() - 0.5 - radius), Math.round(position.getY()));
+        Position roundRightPosition = new Position(Math.round(position.getX() + 0.5 + radius), Math.round(position.getY()));
         if (getModel().isWall(roundLeftPosition) || getModel().isWall(roundRightPosition)) {
             return true;
         }
         return false;
     }
 
-    private boolean collisionWithDisk(Position position, Disk disk1, Disk disk2) {
-        double collisionRadius = 1.5; //para já é assim mas futuramente tem de ser a soma entre os raios do disco e da bola
+    private boolean collisionWithDisk(Position position, double radius, Disk disk1, Disk disk2) {
+        double collisionRadius = disk1.getRadius() + radius; //para já é assim mas futuramente tem de ser a soma entre os raios do disco e da bola
 
         double dist1 = getDistance(position, disk1.getPosition());
         double dist2 = getDistance(position, disk2.getPosition());
