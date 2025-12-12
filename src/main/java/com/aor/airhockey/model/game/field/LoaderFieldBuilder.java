@@ -1,6 +1,7 @@
 package com.aor.airhockey.model.game.field;
 
 import com.aor.airhockey.model.game.elements.*;
+import com.aor.airhockey.config.model.game.field.LoaderFieldBuilderConfig;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,7 +14,7 @@ public class LoaderFieldBuilder extends FieldBuilder {
     private final List<String> lines;
 
     public LoaderFieldBuilder() throws IOException {
-        URL resource = LoaderFieldBuilder.class.getResource("/field/fullscreen.fld");
+        URL resource = LoaderFieldBuilder.class.getResource(LoaderFieldBuilderConfig.FIELD_RESOURCE_PATH);
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
 
         lines = readLines(br);
@@ -46,7 +47,7 @@ public class LoaderFieldBuilder extends FieldBuilder {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == '#') walls.add(new Wall(x, y));
+                if (line.charAt(x) == LoaderFieldBuilderConfig.WALL_CHARACTER) walls.add(new Wall(x, y));
         }
 
         return walls;
@@ -58,7 +59,7 @@ public class LoaderFieldBuilder extends FieldBuilder {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++) {
-                if (line.charAt(x) == 'D' ) {
+                if (line.charAt(x) == LoaderFieldBuilderConfig.DISK_CHARACTER) {
                     if (count == diskNumber) {
                         return new Disk(x, y, 2, count);
                     }
@@ -75,7 +76,7 @@ public class LoaderFieldBuilder extends FieldBuilder {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'B') return new Ball(x, y, 1);
+                if (line.charAt(x) == LoaderFieldBuilderConfig.BALL_CHARACTER) return new Ball(x, y, 1);
         }
         return null;
     }
@@ -87,7 +88,7 @@ public class LoaderFieldBuilder extends FieldBuilder {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'L') halfline.add(new Halfline(x, y));
+                if (line.charAt(x) == LoaderFieldBuilderConfig.HALFLINE_CHARACTER) halfline.add(new Halfline(x, y));
         }
 
         return halfline;
@@ -100,7 +101,7 @@ public class LoaderFieldBuilder extends FieldBuilder {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'G') goals.add(new Goal(x, y));
+                if (line.charAt(x) == LoaderFieldBuilderConfig.GOAL_CHARACTER) goals.add(new Goal(x, y));
         }
 
         return goals;
