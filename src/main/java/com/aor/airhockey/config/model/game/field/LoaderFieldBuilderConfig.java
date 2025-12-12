@@ -8,4 +8,7 @@ public class LoaderFieldBuilderConfig {
     public static final Character BALL_CHARACTER = 'B';
     public static final Character HALFLINE_CHARACTER = 'L';
     public static final Character GOAL_CHARACTER = 'G';
+
+    public static final int BALL_RADIUS = 1;
+    public static final int DISK_RADIUS = 2;
 }

@@ -61,7 +61,7 @@ public class LoaderFieldBuilder extends FieldBuilder {
             for (int x = 0; x < line.length(); x++) {
                 if (line.charAt(x) == LoaderFieldBuilderConfig.DISK_CHARACTER) {
                     if (count == diskNumber) {
-                        return new Disk(x, y, 2, count);
+                        return new Disk(x, y, LoaderFieldBuilderConfig.DISK_RADIUS, count);
                     }
                     count++;
                 }
@@ -76,7 +76,7 @@ public class LoaderFieldBuilder extends FieldBuilder {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == LoaderFieldBuilderConfig.BALL_CHARACTER) return new Ball(x, y, 1);
+                if (line.charAt(x) == LoaderFieldBuilderConfig.BALL_CHARACTER) return new Ball(x, y, LoaderFieldBuilderConfig.BALL_RADIUS);
         }
         return null;
     }
