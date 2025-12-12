@@ -30,7 +30,6 @@ public class LanternaGUI implements GUI {
     private final Screen screen;
     private final AWTTerminalFrame terminal;
     private final Set<ACTION> actionSet = new HashSet<>();
-    // private final String backgroundColor = "#0F172A";
     private final ColorSettings colorSettings;
 
     public LanternaGUI(Screen screen, Terminal terminal, ColorSettings colorSettings) {
@@ -93,11 +92,6 @@ public class LanternaGUI implements GUI {
             public void keyReleased(KeyEvent e) {
                 removeKeyEvent(e);
             }
-//
-//            @Override
-//            public void keyTyped(KeyEvent e) {
-//                handleKeyTyped(e);
-//            }
         });
     }
 

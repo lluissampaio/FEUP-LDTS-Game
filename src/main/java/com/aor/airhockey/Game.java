@@ -7,6 +7,7 @@ import com.aor.airhockey.states.GameState;
 import com.aor.airhockey.states.MenuState;
 import com.aor.airhockey.states.OptionsState;
 import com.aor.airhockey.states.State;
+import com.aor.airhockey.config.GameConfig;
 
 import java.awt.*;
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class Game {
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
         this.colorSettings = new ColorSettings();
-        this.gui = new LanternaGUI(75, 39, getColorSettings());
+        this.gui = new LanternaGUI(GameConfig.GAME_WIDTH, GameConfig.GAME_HEIGHT, getColorSettings());
         this.state = new MenuState(new Menu());
     }
 
@@ -36,11 +37,8 @@ public class Game {
     }
 
     private void start() throws IOException {
-        int FPS_GAME = 30;
-        int FPS_MENU = 16;
-
-        int frameTimeGame = 1000 / FPS_GAME;
-        int frameTimeMENU = 1000 / FPS_MENU;
+        int frameTimeGame = 1000 / GameConfig.GAME_FPS;
+        int frameTimeMENU = 1000 / GameConfig.MENU_FPS;
 
         int frameTime = 1000 / 30; // default
         while (this.state != null) {
