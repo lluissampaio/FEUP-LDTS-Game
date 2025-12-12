@@ -4,10 +4,7 @@ import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.menu.Menu;
 import com.aor.airhockey.viewer.Viewer;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.aor.airhockey.config.viewer.menu.MenuViewerConfig;
 
 public class MenuViewer extends Viewer<Menu> {
     public MenuViewer(Menu menu) {
@@ -16,14 +13,12 @@ public class MenuViewer extends Viewer<Menu> {
 
     @Override
     public void drawElements(GUI gui) {
-        gui.drawText(new Position(33, 7), "Air Hockey", "#018ABE");
-
-        List<Integer> positions = Arrays.asList(32, 32, 34, 36);
+        gui.drawText(new Position(MenuViewerConfig.TITLE_X_POS, MenuViewerConfig.TITLE_Y_POS), MenuViewerConfig.TITLE_TEXT, MenuViewerConfig.TITLE_COLOR);
 
         for (int i = 0; i < getModel().getNumberEntries(); i++)
             gui.drawText(
-                    new Position(positions.get(i), 14 + 3*i),
+                    new Position(MenuViewerConfig.positions.get(i), MenuViewerConfig.OPTIONS_STARTING_POINT + MenuViewerConfig.OPTIONS_DISTANCE*i),
                     getModel().getEntry(i),
-                    getModel().isSelected(i) ? "#FF3333" : "#FFFFFF");
+                    getModel().isSelected(i) ? MenuViewerConfig.IS_SELECTED_COLOR : MenuViewerConfig.NOT_SELECTED_COLOR);
     }
 }
