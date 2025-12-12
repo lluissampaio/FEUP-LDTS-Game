@@ -6,13 +6,10 @@ import com.aor.airhockey.model.Position;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.swing.AWTTerminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
@@ -135,7 +132,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawDisk(Position position, double radius, int playerNumber) {
-        String color = "#FFFFFF";
+        String color = LanternaGUIConfig.DEFAULT_DISK_COLOR;
         if (playerNumber == 1) {
             color = colorSettings.getDisk1Color();
         }
