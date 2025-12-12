@@ -12,7 +12,7 @@ public class Ball extends MovableElement {
     }
 
     public Ball(double x, double y, double r) {
-        this(x, y, r, 0.3, 0.2);
+        this(x, y, r, 0.2, 0.0);
     }
 
 }
