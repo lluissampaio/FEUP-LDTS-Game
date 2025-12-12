@@ -1,13 +1,17 @@
 package com.aor.airhockey.model.game.elements;
 
-public class Disk extends Element {
+public class Disk extends MovableElement {
     private double radius;
     private int playerNumber;
 
-    public Disk(double x, double y, double r, int playerNumber) {
-        super(x, y);
+    public Disk(double x, double y, double r, double vx, double vy, int playerNumber) {
+        super(x, y, vx, vy);
         this.radius = r;
         this.playerNumber = playerNumber;
+    }
+
+    public Disk(double x, double y, double r, int playerNumber) {
+        this(x, y, r, 0.0, 0.0,  playerNumber);
     }
 
     public double getRadius() {
