@@ -76,7 +76,6 @@ public class BallController extends GameController {
                 newPosition = new Position(newX, newY);
             }
         }
-        
 
         ball.setPosition(newPosition);
     }
