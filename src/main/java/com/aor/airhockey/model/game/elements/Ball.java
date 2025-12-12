@@ -1,5 +1,7 @@
 package com.aor.airhockey.model.game.elements;
 
+import com.aor.airhockey.config.model.game.elements.BallConfig;
+
 public class Ball extends MovableElement {
     private double radius;
 
@@ -12,7 +14,7 @@ public class Ball extends MovableElement {
     }
 
     public Ball(double x, double y, double r) {
-        this(x, y, r, 0.3, 0.2);
+        this(x, y, r, BallConfig.DEFAULT_BALL_X_VELOCITY, BallConfig.DEFAULT_BALL_Y_VELOCITY);
     }
 
 }
