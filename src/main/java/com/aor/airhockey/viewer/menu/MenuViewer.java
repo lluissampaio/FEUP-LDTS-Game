@@ -17,7 +17,7 @@ public class MenuViewer extends Viewer<Menu> {
 
         for (int i = 0; i < getModel().getNumberEntries(); i++)
             gui.drawText(
-                    new Position(MenuViewerConfig.positions.get(i), MenuViewerConfig.OPTIONS_STARTING_POINT + MenuViewerConfig.OPTIONS_DISTANCE*i),
+                    new Position(MenuViewerConfig.POSITIONS_LIST.get(i), MenuViewerConfig.OPTIONS_Y_STARTING_POS + MenuViewerConfig.OPTIONS_Y_DISTANCE * i),
                     getModel().getEntry(i),
                     getModel().isSelected(i) ? MenuViewerConfig.IS_SELECTED_COLOR : MenuViewerConfig.NOT_SELECTED_COLOR);
     }

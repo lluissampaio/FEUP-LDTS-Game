@@ -5,6 +5,7 @@ import com.aor.airhockey.model.ColorSettings;
 import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.menu.Options;
 import com.aor.airhockey.viewer.Viewer;
+import com.aor.airhockey.config.viewer.menu.OptionsViewerConfig;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -17,24 +18,24 @@ public class OptionsViewer extends Viewer<Options> {
     @Override
     public void drawElements(GUI gui) {
         ColorSettings colorSettings = getModel().getColorSettings();
-        gui.drawText(new Position(34, 7), "Options", "#018ABE");
+        gui.drawText(new Position(OptionsViewerConfig.OPTIONS_X_POS, OptionsViewerConfig.OPTIONS_Y_POS), OptionsViewerConfig.OPTIONS_TITLE, OptionsViewerConfig.OPTIONS_COLOR);
 
-        List<Integer> positions = Arrays.asList(33, 33, 33, 33, 36);
 
         for (int i = 0; i < getModel().getNumberEntries(); i++) {
             gui.drawText(
-                    new Position(positions.get(i), 14 + 3 * i),
+                    new Position(OptionsViewerConfig.POSITIONS_LIST.get(i), OptionsViewerConfig.OPTIONS_Y_STARTING_POS + OptionsViewerConfig.OPTIONS_Y_DISTANCE * i),
                     getModel().getEntry(i),
-                    getModel().isSelected(i) ? "#FF3333" : "#FFFFFF");
-            if (i < 4) {
+                    getModel().isSelected(i) ? OptionsViewerConfig.IS_SELECTED_COLOR : OptionsViewerConfig.NOT_SELECTED_COLOR);
+
+                if (i < 4) {
                 String currentColor = switch(i) {
                     case 0 -> colorSettings.getBallColor();
                     case 1 -> colorSettings.getDisk1Color();
                     case 2 -> colorSettings.getDisk2Color();
                     case 3 -> colorSettings.getWallColor();
-                    default -> "#FFFFFF";
+                    default -> OptionsViewerConfig.DEFAULT_COLOR;
                 };
-                gui.drawSquare(50, 13 + 3 * i, currentColor);
+                gui.drawSquare(OptionsViewerConfig.SQUARE_X_POS, OptionsViewerConfig.SQUARE_Y_STARTING_POS + OptionsViewerConfig.SQUARE_Y_DISTANCE * i, currentColor);
             }
         }
     }

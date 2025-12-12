@@ -9,10 +9,10 @@ public class MenuViewerConfig {
     public static final String TITLE_TEXT = "Air Hockey";
     public static final String TITLE_COLOR = "#018ABE";
 
-    public static final List<Integer> positions = Arrays.asList(32, 32, 34, 36);
+    public static final List<Integer> POSITIONS_LIST = Arrays.asList(32, 32, 34, 36);
 
-    public static final int OPTIONS_STARTING_POINT = 14;
-    public static final int OPTIONS_DISTANCE = 3;
+    public static final int OPTIONS_Y_STARTING_POS = 14;
+    public static final int OPTIONS_Y_DISTANCE = 3;
 
     public static final String IS_SELECTED_COLOR = "#FF3333";
     public static final String NOT_SELECTED_COLOR = "#FFFFFF";
