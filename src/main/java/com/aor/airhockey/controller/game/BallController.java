@@ -28,22 +28,30 @@ public class BallController extends GameController {
 
         Position newPosition = new Position(newX, newY);
 
-        if (collisionWithHorWall(newPosition, ball.getRadius())) {
-            Velocity newVelocity = new Velocity(velX, velY * -0.95); //a multiplicação é só para simular atrito
-            ball.setVelocity(newVelocity);
+        Velocity ballVelocity = new Velocity(ball.getVelocity().getX(), ball.getVelocity().getY());
+
+        if (collisionWithHorWall(newPosition,ball.getRadius())) {
+            ballVelocity.setVelY(ballVelocity.getY()*-0.95);//a multiplicação é só para simular atrito
+            ball.setVelocity(ballVelocity);
             newY = ball.getPosition().getY() + ball.getVelocity().getY();
             newPosition = new Position(newX, newY);
         }
-        else if (collisionWithVerWall(newPosition, ball.getRadius())) {
-            Velocity newVelocity = new Velocity(velX * -0.95, velY); //a multiplicação é só para simular atrito
-            ball.setVelocity(newVelocity);
+        else if (collisionWithVerWall(newPosition,ball.getRadius())) {
+            ballVelocity.setVelX(ballVelocity.getX()*-0.95);//a multiplicação é só para simular atrito
+            ball.setVelocity(ballVelocity);
             newX = ball.getPosition().getX() + ball.getVelocity().getX();
             newPosition = new Position(newX, newY);
         }
+
         Position gridPosition = new Position(Math.round(newPosition.getX()), Math.round(newPosition.getY())); //é preciso porque os discos só ocupam posições inteiras
         if (collisionWithDisk(gridPosition, ball.getRadius(), disk1, disk2)) {
+            //aqui o código já sabe que houve colisão quando entra aqui
+            double distToDisk1 = getDistance(gridPosition, disk1.getPosition());
+            double distToDisk2 = getDistance(gridPosition, disk2.getPosition());
+            //cada um mede a distancia do centro do disco até ao centro da bola
 
-            Disk hitDisk = disk1.getPosition().equals(gridPosition) ? disk1 : disk2; // qual disco colidiu
+            Disk hitDisk = distToDisk1 < distToDisk2 ? disk1 : disk2; // qual disco colidiu
+            //como já sabemos que houve uma colisão, o que tiver menos distancia para a bola é o que colide
 
             resolveDiskCollision(gridPosition,hitDisk,ball);
 
@@ -52,18 +60,21 @@ public class BallController extends GameController {
             newY = ball.getPosition().getY() + ball.getVelocity().getY();
             newPosition = new Position(newX, newY);
 
+            ballVelocity = new Velocity(ball.getVelocity().getX(), ball.getVelocity().getY());
 
-            /*//para já repetimos aqui colisão com paredes para nao bugar a bola com a parede
-            if (collisionWithHorWall(newPosition)) {
-                ball.setVelY(-ball.getVelY()*0.95);//a multiplicação é só para simular atrito
-                newY = ball.getPosition().getY() + ball.getVelY();
+            //para já repetimos aqui colisão com paredes para nao bugar a bola com a parede
+            if (collisionWithHorWall(newPosition,ball.getRadius())) {
+                ballVelocity.setVelY(ballVelocity.getY()*-0.95);//a multiplicação é só para simular atrito
+                ball.setVelocity(ballVelocity);
+                newY = ball.getPosition().getY() + ball.getVelocity().getY();
                 newPosition = new Position(newX, newY);
             }
-            else if (collisionWithVerWall(newPosition)) {
-                ball.setVelX(-ball.getVelX()*0.95); //a multiplicação é só para simular atrito
-                newX = ball.getPosition().getX() + ball.getVelX();
+            else if (collisionWithVerWall(newPosition,ball.getRadius())) {
+                ballVelocity.setVelX(ballVelocity.getX()*-0.95);//a multiplicação é só para simular atrito
+                ball.setVelocity(ballVelocity);
+                newX = ball.getPosition().getX() + ball.getVelocity().getX();
                 newPosition = new Position(newX, newY);
-            }*/
+            }
         }
         
 
@@ -88,11 +99,11 @@ public class BallController extends GameController {
         return false;
     }
 
-    private boolean collisionWithDisk(Position position, double radius, Disk disk1, Disk disk2) {
+    private boolean collisionWithDisk(Position ballposition, double radius, Disk disk1, Disk disk2) {
         double collisionRadius = disk1.getRadius() + radius;
 
-        double dist1 = getDistance(position, disk1.getPosition());
-        double dist2 = getDistance(position, disk2.getPosition());
+        double dist1 = getDistance(ballposition, disk1.getPosition());
+        double dist2 = getDistance(ballposition, disk2.getPosition());
 
         return dist1 < collisionRadius || dist2 < collisionRadius;
     }
@@ -112,12 +123,12 @@ public class BallController extends GameController {
         double vY = ball.getVelocity().getY();
 
         // colisão lateral
-        if (Math.abs(dx) > Math.abs(dy)) {
+        if (dy==0) {
             if (dx > 0) vX = Math.abs(vX);  // Bola à direita -> força velocidade positiva X
             else vX = -Math.abs(vX);        // Bola à esquerda -> força velocidade negativa X
         }
         // colisão superior/inferior
-        else if (Math.abs(dy) > Math.abs(dx)) {
+        else if (dx==0) {
             if (dy > 0) vY = Math.abs(vY);  // Bola em baixo -> força velocidade positiva Y
             else vY = -Math.abs(vY);        // Bola em cima -> força velocidade negativa Y
         }
@@ -128,7 +139,7 @@ public class BallController extends GameController {
         }
 
 
-        Velocity newVelocity = new Velocity(vX*1.05,  vY*1.05); //para já, só para aumeuntar a velocidade da bola
+        Velocity newVelocity = new Velocity(vX*1.1,  vY*1.1); //para já, só para aumeuntar a velocidade da bola
         ball.setVelocity(newVelocity);
     }
 

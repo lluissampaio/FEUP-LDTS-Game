@@ -3,8 +3,8 @@ package com.aor.airhockey.model;
 import java.util.Objects;
 
 public class Velocity {
-    private final double velX;
-    private final double velY;
+    private double velX;
+    private double velY;
     public Velocity(double x, double y) {
         this.velX = x;
         this.velY = y;
@@ -16,6 +16,9 @@ public class Velocity {
     public double getY() {
         return this.velY;
     }
+
+    public void setVelX(double velX){this.velX=velX;}
+    public void setVelY(double velY){this.velY=velY;}
 
     @Override
     public boolean equals(Object o) {
