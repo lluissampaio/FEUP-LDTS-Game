@@ -1,8 +1,8 @@
 package com.aor.airhockey.model.menu;
 
 import com.aor.airhockey.model.ColorSettings;
+import com.aor.airhockey.config.model.menu.OptionsConfig;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Options {
@@ -18,12 +18,9 @@ public class Options {
     private int wallColorIndex;
 
     public Options(ColorSettings colorSettings) {
-        this.entries = Arrays.asList("Ball color", "Disk1 color","Disk2 color", "Wall color", "Back");
+        this.entries = OptionsConfig.ENTRIES;
         this.colorSettings = colorSettings;
-        this.colors = Arrays.asList(
-                "#FFFFFF", "#FF0000", "#00FF00", "#0000FF",
-                "#FFFF00", "#FF00FF", "#00FFFF", "#FFA500",
-                "#808080", "#800080", "#008080", "#FFC0CB");
+        this.colors = OptionsConfig.COLORS;
         this.ballColorIndex = findColorIndex(colorSettings.getBallColor());
         this.disk1ColorIndex = findColorIndex(colorSettings.getDisk1Color());
         this.disk2ColorIndex = findColorIndex(colorSettings.getDisk2Color());

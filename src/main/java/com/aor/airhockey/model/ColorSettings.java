@@ -1,4 +1,5 @@
 package com.aor.airhockey.model;
+import com.aor.airhockey.config.model.ColorSettingsConfig;
 
 public class ColorSettings {
     private String ballColor;
@@ -7,10 +8,10 @@ public class ColorSettings {
     private String wallColor;
 
     public ColorSettings() {
-        this.ballColor = "#FFFFFF";
-        this.disk1Color = "#FF0000";
-        this.disk2Color = "#0000FF";
-        this.wallColor = "#808080";
+        this.ballColor = ColorSettingsConfig.DEFAULT_BALL_COLOR;
+        this.disk1Color = ColorSettingsConfig.DEFAULT_DISK1_COLOR;
+        this.disk2Color = ColorSettingsConfig.DEFAULT_DISK2_COLOR;
+        this.wallColor = ColorSettingsConfig.DEFAULT_WALL_COLOR;
     }
 
     public String getBallColor() {

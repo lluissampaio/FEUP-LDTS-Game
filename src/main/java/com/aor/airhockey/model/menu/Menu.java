@@ -1,6 +1,7 @@
 package com.aor.airhockey.model.menu;
 
-import java.util.Arrays;
+import com.aor.airhockey.config.model.menu.MenuConfig;
+
 import java.util.List;
 
 public class Menu {
@@ -8,7 +9,7 @@ public class Menu {
     private int currentEntry = 0;
 
     public Menu() {
-        this.entries = Arrays.asList("Singleplayer", "Multiplayer", "Options", "Exit");
+        this.entries = MenuConfig.ENTRIES;
     }
 
     public void nextEntry() {
