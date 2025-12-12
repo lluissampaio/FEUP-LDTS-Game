@@ -7,8 +7,8 @@ import com.aor.airhockey.model.Velocity;
 import com.aor.airhockey.model.game.elements.Ball;
 import com.aor.airhockey.model.game.elements.Disk;
 import com.aor.airhockey.model.game.field.Field;
+import com.aor.airhockey.config.controller.game.BallControllerConfig;
 
-import java.io.IOException;
 import java.util.Set;
 
 public class BallController extends GameController {
@@ -31,13 +31,13 @@ public class BallController extends GameController {
         Velocity ballVelocity = new Velocity(ball.getVelocity().getX(), ball.getVelocity().getY());
 
         if (collisionWithHorWall(newPosition,ball.getRadius())) {
-            ballVelocity.setVelY(ballVelocity.getY()*-0.95);//a multiplicação é só para simular atrito
+            ballVelocity.setVelY(ballVelocity.getY()*BallControllerConfig.FRICTION_MULTIPLIER);//a multiplicação é só para simular atrito
             ball.setVelocity(ballVelocity);
             newY = ball.getPosition().getY() + ball.getVelocity().getY();
             newPosition = new Position(newX, newY);
         }
         else if (collisionWithVerWall(newPosition,ball.getRadius())) {
-            ballVelocity.setVelX(ballVelocity.getX()*-0.95);//a multiplicação é só para simular atrito
+            ballVelocity.setVelX(ballVelocity.getX()*BallControllerConfig.FRICTION_MULTIPLIER);//a multiplicação é só para simular atrito
             ball.setVelocity(ballVelocity);
             newX = ball.getPosition().getX() + ball.getVelocity().getX();
             newPosition = new Position(newX, newY);
@@ -64,13 +64,13 @@ public class BallController extends GameController {
 
             //para já repetimos aqui colisão com paredes para nao bugar a bola com a parede
             if (collisionWithHorWall(newPosition,ball.getRadius())) {
-                ballVelocity.setVelY(ballVelocity.getY()*-0.95);//a multiplicação é só para simular atrito
+                ballVelocity.setVelY(ballVelocity.getY()*BallControllerConfig.FRICTION_MULTIPLIER);//a multiplicação é só para simular atrito
                 ball.setVelocity(ballVelocity);
                 newY = ball.getPosition().getY() + ball.getVelocity().getY();
                 newPosition = new Position(newX, newY);
             }
             else if (collisionWithVerWall(newPosition,ball.getRadius())) {
-                ballVelocity.setVelX(ballVelocity.getX()*-0.95);//a multiplicação é só para simular atrito
+                ballVelocity.setVelX(ballVelocity.getX()*BallControllerConfig.FRICTION_MULTIPLIER);//a multiplicação é só para simular atrito
                 ball.setVelocity(ballVelocity);
                 newX = ball.getPosition().getX() + ball.getVelocity().getX();
                 newPosition = new Position(newX, newY);
@@ -138,7 +138,7 @@ public class BallController extends GameController {
         }
 
 
-        Velocity newVelocity = new Velocity(vX*1.1,  vY*1.1); //para já, só para aumeuntar a velocidade da bola
+        Velocity newVelocity = new Velocity(vX*BallControllerConfig.IMPACT_MULTIPLIER,  vY*BallControllerConfig.IMPACT_MULTIPLIER); //para já, só para aumeuntar a velocidade da bola
         ball.setVelocity(newVelocity);
     }
 
