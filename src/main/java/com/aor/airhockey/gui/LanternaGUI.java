@@ -144,7 +144,7 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawHalfline(Position position) {drawSquare((int)Math.round(position.getX()), (int)Math.round(position.getY()), "#808080");}
+    public void drawHalfline(Position position) {drawSquare((int)Math.round(position.getX()), (int)Math.round(position.getY()), LanternaGUIConfig.HALFLINE_COLOR);}
 
     @Override
     public void drawText(Position position, String text, String color) {
@@ -186,9 +186,7 @@ public class LanternaGUI implements GUI {
     @Override
     public void drawScore(Score score, GUI gui)
     {
-        String scoreString = "Player 1 [" + score.getPlayer1Points() + " - " + score.getPlayer2Points() + "] Player 2";
-
-        gui.drawText(new Position(25, 0), scoreString, "#FFFFFF");
+        gui.drawText(LanternaGUIConfig.SCORE_POSITION, String.format(LanternaGUIConfig.SCORE_STRING, score.getPlayer1Points(), score.getPlayer2Points()), LanternaGUIConfig.SCORE_COLOR);
     }
 
     @Override

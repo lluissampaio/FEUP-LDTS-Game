@@ -1,6 +1,8 @@
 package com.aor.airhockey.controller.game;
 
 import com.aor.airhockey.Game;
+import com.aor.airhockey.config.GameConfig;
+import com.aor.airhockey.config.model.game.elements.BallConfig;
 import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.Velocity;
@@ -122,28 +124,38 @@ public class BallController extends GameController {
         double vY = ball.getVelocity().getY();
 
         // colisão lateral
-        if (dy==0) {
+        if (dy == 0) {
             if (dx > 0) vX = Math.abs(vX);  // Bola à direita -> força velocidade positiva X
             else vX = -Math.abs(vX);        // Bola à esquerda -> força velocidade negativa X
         }
         // colisão superior/inferior
-        else if (dx==0) {
+        else if (dx == 0) {
             if (dy > 0) vY = Math.abs(vY);  // Bola em baixo -> força velocidade positiva Y
             else vY = -Math.abs(vY);        // Bola em cima -> força velocidade negativa Y
         }
         // Colisão na diagonal
         else {
-            if (dx > 0) vX = Math.abs(vX); else vX = -Math.abs(vX);
-            if (dy > 0) vY = Math.abs(vY); else vY = -Math.abs(vY);
+            if (dx > 0) vX = Math.abs(vX);
+            else vX = -Math.abs(vX);
+            if (dy > 0) vY = Math.abs(vY);
+            else vY = -Math.abs(vY);
         }
 
 
-        Velocity newVelocity = new Velocity(vX*BallControllerConfig.IMPACT_MULTIPLIER,  vY*BallControllerConfig.IMPACT_MULTIPLIER); //para já, só para aumeuntar a velocidade da bola
+        Velocity newVelocity = new Velocity(vX * BallControllerConfig.IMPACT_MULTIPLIER, vY * BallControllerConfig.IMPACT_MULTIPLIER); //para já, só para aumeuntar a velocidade da bola
         ball.setVelocity(newVelocity);
     }
 
     @Override
     public void step(Game game, Set<GUI.ACTION> actionSet, long time) {
         moveBall();
+
+       if (getModel().getBall().getScoringPlayer() != 0) // Someone scored
+       {
+           getModel().getBall().setPosition(BallControllerConfig.MIDDLE_POSITION);
+           getModel().getBall().resetScoringPlayer();
+
+           getModel().getBall().setVelocity(new Velocity(BallConfig.DEFAULT_BALL_X_VELOCITY, BallConfig.DEFAULT_BALL_Y_VELOCITY));
+       }
     }
 }

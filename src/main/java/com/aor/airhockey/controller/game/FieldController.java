@@ -14,6 +14,7 @@ public class FieldController extends GameController {
     private final Disk1Controller disk1Controller;
     private final Disk2Controller disk2Controller;
     private final BallController ballController;
+    private final ScoreController scoreController;
 
     public FieldController(Field field) {
         super(field);
@@ -21,6 +22,7 @@ public class FieldController extends GameController {
         this.disk1Controller = new Disk1Controller(field);
         this.disk2Controller = new Disk2Controller(field);
         this.ballController = new BallController(field);
+        this.scoreController = new ScoreController(field);
     }
 
     public void step(Game game, Set<GUI.ACTION> actionSet, long time) throws IOException {
@@ -31,6 +33,7 @@ public class FieldController extends GameController {
             disk1Controller.step(game, actionSet, time);
             disk2Controller.step(game, actionSet, time);
             ballController.step(game, actionSet, time);
+            scoreController.step(game, actionSet, time);
         }
     }
 }
