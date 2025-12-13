@@ -1,7 +1,6 @@
 package com.aor.airhockey.viewer.menu;
 
 import com.aor.airhockey.config.viewer.menu.EndViewerConfig;
-import com.aor.airhockey.config.viewer.menu.MenuViewerConfig;
 import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.menu.End;
