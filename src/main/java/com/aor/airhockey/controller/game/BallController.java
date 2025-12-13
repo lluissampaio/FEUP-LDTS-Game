@@ -25,61 +25,75 @@ public class BallController extends GameController {
         double velX = ball.getVelocity().getX();
         double velY = ball.getVelocity().getY();
 
-        double newX = ball.getPosition().getX() + velX;
-        double newY = ball.getPosition().getY() + velY;
 
-        Position newPosition = new Position(newX, newY);
+        double distance = Math.sqrt(velX * velX + velY * velY); //distância que a bola percorre neste frame
+        double stepSize = 0.5; //defenir o tamanho do passo
+        int steps = (int) Math.ceil(distance / stepSize); //quantos passos são precisos, arredondando para cima
+        if (steps == 0) steps = 1; // Pelo menos 1 passo se estiver quase parado
 
-        Velocity ballVelocity = new Velocity(ball.getVelocity().getX(), ball.getVelocity().getY());
+        //calcular a velocidade do passo
+        double stepX = velX / steps;
+        double stepY = velY / steps;
 
-        if (collisionWithHorWall(newPosition,ball.getRadius())) {
-            ballVelocity.setVelY(ballVelocity.getY()*BallControllerConfig.FRICTION_MULTIPLIER);//a multiplicação é só para simular atrito
-            ball.setVelocity(ballVelocity);
-            newY = ball.getPosition().getY() + ball.getVelocity().getY();
-            newPosition = new Position(newX, newY);
-        }
-        else if (collisionWithVerWall(newPosition,ball.getRadius())) {
-            ballVelocity.setVelX(ballVelocity.getX()*BallControllerConfig.FRICTION_MULTIPLIER);//a multiplicação é só para simular atrito
-            ball.setVelocity(ballVelocity);
-            newX = ball.getPosition().getX() + ball.getVelocity().getX();
-            newPosition = new Position(newX, newY);
-        }
+        for (int i = 0; i < steps; i++) {
+            // Recalcular a posição baseada no passo atual
+            double nextX = ball.getPosition().getX() + stepX;
+            double nextY = ball.getPosition().getY() + stepY;
+            Position newPosition = new Position(nextX, nextY);
 
-        Position gridPosition = new Position(Math.round(newPosition.getX()), Math.round(newPosition.getY())); //é preciso porque os discos só ocupam posições inteiras
-        if (collisionWithDisk(gridPosition, ball.getRadius(), disk1, disk2)) {
-            //aqui o código já sabe que houve colisão quando entra aqui
-            double distToDisk1 = getDistance(gridPosition, disk1.getPosition());
-            double distToDisk2 = getDistance(gridPosition, disk2.getPosition());
-            //cada um mede a distancia do centro do disco até ao centro da bola
+            // Horizontal
+            if (collisionWithHorWall(newPosition, ball.getRadius())) {
+                Velocity v = ball.getVelocity();
+                v.setVelY(v.getY() * BallControllerConfig.FRICTION_MULTIPLIER);
+                ball.setVelocity(v); //mudar a velocidade oficial da bola
 
-            Disk hitDisk = distToDisk1 < distToDisk2 ? disk1 : disk2; // qual disco colidiu
-            //como já sabemos que houve uma colisão, o que tiver menos distancia para a bola é o que colide
-
-            resolveDiskCollision(gridPosition,hitDisk,ball);
-
-            // Recalcula posição final com a nova velocidade pós-choque
-            newX = ball.getPosition().getX() + ball.getVelocity().getX();
-            newY = ball.getPosition().getY() + ball.getVelocity().getY();
-            newPosition = new Position(newX, newY);
-
-            ballVelocity = new Velocity(ball.getVelocity().getX(), ball.getVelocity().getY());
-
-            //para já repetimos aqui colisão com paredes para nao bugar a bola com a parede
-            if (collisionWithHorWall(newPosition,ball.getRadius())) {
-                ballVelocity.setVelY(ballVelocity.getY()*BallControllerConfig.FRICTION_MULTIPLIER);//a multiplicação é só para simular atrito
-                ball.setVelocity(ballVelocity);
-                newY = ball.getPosition().getY() + ball.getVelocity().getY();
-                newPosition = new Position(newX, newY);
+                //faz o mesmo que o código de cima mas é para controlar os steps
+                stepY = -stepY * Math.abs(BallControllerConfig.FRICTION_MULTIPLIER);
+                nextY = ball.getPosition().getY() + stepY; // Corrige a posição
+                newPosition = new Position(nextX, nextY);
             }
-            else if (collisionWithVerWall(newPosition,ball.getRadius())) {
-                ballVelocity.setVelX(ballVelocity.getX()*BallControllerConfig.FRICTION_MULTIPLIER);//a multiplicação é só para simular atrito
-                ball.setVelocity(ballVelocity);
-                newX = ball.getPosition().getX() + ball.getVelocity().getX();
-                newPosition = new Position(newX, newY);
-            }
-        }
 
-        ball.setPosition(newPosition);
+            // Vertical
+            if (collisionWithVerWall(newPosition, ball.getRadius())) {
+                Velocity v = ball.getVelocity();
+                v.setVelX(v.getX() * BallControllerConfig.FRICTION_MULTIPLIER);
+                ball.setVelocity(v); //mudar a velocidade oficial da bola
+
+                //faz o mesmo que o código de cima mas é para controlar os steps
+                stepX = -stepX * Math.abs(BallControllerConfig.FRICTION_MULTIPLIER);
+                nextX = ball.getPosition().getX() + stepX;
+                newPosition = new Position(nextX, nextY);
+            }
+
+            Position gridPosition = new Position(Math.round(newPosition.getX()), Math.round(newPosition.getY()));
+            if (collisionWithDisk(gridPosition, ball.getRadius(), disk1, disk2)) {
+                //aqui o código já sabe que houve colisão quando entra aqui
+                double distToDisk1 = getDistance(gridPosition, disk1.getPosition());
+                double distToDisk2 = getDistance(gridPosition, disk2.getPosition());
+                //cada um mede a distancia do centro do disco até ao centro da bola
+
+                Disk hitDisk = distToDisk1 < distToDisk2 ? disk1 : disk2;
+                //como já sabemos que houve uma colisão, o que tiver menos distancia para a bola é o que colide
+
+                resolveDiskCollision(gridPosition, hitDisk, ball);
+
+                // Como a velocidade mudou drasticamente, paramos este ciclo de passos
+                // e deixamos o próximo frame tratar do novo movimento.
+                // Isto evita que a bola entre "dentro" do disco no mesmo frame.
+                ball.setPosition(newPosition);
+                return; //como muda muito, mais vale tratar noutro frame
+            }
+
+
+            ball.setPosition(newPosition); //a cada subpasso atualiza-se a posição da bola
+        }
+        double curVelX = ball.getVelocity().getX();
+        double curVelY = ball.getVelocity().getY();
+        double speed = Math.sqrt(curVelX * curVelX + curVelY * curVelY);
+        if (speed > BallControllerConfig.MAX_SPEED) {
+            double ratio = BallControllerConfig.MAX_SPEED / speed;
+            ball.setVelocity(new Velocity(curVelX * ratio, curVelY * ratio));
+        }//só para garantir que a velocidade da bola não fique muito grande
     }
 
     private boolean collisionWithHorWall(Position position, double radius) {
@@ -115,35 +129,37 @@ public class BallController extends GameController {
 
     private void resolveDiskCollision(Position ballPos, Disk disk, Ball ball) {
         Position diskPos = disk.getPosition();
+        Velocity diskVel = disk.getVelocity();
+        Velocity ballVel = ball.getVelocity();
 
+        //vetor Normal (do centro do disco para a bola)
         double dx = ballPos.getX() - diskPos.getX();
         double dy = ballPos.getY() - diskPos.getY();
+        double distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Velocidade atual
-        double vX = ball.getVelocity().getX();
-        double vY = ball.getVelocity().getY();
+        if (distance == 0) return; // Evitar erros matemáticos
 
-        // colisão lateral
-        if (dy == 0) {
-            if (dx > 0) vX = Math.abs(vX);  // Bola à direita -> força velocidade positiva X
-            else vX = -Math.abs(vX);        // Bola à esquerda -> força velocidade negativa X
-        }
-        // colisão superior/inferior
-        else if (dx == 0) {
-            if (dy > 0) vY = Math.abs(vY);  // Bola em baixo -> força velocidade positiva Y
-            else vY = -Math.abs(vY);        // Bola em cima -> força velocidade negativa Y
-        }
-        // Colisão na diagonal
-        else {
-            if (dx > 0) vX = Math.abs(vX);
-            else vX = -Math.abs(vX);
-            if (dy > 0) vY = Math.abs(vY);
-            else vY = -Math.abs(vY);
-        }
+        //vetor Normal normalizado, para termos a direção da colisão
+        double nx = dx / distance;
+        double ny = dy / distance;
 
+        // calculamos a velocidade Relativa (Velocidade da Bola - Velocidade do Disco)
+        double relVx = ballVel.getX() - diskVel.getX();
+        double relVy = ballVel.getY() - diskVel.getY();
 
-        Velocity newVelocity = new Velocity(vX * BallControllerConfig.IMPACT_MULTIPLIER, vY * BallControllerConfig.IMPACT_MULTIPLIER); //para já, só para aumeuntar a velocidade da bola
-        ball.setVelocity(newVelocity);
+        // a velocidade ao longo da normal (Produto Escalar)
+        double velocityAlongNormal = relVx * nx + relVy * ny;
+
+        if (velocityAlongNormal > 0) return; //foi tangente
+
+        // Vnew = Vold - 2(Vold . Normal) * Normal : formulla fisica para calcular reflexão com impulso
+        double j = -2 * velocityAlongNormal; //o j corresponde  ao impulso
+        //a partir da formula, calculamos a nova velocidade
+        double newVx = ballVel.getX() + j * nx;
+        double newVy = ballVel.getY() + j * ny;
+
+        // apllicamos um multiplicador de impacto á nova velocidade
+        ball.setVelocity(new Velocity(newVx * BallControllerConfig.IMPACT_MULTIPLIER, newVy * BallControllerConfig.IMPACT_MULTIPLIER));
     }
 
     @Override

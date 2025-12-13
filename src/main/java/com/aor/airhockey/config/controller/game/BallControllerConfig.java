@@ -7,4 +7,5 @@ public class BallControllerConfig {
     public static final double IMPACT_MULTIPLIER = 1.1;
 
     public static final Position MIDDLE_POSITION = new Position(37.0, 19.0);
+    public static final double MAX_SPEED = 2;
 }
