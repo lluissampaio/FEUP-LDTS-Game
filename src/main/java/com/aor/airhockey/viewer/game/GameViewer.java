@@ -4,6 +4,7 @@ import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.game.elements.Ball;
 import com.aor.airhockey.model.game.elements.Halfline;
+import com.aor.airhockey.model.game.elements.Score;
 import com.aor.airhockey.model.game.field.Field;
 import com.aor.airhockey.model.game.elements.Element;
 import com.aor.airhockey.viewer.Viewer;
@@ -22,6 +23,7 @@ public class GameViewer extends Viewer<Field> {
         drawElement(gui, getModel().getDisk1(), new DiskViewer());
         drawElement(gui, getModel().getDisk2(), new DiskViewer());
         drawElements(gui, getModel().getHalfline(), new HalflineViewer());
+        drawElement(gui, getModel().getScore(), new ScoreViewer());
     }
 
     private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer) {

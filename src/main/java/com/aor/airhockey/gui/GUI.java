@@ -1,6 +1,7 @@
 package com.aor.airhockey.gui;
 
 import com.aor.airhockey.model.Position;
+import com.aor.airhockey.model.game.elements.Score;
 
 import java.io.IOException;
 import java.util.Set;
@@ -15,6 +16,8 @@ public interface GUI {
     void drawDisk(Position position, double radius, int playerNumber);
 
     void drawHalfline(Position position);
+
+    void drawScore(Score score, GUI gui);
 
     void drawText(Position position, String text, String color);
 

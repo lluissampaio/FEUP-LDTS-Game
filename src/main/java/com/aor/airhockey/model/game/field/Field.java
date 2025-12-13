@@ -15,10 +15,12 @@ public class Field {
     private Disk disk2;
     private List<Halfline> halfline;
     private List<Goal> goals;
+    private Score score;
 
     public Field(int width, int height) {
         this.width = width;
         this.height = height;
+        this.score = new Score(0, 0);
     }
 
     public int getWidth() {
@@ -54,6 +56,9 @@ public class Field {
     public void setHalfline(List<Halfline> halfline) {this.halfline = halfline;}
 
     public void setGoals(List<Goal> goals) {this.goals = goals;}
+
+    public void setScore(Score score) { this.score = score; }
+    public Score getScore() { return this.score; }
 
     public boolean isEmpty(Position position) {
         for (Wall wall : walls)

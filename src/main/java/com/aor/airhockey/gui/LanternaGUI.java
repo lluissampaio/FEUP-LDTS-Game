@@ -3,6 +3,7 @@ package com.aor.airhockey.gui;
 import com.aor.airhockey.config.gui.LanternaGUIConfig;
 import com.aor.airhockey.model.ColorSettings;
 import com.aor.airhockey.model.Position;
+import com.aor.airhockey.model.game.elements.Score;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -180,6 +181,14 @@ public class LanternaGUI implements GUI {
                 drawSquare(x, y, color);
             }
         }
+    }
+
+    @Override
+    public void drawScore(Score score, GUI gui)
+    {
+        String scoreString = "Player 1 [" + score.getPlayer1Points() + " - " + score.getPlayer2Points() + "] Player 2";
+
+        gui.drawText(new Position(25, 0), scoreString, "#FFFFFF");
     }
 
     @Override
