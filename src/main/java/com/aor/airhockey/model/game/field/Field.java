@@ -1,5 +1,7 @@
 package com.aor.airhockey.model.game.field;
 
+import com.aor.airhockey.config.gui.LanternaGUIConfig;
+import com.aor.airhockey.config.model.game.field.FieldConfig;
 import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.game.elements.*;
 
@@ -8,6 +10,10 @@ import java.util.List;
 public class Field {
     private final int width;
     private final int height;
+
+    // time
+    private final int duration;
+    private final long startTime;
 
     private List<Wall> walls;
     private Ball ball;
@@ -20,7 +26,9 @@ public class Field {
     public Field(int width, int height) {
         this.width = width;
         this.height = height;
-        this.score = new Score(0, 0);
+        this.score = new Score(LanternaGUIConfig.SCORE_POSITION.getX(), LanternaGUIConfig.SCORE_POSITION.getY());
+        this.duration = FieldConfig.GAME_DURATION;
+        this.startTime = System.currentTimeMillis();
     }
 
     public int getWidth() {
@@ -81,8 +89,24 @@ public class Field {
     }
 
     public int getWinner() {
-        if (score.getPlayer1Points() >= 4) return 1;
-        if (score.getPlayer2Points() >= 4) return 2;
-        return 0;
+        // check if we are at over time
+        if (isOvertime()) {
+            if (score.getPlayer1Points() > score.getPlayer2Points()) return 1;
+            else if (score.getPlayer2Points() > score.getPlayer1Points()) return 2;
+            else return 0;
+        }
+        else {
+            if (score.getPlayer1Points() >= 4) return 1; // player 1 wins
+            if (score.getPlayer2Points() >= 4) return 2; // player 2 wins
+            return 0; // no winner
+        }
+    }
+
+    public long getElapsedTime() {
+        return System.currentTimeMillis() - startTime;
+    }
+
+    public boolean isOvertime() {
+        return getElapsedTime() >= FieldConfig.GAME_DURATION;
     }
 }
