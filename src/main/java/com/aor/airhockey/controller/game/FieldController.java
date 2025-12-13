@@ -4,7 +4,9 @@ import com.aor.airhockey.Game;
 import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.model.game.elements.Disk;
 import com.aor.airhockey.model.game.field.Field;
+import com.aor.airhockey.model.menu.End;
 import com.aor.airhockey.model.menu.Menu;
+import com.aor.airhockey.states.EndState;
 import com.aor.airhockey.states.MenuState;
 
 import java.io.IOException;
@@ -34,6 +36,11 @@ public class FieldController extends GameController {
             disk2Controller.step(game, actionSet, time);
             ballController.step(game, actionSet, time);
             scoreController.step(game, actionSet, time);
+        }
+
+        // check if there is a winner
+        if (getModel().getWinner() != 0) {
+            game.setState(new EndState(new End()));
         }
     }
 }

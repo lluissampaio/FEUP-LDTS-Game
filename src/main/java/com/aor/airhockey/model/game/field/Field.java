@@ -79,4 +79,10 @@ public class Field {
                 return true;
         return false;
     }
+
+    public int getWinner() {
+        if (score.getPlayer1Points() >= 4) return 1;
+        if (score.getPlayer2Points() >= 4) return 2;
+        return 0;
+    }
 }

@@ -3,10 +3,7 @@ package com.aor.airhockey;
 import com.aor.airhockey.gui.LanternaGUI;
 import com.aor.airhockey.model.ColorSettings;
 import com.aor.airhockey.model.menu.Menu;
-import com.aor.airhockey.states.GameState;
-import com.aor.airhockey.states.MenuState;
-import com.aor.airhockey.states.OptionsState;
-import com.aor.airhockey.states.State;
+import com.aor.airhockey.states.*;
 import com.aor.airhockey.config.GameConfig;
 
 import java.awt.*;
@@ -43,7 +40,7 @@ public class Game {
         int frameTime = 1000 / 30; // default
         while (this.state != null) {
             // change frames depending on current state to improve navigation in the menu
-            if (state.getClass() == MenuState.class || state.getClass() == OptionsState.class) frameTime = frameTimeMENU;
+            if (state.getClass() == MenuState.class || state.getClass() == OptionsState.class || state.getClass() == EndState.class) frameTime = frameTimeMENU;
             else if (state.getClass() == GameState.class) frameTime = frameTimeGame;
 
             long startTime = System.currentTimeMillis();
