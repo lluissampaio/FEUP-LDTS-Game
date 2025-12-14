@@ -35,7 +35,11 @@ public class OptionsViewer extends Viewer<Options> {
                     case 3 -> colorSettings.getWallColor();
                     default -> OptionsViewerConfig.DEFAULT_COLOR;
                 };
-                gui.drawSquare(OptionsViewerConfig.SQUARE_X_POS, OptionsViewerConfig.SQUARE_Y_STARTING_POS + OptionsViewerConfig.SQUARE_Y_DISTANCE * i, currentColor);
+                for (int x = 0; x < OptionsViewerConfig.SQUARE_LENGTH; x++) {
+                    for (int y = 0; y < OptionsViewerConfig.SQUARE_LENGTH; y++) {
+                        gui.drawSquare(OptionsViewerConfig.SQUARE_X_POS + x, OptionsViewerConfig.SQUARE_Y_STARTING_POS + OptionsViewerConfig.SQUARE_Y_DISTANCE * i + y, currentColor);
+                    }
+                }
             }
         }
     }
