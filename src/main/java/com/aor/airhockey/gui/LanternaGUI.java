@@ -126,7 +126,10 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawBall(Position position, double radius) {drawCircle(position, (int)radius, colorSettings.getBallColor());}
+    public void drawBall(Position position, double radius) {
+        Position gridPosition = new Position(Math.round(position.getX()), Math.round(position.getY()));
+        drawCircle(gridPosition, (int)radius, colorSettings.getBallColor());
+    }
 
     @Override
     public void drawWall(Position position) {drawSquare((int)Math.round(position.getX()), (int)Math.round(position.getY()), colorSettings.getWallColor());}
@@ -140,7 +143,8 @@ public class LanternaGUI implements GUI {
         if (playerNumber == 2) {
             color = colorSettings.getDisk2Color();
         }
-        drawCircle(position, (int)radius, color);
+        Position gridPosition = new Position(Math.round(position.getX()), Math.round(position.getY()));
+        drawCircle(gridPosition, (int)radius, color);
     }
 
     @Override
