@@ -169,9 +169,13 @@ public class BallController extends GameController {
        if (getModel().getBall().getScoringPlayer() != 0) // Someone scored
        {
            getModel().getBall().setPosition(BallControllerConfig.MIDDLE_POSITION);
+           if (getModel().getBall().getScoringPlayer()==1){ //par de if/else só para a bola ir para o campo de quem sofreu ponto
+               getModel().getBall().setVelocity(new Velocity(BallConfig.DEFAULT_BALL_X_VELOCITY, BallConfig.DEFAULT_BALL_Y_VELOCITY));
+           }
+           else{
+               getModel().getBall().setVelocity(new Velocity(-1.0*BallConfig.DEFAULT_BALL_X_VELOCITY, BallConfig.DEFAULT_BALL_Y_VELOCITY));
+           }
            getModel().getBall().resetScoringPlayer();
-
-           getModel().getBall().setVelocity(new Velocity(BallConfig.DEFAULT_BALL_X_VELOCITY, BallConfig.DEFAULT_BALL_Y_VELOCITY));
        }
     }
 }
