@@ -81,8 +81,8 @@ public class Field {
     }
 
     public int getWinner() {
-        if (score.getPlayer1Points() >= 1) return 1;
-        if (score.getPlayer2Points() >= 1) return 2;
+        if (score.getPlayer1Points() >= 4) return 1;
+        if (score.getPlayer2Points() >= 4) return 2;
         return 0;
     }
 }
