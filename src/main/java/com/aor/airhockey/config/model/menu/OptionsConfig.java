@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class OptionsConfig {
-    public static final List<String> ENTRIES = Arrays.asList("Ball color", "Disk1 color","Disk2 color", "Wall color", "Back");
+    public static final List<String> ENTRIES = Arrays.asList("BALL COLOR", "DISK1 COLOR","DISK2 COLOR", "WALL COLOR", "BACK");
 
     public static final List<String> COLORS = Arrays.asList(
             "#FFFFFF", "#FF0000", "#00FF00", "#0000FF",

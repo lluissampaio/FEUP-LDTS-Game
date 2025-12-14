@@ -4,5 +4,5 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MenuConfig {
-    public static final List<String> ENTRIES = Arrays.asList("Singleplayer", "Multiplayer", "Options", "Exit");
+    public static final List<String> ENTRIES = Arrays.asList("SINGLEPLAYER", "MULTIPLAYER", "OPTIONS", "EXIT");
 }

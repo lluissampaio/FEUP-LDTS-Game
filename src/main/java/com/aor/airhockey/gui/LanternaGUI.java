@@ -1,6 +1,7 @@
 package com.aor.airhockey.gui;
 
 import com.aor.airhockey.config.gui.LanternaGUIConfig;
+import com.aor.airhockey.config.gui.FontRendererConfig;
 import com.aor.airhockey.model.ColorSettings;
 import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.game.elements.Score;
@@ -161,7 +162,7 @@ public class LanternaGUI implements GUI {
     public void drawText(Position position, String text, String color) {
         for (int i = 0; i < text.length(); i++) {
             char c = text.charAt(i);
-            drawCharacter((int) Math.round(position.getX()) + i * 8, (int) Math.round(position.getY()), c, color);
+            drawCharacter((int) Math.round(position.getX()) + i * FontRendererConfig.CHAR_WIDTH, (int) Math.round(position.getY()), c, color);
         }
     }
 
