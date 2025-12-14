@@ -17,7 +17,7 @@ public class LanternaGUIConfig {
     public static final Position SCORE_POSITION = new Position(98, 0);
 
     public static final String TIMER_COLOR = "#FFFFFF";
-    public static final String TIMER_STRING = "TIMER: %02d:%02d"; // min:seconds
+    public static final String TIMER_STRING = "%02d:%02d"; // min:seconds
     public static final Position TIMER_POSITION = new Position(0, 0);
 
     // CHANGE TIMER TO SECONDS AND CHANGE COLOR ACCORDINGLY
