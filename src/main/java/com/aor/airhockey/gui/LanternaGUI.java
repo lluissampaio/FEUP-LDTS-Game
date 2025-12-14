@@ -4,9 +4,12 @@ import com.aor.airhockey.config.gui.LanternaGUIConfig;
 import com.aor.airhockey.model.ColorSettings;
 import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.game.elements.Score;
+import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.graphics.TextImage;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -17,6 +20,7 @@ import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -29,11 +33,13 @@ public class LanternaGUI implements GUI {
     private final AWTTerminalFrame terminal;
     private final Set<ACTION> actionSet = new HashSet<>();
     private final ColorSettings colorSettings;
+    private final FontRenderer fontRenderer;
 
-    public LanternaGUI(Screen screen, Terminal terminal, ColorSettings colorSettings) {
+    public LanternaGUI(Screen screen, Terminal terminal, ColorSettings colorSettings) throws IOException, URISyntaxException {
         this.screen = screen;
         this.terminal = (AWTTerminalFrame) terminal;
         this.colorSettings = colorSettings;
+        fontRenderer = new FontRenderer();
     }
 
     public LanternaGUI(int width, int height, ColorSettings colorSettings) throws IOException, FontFormatException, URISyntaxException {
@@ -41,6 +47,7 @@ public class LanternaGUI implements GUI {
         this.terminal = (AWTTerminalFrame) createTerminal(width, height, fontConfig);
         this.screen = createScreen(terminal);
         this.colorSettings = colorSettings;
+        fontRenderer = new FontRenderer();
 
         startKeyListeners();
     }
@@ -152,17 +159,29 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawText(Position position, String text, String color) {
-        TextGraphics tg = screen.newTextGraphics();
-        tg.setForegroundColor(TextColor.Factory.fromString(color));
-        tg.setBackgroundColor(TextColor.Factory.fromString(LanternaGUIConfig.BACKGROUND_COLOR));
-        tg.putString((int)Math.round(position.getX()), (int)Math.round(position.getY()), text);
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            drawCharacter((int) Math.round(position.getX()) + i * 8, (int) Math.round(position.getY()), c, color);
+        }
     }
 
     private void drawCharacter(int x, int y, char c, String color) {
         TextGraphics tg = screen.newTextGraphics();
-        tg.setForegroundColor(TextColor.Factory.fromString(color));
-        tg.setBackgroundColor(TextColor.Factory.fromString(LanternaGUIConfig.BACKGROUND_COLOR));
-        tg.putString(x, y + 1, "" + c);
+        BufferedImage charSprite = fontRenderer.getChar(c);
+        for (int i = 0; i < charSprite.getWidth(); i++) {
+            for (int j = 0; j < charSprite.getHeight(); j++) {
+                int a = charSprite.getRGB(i, j);
+                int red = (a >> 16) & 255;
+                int green = (a >> 8) & 255;
+                int blue = a & 255;
+
+                if (red > 128 || green > 128 || blue > 128) {
+                    TextColor foreground = TextColor.Factory.fromString(color);
+                    TextCharacter pixel = new TextCharacter(' ', foreground, foreground);
+                    tg.setCharacter(x + i, y + j, pixel);
+                }
+            }
+        }
     }
 
     @Override
