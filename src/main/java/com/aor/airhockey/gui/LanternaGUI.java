@@ -220,8 +220,12 @@ public class LanternaGUI implements GUI {
     @Override
     public void drawTimer(Timer timer, GUI gui)
     {
-        gui.drawText(LanternaGUIConfig.TIMER_POSITION, String.format(LanternaGUIConfig.TIMER_STRING,
-                timer.getElapsedMinutes(), timer.getElapsedSeconds()), LanternaGUIConfig.TIMER_COLOR);
+        if (timer.isOvertime()) {
+            gui.drawText(LanternaGUIConfig.TIMER_POSITION, LanternaGUIConfig.OVERTIME_STRING, LanternaGUIConfig.OVERTIME_COLOR);
+        } else {
+            gui.drawText(LanternaGUIConfig.TIMER_POSITION, String.format(LanternaGUIConfig.TIMER_STRING,
+                    timer.getElapsedMinutes(), timer.getElapsedSeconds()), LanternaGUIConfig.TIMER_COLOR);
+        }
     }
 
     @Override
