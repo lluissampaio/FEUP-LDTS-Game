@@ -24,6 +24,7 @@ public class GameViewer extends Viewer<Field> {
         drawElement(gui, getModel().getDisk2(), new DiskViewer());
         drawElements(gui, getModel().getHalfline(), new HalflineViewer());
         drawElement(gui, getModel().getScore(), new ScoreViewer());
+        drawElement(gui, getModel().getTimer(), new TimerViewer());
     }
 
     private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer) {

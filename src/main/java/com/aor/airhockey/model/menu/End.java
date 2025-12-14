@@ -7,8 +7,14 @@ import java.util.List;
 public class End {
     private final List<String> entries;
     private int currentEntry = 0;
+    private int winner;
 
-    public End() { this.entries = EndConfig.ENTRIES; }
+    public End(int winner) {
+        this.entries = EndConfig.ENTRIES;
+        this.winner = winner;
+    }
+
+    public int getWinner() { return this.winner; };
 
     public void nextEntry() {
         currentEntry++;

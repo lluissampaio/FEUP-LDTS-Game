@@ -12,7 +12,7 @@ public class EndViewer extends Viewer<End> {
     @Override
     protected void drawElements(GUI gui) {
 
-        gui.drawText(new Position(EndViewerConfig.TITLE_X_POS, EndViewerConfig.TITLE_Y_POS), EndViewerConfig.TITLE_TEXT, EndViewerConfig.TITLE_COLOR);
+        gui.drawText(new Position(EndViewerConfig.TITLE_X_POS, EndViewerConfig.TITLE_Y_POS), String.format(EndViewerConfig.TITLE_TEXT, getModel().getWinner()), EndViewerConfig.TITLE_COLOR);
 
         for (int i = 0; i < getModel().getNumberEntries(); i++)
             gui.drawText(

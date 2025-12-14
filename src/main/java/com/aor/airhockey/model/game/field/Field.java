@@ -1,5 +1,6 @@
 package com.aor.airhockey.model.game.field;
 
+import com.aor.airhockey.config.gui.LanternaGUIConfig;
 import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.game.elements.*;
 
@@ -16,11 +17,13 @@ public class Field {
     private List<Halfline> halfline;
     private List<Goal> goals;
     private Score score;
+    private Timer timer;
 
     public Field(int width, int height) {
         this.width = width;
         this.height = height;
-        this.score = new Score(0, 0);
+        this.score = new Score(LanternaGUIConfig.SCORE_POSITION.getX(), LanternaGUIConfig.SCORE_POSITION.getY());
+        this.timer = new Timer(LanternaGUIConfig.TIMER_POSITION.getX(), LanternaGUIConfig.TIMER_POSITION.getY());
     }
 
     public int getWidth() {
@@ -60,6 +63,9 @@ public class Field {
     public void setScore(Score score) { this.score = score; }
     public Score getScore() { return this.score; }
 
+    public void setTimer(Timer timer) { this.timer = timer; }
+    public Timer getTimer() { return this.timer; }
+
     public boolean isEmpty(Position position) {
         for (Wall wall : walls)
             if (wall.getPosition().equals(position))
@@ -81,8 +87,16 @@ public class Field {
     }
 
     public int getWinner() {
-        if (score.getPlayer1Points() >= 4) return 1;
-        if (score.getPlayer2Points() >= 4) return 2;
-        return 0;
+        // check if we are at over time
+        if (timer.isOvertime()) {
+            if (score.getPlayer1Points() > score.getPlayer2Points()) return 1;
+            else if (score.getPlayer2Points() > score.getPlayer1Points()) return 2;
+            else return 0;
+        }
+        else {
+            if (score.getPlayer1Points() >= 4) return 1; // player 1 wins
+            if (score.getPlayer2Points() >= 4) return 2; // player 2 wins
+            return 0; // no winner
+        }
     }
 }

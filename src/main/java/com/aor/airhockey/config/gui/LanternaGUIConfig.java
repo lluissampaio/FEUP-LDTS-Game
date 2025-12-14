@@ -15,4 +15,10 @@ public class LanternaGUIConfig {
     public static final String SCORE_COLOR = "#FFFFFF";
     public static final String SCORE_STRING = "PLAYER 1 [%d - %d] PLAYER 2";
     public static final Position SCORE_POSITION = new Position(50, 0);
+
+    public static final String TIMER_COLOR = "#FFFFFF";
+    public static final String TIMER_STRING = "TIMER: %d"; // for now the time will appear in milliseconds;
+    public static final Position TIMER_POSITION = new Position(0, 0);
+
+    // CHANGE TIMER TO SECONDS AND CHANGE COLOR ACCORDINGLY
 }
