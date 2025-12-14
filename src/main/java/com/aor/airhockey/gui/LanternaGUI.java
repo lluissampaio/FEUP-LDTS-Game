@@ -4,6 +4,7 @@ import com.aor.airhockey.config.gui.LanternaGUIConfig;
 import com.aor.airhockey.model.ColorSettings;
 import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.game.elements.Score;
+import com.aor.airhockey.model.game.elements.Timer;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -191,6 +192,13 @@ public class LanternaGUI implements GUI {
     public void drawScore(Score score, GUI gui)
     {
         gui.drawText(LanternaGUIConfig.SCORE_POSITION, String.format(LanternaGUIConfig.SCORE_STRING, score.getPlayer1Points(), score.getPlayer2Points()), LanternaGUIConfig.SCORE_COLOR);
+    }
+
+    @Override
+    public void drawTimer(Timer timer, GUI gui)
+    {
+        gui.drawText(LanternaGUIConfig.TIMER_POSITION, String.format(LanternaGUIConfig.TIMER_STRING,
+                timer.getElapsedTime()), LanternaGUIConfig.TIMER_COLOR);
     }
 
     @Override

@@ -1,15 +1,21 @@
 package com.aor.airhockey.config.viewer.menu;
 
+import com.aor.airhockey.config.ConfigCalculator;
+import com.aor.airhockey.config.GameConfig;
+import com.aor.airhockey.config.model.menu.MenuConfig;
+import com.aor.airhockey.config.model.menu.OptionsConfig;
+
+import javax.swing.text.html.Option;
 import java.util.Arrays;
 import java.util.List;
 
 public class OptionsViewerConfig {
-    public static final int OPTIONS_X_POS = 34;
-    public static final int OPTIONS_Y_POS = 7;
     public static final String OPTIONS_TITLE = "Options";
+    public static final int OPTIONS_X_POS = ConfigCalculator.calculateStringCenterX(OPTIONS_TITLE);
+    public static final int OPTIONS_Y_POS = 7;
     public static final String OPTIONS_COLOR = "#018ABE";
 
-    public static final List<Integer> POSITIONS_LIST = Arrays.asList(33, 33, 33, 33, 36);
+    public static final List<Integer> POSITIONS_LIST = ConfigCalculator.calculateStringListCenterX(OptionsConfig.ENTRIES);
 
     public static final int OPTIONS_Y_STARTING_POS = 14;
     public static final int OPTIONS_Y_DISTANCE = 3;

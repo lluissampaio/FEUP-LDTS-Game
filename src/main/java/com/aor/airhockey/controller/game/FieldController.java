@@ -40,7 +40,7 @@ public class FieldController extends GameController {
 
         // check if there is a winner
         if (getModel().getWinner() != 0) {
-            game.setState(new EndState(new End()));
+            game.setState(new EndState(new End(getModel().getWinner())));
         }
     }
 }
