@@ -13,8 +13,8 @@ public class LanternaGUIConfig {
     public static final String HALFLINE_COLOR = "#808080";
 
     public static final String SCORE_COLOR = "#FFFFFF";
-    public static final String SCORE_STRING = "PLAYER 1 [%d - %d] PLAYER 2";
-    public static final Position SCORE_POSITION = new Position(50, 0);
+    public static final String SCORE_STRING = "P1 [%d - %d] P2";
+    public static final Position SCORE_POSITION = new Position(98, 0);
 
     public static final String TIMER_COLOR = "#FFFFFF";
     public static final String TIMER_STRING = "TIMER: %d"; // for now the time will appear in milliseconds;
