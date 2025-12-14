@@ -137,11 +137,13 @@ public class LanternaGUI implements GUI {
     @Override
     public void drawBall(Position position, double radius) {
         Position gridPosition = new Position(Math.round(position.getX()), Math.round(position.getY()));
-        drawCircle(gridPosition, (int)radius, colorSettings.getBallColor());
+        drawCircle(gridPosition, (int) radius, colorSettings.getBallColor());
     }
 
     @Override
-    public void drawWall(Position position) {drawSquare((int)Math.round(position.getX()), (int)Math.round(position.getY()), colorSettings.getWallColor());}
+    public void drawWall(Position position) {
+        drawSquare((int) Math.round(position.getX()), (int) Math.round(position.getY()), colorSettings.getWallColor());
+    }
 
     @Override
     public void drawDisk(Position position, double radius, int playerNumber) {
@@ -153,11 +155,13 @@ public class LanternaGUI implements GUI {
             color = colorSettings.getDisk2Color();
         }
         Position gridPosition = new Position(Math.round(position.getX()), Math.round(position.getY()));
-        drawCircle(gridPosition, (int)radius, color);
+        drawCircle(gridPosition, (int) radius, color);
     }
 
     @Override
-    public void drawHalfline(Position position) {drawSquare((int)Math.round(position.getX()), (int)Math.round(position.getY()), LanternaGUIConfig.HALFLINE_COLOR);}
+    public void drawHalfline(Position position) {
+        drawSquare((int) Math.round(position.getX()), (int) Math.round(position.getY()), LanternaGUIConfig.HALFLINE_COLOR);
+    }
 
     @Override
     public void drawText(Position position, String text, String color) {
@@ -195,10 +199,10 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawCircle(Position center, int radius, String color){
+    public void drawCircle(Position center, int radius, String color) {
         double degreesToRadians = Math.PI / 180.0;
 
-        for  (int r = 0; r <= radius; r++) {
+        for (int r = 0; r <= radius; r++) {
             for (int degrees = 0; degrees < 360; degrees++) {
                 double radians = degreesToRadians * degrees;
                 int x = (int) Math.round(center.getX() + Math.cos(radians) * r);
@@ -209,8 +213,7 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawScore(Score score, GUI gui)
-    {
+    public void drawScore(Score score, GUI gui) {
         gui.drawText(LanternaGUIConfig.SCORE_POSITION, String.format(LanternaGUIConfig.SCORE_STRING, score.getPlayer1Points(), score.getPlayer2Points()), LanternaGUIConfig.SCORE_COLOR);
     }
 
@@ -218,7 +221,7 @@ public class LanternaGUI implements GUI {
     public void drawTimer(Timer timer, GUI gui)
     {
         gui.drawText(LanternaGUIConfig.TIMER_POSITION, String.format(LanternaGUIConfig.TIMER_STRING,
-                timer.getElapsedTime()), LanternaGUIConfig.TIMER_COLOR);
+                timer.getElapsedMinutes(), timer.getElapsedSeconds()), LanternaGUIConfig.TIMER_COLOR);
     }
 
     @Override
