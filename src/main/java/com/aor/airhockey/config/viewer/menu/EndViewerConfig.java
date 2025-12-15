@@ -14,7 +14,7 @@ public class EndViewerConfig {
     public static final List<Integer> POSITIONS_LIST = ConfigCalculator.calculateStringListCenterX(EndConfig.ENTRIES);
 
     public static final int OPTIONS_Y_STARTING_POS = 56;
-    public static final int OPTIONS_Y_DISTANCE = 20;
+    public static final int OPTIONS_Y_DISTANCE = 24;
 
     public static final String IS_SELECTED_COLOR = "#FF3333";
     public static final String NOT_SELECTED_COLOR = "#FFFFFF";

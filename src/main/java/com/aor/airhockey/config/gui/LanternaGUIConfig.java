@@ -18,7 +18,7 @@ public class LanternaGUIConfig {
 
     public static final String TIMER_COLOR = "#FFFFFF";
     public static final String TIMER_STRING = "%02d:%02d"; // min:seconds
-    public static final String OVERTIME_STRING = "OVERTIME";
+    public static final String OVERTIME_STRING = "OVERTIME!";
     public static final String OVERTIME_COLOR = "#FFFF00";
     public static final Position TIMER_POSITION = new Position(0, 0);
 

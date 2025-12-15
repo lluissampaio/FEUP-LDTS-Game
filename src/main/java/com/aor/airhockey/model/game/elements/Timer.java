@@ -15,14 +15,16 @@ public class Timer extends Element {
         return System.currentTimeMillis() - startTime;
     }
 
-    public long getElapsedSeconds() {
-        // returns seconds since the beginning of the game
-        return ((System.currentTimeMillis() - startTime) / 1000) - (getElapsedMinutes() * 60);
+    public long getRemainingSeconds() {
+        return (TimerConfig.GAME_DURATION - getElapsedTime()) / 1000 + 1;
     }
 
-    public long getElapsedMinutes() {
-        // return minutes since the beginning of the game
-        return (System.currentTimeMillis() - startTime) / 1000 / 60;
+    public long getRemainingMinutes() {
+        return getRemainingSeconds() / 60;
+    }
+
+    public long getDisplaySeconds() {
+        return getRemainingSeconds() % 60;
     }
 
     public boolean isOvertime() {

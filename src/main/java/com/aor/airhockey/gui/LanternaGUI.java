@@ -224,7 +224,7 @@ public class LanternaGUI implements GUI {
             gui.drawText(LanternaGUIConfig.TIMER_POSITION, LanternaGUIConfig.OVERTIME_STRING, LanternaGUIConfig.OVERTIME_COLOR);
         } else {
             gui.drawText(LanternaGUIConfig.TIMER_POSITION, String.format(LanternaGUIConfig.TIMER_STRING,
-                    timer.getElapsedMinutes(), timer.getElapsedSeconds()), LanternaGUIConfig.TIMER_COLOR);
+                    timer.getRemainingMinutes(), timer.getDisplaySeconds()), LanternaGUIConfig.TIMER_COLOR);
         }
     }
 
