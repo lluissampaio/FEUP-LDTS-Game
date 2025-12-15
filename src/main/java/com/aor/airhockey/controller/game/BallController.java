@@ -77,10 +77,18 @@ public class BallController extends GameController {
 
                 resolveDiskCollision(gridPosition, hitDisk, ball);
 
+                Velocity newVel = ball.getVelocity();
+
+                // Mexer a bola imediatamente para garantir que sai do disco
+                double escapeX = newVel.getX() * 0.3;
+                double escapeY = newVel.getY() * 0.3;
+
+                Position currentPos = ball.getPosition();
+                ball.setPosition(new Position(currentPos.getX() + escapeX, currentPos.getY() + escapeY));
+
                 // Como a velocidade mudou drasticamente, paramos este ciclo de passos
                 // e deixamos o próximo frame tratar do novo movimento.
                 // Isto evita que a bola entre "dentro" do disco no mesmo frame.
-                ball.setPosition(newPosition);
                 return; //como muda muito, mais vale tratar noutro frame
             }
 
@@ -142,6 +150,16 @@ public class BallController extends GameController {
         //vetor Normal normalizado, para termos a direção da colisão
         double nx = dx / distance;
         double ny = dy / distance;
+
+        //Quanto a bola está dentro do disco
+        double overlap = (disk.getRadius() + ball.getRadius()) - distance;
+
+        if (overlap > 0) {
+            //Separa a bola do disco
+            double correctX = ballPos.getX() + nx * (overlap + 0.01);
+            double correctY = ballPos.getY() + ny * (overlap + 0.01);
+            ball.setPosition(new Position(correctX, correctY));
+        }
 
         // calculamos a velocidade Relativa (Velocidade da Bola - Velocidade do Disco)
         double relVx = ballVel.getX() - diskVel.getX();
