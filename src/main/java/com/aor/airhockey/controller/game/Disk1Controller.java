@@ -57,10 +57,14 @@ public class Disk1Controller extends GameController {
        double velX = disk1.getVelocity().getX();
        double velY = disk1.getVelocity().getY();
        for (GUI.ACTION action : actionSet) {
-           if (action == GUI.ACTION.KEY_N) velY -= DiskControllerConfig.ACCELERATION;
-           if (action == GUI.ACTION.KEY_E) velX += DiskControllerConfig.ACCELERATION;
+           // if (action == GUI.ACTION.KEY_N) velY -= DiskControllerConfig.ACCELERATION;
+           // if (action == GUI.ACTION.KEY_E) velX += DiskControllerConfig.ACCELERATION;
+           // if (action == GUI.ACTION.KEY_S) velY += DiskControllerConfig.ACCELERATION;
+           // if (action == GUI.ACTION.KEY_W) velX -= DiskControllerConfig.ACCELERATION;
+           if (action == GUI.ACTION.KEY_W) velY -= DiskControllerConfig.ACCELERATION;
+           if (action == GUI.ACTION.KEY_D) velX += DiskControllerConfig.ACCELERATION;
            if (action == GUI.ACTION.KEY_S) velY += DiskControllerConfig.ACCELERATION;
-           if (action == GUI.ACTION.KEY_W) velX -= DiskControllerConfig.ACCELERATION;
+           if (action == GUI.ACTION.KEY_A) velX -= DiskControllerConfig.ACCELERATION;
        }
        velX *= DiskControllerConfig.ATTRITION_MULTIPLIER;
        velY *= DiskControllerConfig.ATTRITION_MULTIPLIER;

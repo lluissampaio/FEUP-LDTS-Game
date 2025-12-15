@@ -116,15 +116,15 @@ public class LanternaGUI implements GUI {
         int keycode = e.getKeyCode();
 
         return switch (keycode) {
-            case KeyEvent.VK_UP -> ACTION.ARR_N;
-            case KeyEvent.VK_LEFT -> ACTION.ARR_W;
-            case KeyEvent.VK_DOWN -> ACTION.ARR_S;
-            case KeyEvent.VK_RIGHT -> ACTION.ARR_E;
+            case KeyEvent.VK_UP -> ACTION.ARR_UP;
+            case KeyEvent.VK_LEFT -> ACTION.ARR_LEFT;
+            case KeyEvent.VK_DOWN -> ACTION.ARR_DOWN;
+            case KeyEvent.VK_RIGHT -> ACTION.ARR_RIGHT;
             case KeyEvent.VK_Q -> ACTION.QUIT;
-            case KeyEvent.VK_W -> ACTION.KEY_N;
-            case KeyEvent.VK_A -> ACTION.KEY_W;
+            case KeyEvent.VK_W -> ACTION.KEY_W;
+            case KeyEvent.VK_A -> ACTION.KEY_A;
             case KeyEvent.VK_S -> ACTION.KEY_S;
-            case KeyEvent.VK_D -> ACTION.KEY_E;
+            case KeyEvent.VK_D -> ACTION.KEY_D;
             case KeyEvent.VK_ENTER -> ACTION.SELECT;
             default -> ACTION.NONE;
         };

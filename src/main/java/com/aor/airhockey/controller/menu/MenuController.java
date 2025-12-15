@@ -24,10 +24,10 @@ public class MenuController extends Controller<Menu> {
         for (GUI.ACTION action : actionSet) {
             if (!previousActions.contains(action)) {
                 switch (action) {
-                    case ARR_N, KEY_N:
+                    case ARR_UP, KEY_W:
                         getModel().previousEntry();
                         break;
-                    case ARR_S, KEY_S:
+                    case ARR_DOWN, KEY_S:
                         getModel().nextEntry();
                         break;
                     case SELECT:

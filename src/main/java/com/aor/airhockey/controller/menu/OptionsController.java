@@ -22,16 +22,16 @@ public class OptionsController extends Controller<Options> {
         for (GUI.ACTION action : actionSet) {
             if (!previousActions.contains(action)) {
                 switch (action) {
-                    case ARR_N, KEY_N:
+                    case ARR_UP, KEY_W:
                         getModel().previousEntry();
                         break;
-                    case ARR_S, KEY_S:
+                    case ARR_DOWN, KEY_S:
                         getModel().nextEntry();
                         break;
-                    case ARR_E, KEY_E:
+                    case ARR_RIGHT, KEY_D:
                         getModel().nextColor();
                         break;
-                    case ARR_W, KEY_W:
+                    case ARR_LEFT, KEY_A:
                         getModel().previousColor();
                         break;
                     case SELECT:
