@@ -160,7 +160,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawHalfline(Position position) {
-        drawSquare((int) Math.round(position.getX()), (int) Math.round(position.getY()), LanternaGUIConfig.HALFLINE_COLOR);
+        drawSquare((int) Math.round(position.getX()), (int) Math.round(position.getY()), colorSettings.getWallColor());
     }
 
     @Override
