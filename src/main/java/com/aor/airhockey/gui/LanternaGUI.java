@@ -172,6 +172,11 @@ public class LanternaGUI implements GUI {
         }
     }
 
+    @Override
+    public void drawArc(Position position) {
+        drawSquare((int) Math.round(position.getX()), (int) Math.round(position.getY()), colorSettings.getWallColor());
+    }
+
     private void drawCharacter(int x, int y, char c, String color) {
         TextGraphics tg = screen.newTextGraphics();
         BufferedImage charSprite = fontRenderer.getChar(c);

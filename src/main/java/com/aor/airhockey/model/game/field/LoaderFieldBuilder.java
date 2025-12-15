@@ -106,4 +106,17 @@ public class LoaderFieldBuilder extends FieldBuilder {
 
         return goals;
     }
+
+    @Override
+    protected List<Arc> createArcs() {
+        List<Arc> arcs = new ArrayList<>();
+
+        for (int y = 0; y < lines.size(); y++) {
+            String line = lines.get(y);
+            for (int x = 0; x < line.length(); x++)
+                if (line.charAt(x) == LoaderFieldBuilderConfig.ARC_CHARACTER) arcs.add(new Arc(x, y));
+        }
+
+        return arcs;
+    }
 }

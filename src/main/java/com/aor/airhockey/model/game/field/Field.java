@@ -18,6 +18,7 @@ public class Field {
     private List<Goal> goals;
     private Score score;
     private Timer timer;
+    private List<Arc> arcs;
 
     public Field(int width, int height) {
         this.width = width;
@@ -65,6 +66,13 @@ public class Field {
 
     public void setTimer(Timer timer) { this.timer = timer; }
     public Timer getTimer() { return this.timer; }
+
+    public void setArcs(List<Arc> arcs) {
+        this.arcs = arcs;
+    }
+    public List<Arc> getArcs() {
+        return arcs;
+    }
 
     public boolean isEmpty(Position position) {
         for (Wall wall : walls)

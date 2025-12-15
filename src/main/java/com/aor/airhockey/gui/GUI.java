@@ -28,6 +28,8 @@ public interface GUI {
 
     void drawCircle(Position position, int radius, String color);
 
+    void drawArc(Position position);
+
     void clear();
 
     void refresh() throws IOException;
@@ -35,7 +37,7 @@ public interface GUI {
     void close() throws IOException;
 
     // ARR -> stands for the arrow keys actions
-    // KEY -> stands for the "wasd" keys actions
+    // KEY -> stands for the keyboard key actions
     enum ACTION { ARR_UP, ARR_RIGHT, ARR_DOWN, ARR_LEFT, KEY_W, KEY_D, KEY_S, KEY_A, NONE, QUIT, SELECT, KEY_R}
 }
 

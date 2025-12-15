@@ -8,11 +8,13 @@ public abstract class FieldBuilder {
     public Field createField() {
         Field field = new Field(getWidth(), getHeight());
 
-        field.setBall(createBall());
+
+        field.setArcs(createArcs());
         field.setDisk1(createDisk(1));
         field.setDisk2(createDisk(2));
         field.setWalls(createWalls());
         field.setHalfline(createHalfline());
+        field.setBall(createBall());
         field.setGoals(createGoals());
 
         return field;
@@ -31,4 +33,6 @@ public abstract class FieldBuilder {
     protected abstract List<Halfline> createHalfline();
 
     protected abstract List<Goal> createGoals();
+
+    protected abstract List<Arc> createArcs();
 }

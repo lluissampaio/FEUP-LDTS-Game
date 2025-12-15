@@ -19,9 +19,11 @@ public class GameViewer extends Viewer<Field> {
     @Override
     public void drawElements(GUI gui) {
         drawElements(gui, getModel().getWalls(), new WallViewer());
+
+        drawElements(gui, getModel().getHalfline(), new HalflineViewer());
+        drawElements(gui, getModel().getArcs(), new ArcViewer());
         drawElement(gui, getModel().getDisk1(), new DiskViewer());
         drawElement(gui, getModel().getDisk2(), new DiskViewer());
-        drawElements(gui, getModel().getHalfline(), new HalflineViewer());
         drawElement(gui, getModel().getBall(), new BallViewer());
         drawElement(gui, getModel().getScore(), new ScoreViewer());
         drawElement(gui, getModel().getTimer(), new TimerViewer());
