@@ -1,6 +1,7 @@
 package com.aor.airhockey.controller.game;
 
 import com.aor.airhockey.Game;
+import com.aor.airhockey.config.ConfigCalculator;
 import com.aor.airhockey.config.GameConfig;
 import com.aor.airhockey.config.model.game.elements.BallConfig;
 import com.aor.airhockey.gui.GUI;
@@ -182,6 +183,15 @@ public class BallController extends GameController {
 
     @Override
     public void step(Game game, Set<GUI.ACTION> actionSet, long time) {
+        // check if we want to centralize the ball
+        for (GUI.ACTION action : actionSet) {
+            if (action == GUI.ACTION.KEY_R) {
+                getModel().getBall().setPosition(new Position(ConfigCalculator.calculateCenterX(), ConfigCalculator.calculateCenterY()));
+                getModel().getBall().setVelocity(new Velocity(BallConfig.DEFAULT_BALL_X_VELOCITY, BallConfig.DEFAULT_BALL_Y_VELOCITY));
+            }
+        }
+
+
         moveBall();
 
        if (getModel().getBall().getScoringPlayer() != 0) // Someone scored

@@ -125,6 +125,7 @@ public class LanternaGUI implements GUI {
             case KeyEvent.VK_A -> ACTION.KEY_A;
             case KeyEvent.VK_S -> ACTION.KEY_S;
             case KeyEvent.VK_D -> ACTION.KEY_D;
+            case KeyEvent.VK_R -> ACTION.KEY_R;
             case KeyEvent.VK_ENTER -> ACTION.SELECT;
             default -> ACTION.NONE;
         };

@@ -10,8 +10,6 @@ public class LanternaGUIConfig {
 
     public static final String DEFAULT_DISK_COLOR = "#FFFFFF";
 
-    public static final String HALFLINE_COLOR = "#808080";
-
     public static final String SCORE_COLOR = "#FFFFFF";
     public static final String SCORE_STRING = "P1 [%d - %d] P2";
     public static final Position SCORE_POSITION = new Position(98, 0);
