@@ -8,5 +8,5 @@ public class BallControllerConfig {
     public static final double IMPACT_MULTIPLIER = 1.1;
 
     public static final Position MIDDLE_POSITION = new Position(ConfigCalculator.calculateCenterX(), ConfigCalculator.calculateCenterY());
-    public static final double MAX_SPEED = 8.0;
+    public static final double MAX_SPEED = 6.0;
 }
