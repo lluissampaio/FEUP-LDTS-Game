@@ -3,6 +3,7 @@ package com.aor.airhockey.config;
 import com.aor.airhockey.config.GameConfig;
 import com.aor.airhockey.config.gui.FontRendererConfig;
 import com.aor.airhockey.config.gui.LanternaGUIConfig;
+import com.aor.airhockey.model.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,10 @@ import java.util.List;
 public class ConfigCalculator {
     public static int calculateCenterX() { return GameConfig.GAME_WIDTH / 2; }
     public static int calculateCenterY() { return GameConfig.GAME_HEIGHT / 2; }
+
+    public static Position calculateCenterPosition() {
+        return new Position(calculateCenterX(), calculateCenterY());
+    }
 
     public static int calculateStringCenterX(String string) { return ((GameConfig.GAME_WIDTH - string.length()*FontRendererConfig.CHAR_WIDTH) / 2); }
 
