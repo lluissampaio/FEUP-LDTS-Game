@@ -56,7 +56,7 @@ class DiskControllerTest {
     // O Field trata Wall, Goal e Halfline como !isEmpty, logo o controller deve reagir igual.
     @Test
     void collisionWithWallRight() {
-        disk.setVelocity(new Velocity(2, 0)); //velocidade inicial para a direita
+        disk.setVelocity(new Velocity(1, 0)); //velocidade inicial para a direita
         Mockito.when(field.isEmpty(new Position(8, 5))).thenReturn(false);  // X = 5 (pos) + 0.5 + 2 (raio) = 7.5 -> Arredonda para 8. Na posição (8,5) a posição nao está vazia
         controller.step(game, Collections.emptySet(), 0);
         Assertions.assertTrue(disk.getVelocity().getX() <= 0); //ao bater na parede a velocidade inverte ou para
@@ -64,8 +64,7 @@ class DiskControllerTest {
 
     @Test
     void collisionWithGoalLeft() {
-        disk.setVelocity(new Velocity(-2, 0));
-        Mockito.when(field.isEmpty(new Position(3, 5))).thenReturn(false);
+        disk.setVelocity(new Velocity(-1, 0));
         Mockito.when(field.isEmpty(new Position(2, 5))).thenReturn(false);
         controller.step(game, Collections.emptySet(), 0);
         Assertions.assertTrue(disk.getVelocity().getX() >= 0);
@@ -73,7 +72,7 @@ class DiskControllerTest {
 
     @Test
     void collisionWithHalflineDown() {
-        disk.setVelocity(new Velocity(0, 2));
+        disk.setVelocity(new Velocity(0, 1));
         Mockito.when(field.isEmpty(new Position(5, 8))).thenReturn(false); // Halfline aqui
         controller.step(game, Collections.emptySet(), 0);
         Assertions.assertTrue(disk.getVelocity().getY() <= 0);
