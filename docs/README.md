@@ -8,15 +8,15 @@ This game was developed by João Morete (up202403406@up.pt), Luís Sampaio (up20
 ### IMPLEMENTED FEATURES
 
 - **Smooth in-game inputs** - Disks feel responsive, allowing for multiple key presses at the same time and key holding
-- **Ball collision with walls** - When the ball hits a wall, it will bounce off the wall, while losing some speed
 - **Disk bounds** - Disks aren't able to leave their halfcourts
+- **Overtime** - Once the countdown timer hits 0, either the game ends, in case a player is already winning, or, if there is a draw, an overtime starts - wins the first player to score.
+- **Options Menu** - A new menu that allows players to customize the colors of the game elements such as the ball, disks and walls.
+- **End Game Menu** - A new menu that shows the result of the game that just finished and gives players plenty of options on what to do next.
+- **Keybinds** - During the game phase we added 2 new keybinds: <br> - **"q"** quit the game into the main menu; <br> - **"r"** reset the ball to the central position.
 
 ### PLANNED FEATURES
 
-- **Singleplayer mode** - One of the disks is controller by a bot, instead of another player
-- **Pause Menu** - Players will be able to pause the game
-- **Ball collision with disks** - When a disk hits a ball, the ball will bounce off it, with accurate velocity and direction, depending on how the disk hits it
-- **Customization** - The player may use the options menu to change things like the ball, disk and wall colors
+We were able to implement all the pretended features apart from the pause menu.
 
 ### DESIGN
 
@@ -60,30 +60,16 @@ The implementation of the MVC design pattern brought us the following benefits:
 
 #### KNOWN CODE SMELLS
 
-1. Hard-coded values: Throughout our code, at times we found the need to use some constant primitive data types to be able to build the game. 
-    The problem is we started with one, and then another, and soon enough we got a lot of values that are hard-coded. 
-    Some examples would be the colors of the game, such as the background or elements' colors, also the Menu's options' positions or the 
-    constant that we use to simulate friction. We will eventually solve this problem by creating a class that holds all the constants of the game.
+All the code smells mentioned before were solved.
 
 2. Position.java: We changed the primitive data type that holds the position from int to double so that it would be easier to calculate the balls 
     movement. The problem is that we need the position in int data type to be able to represent in the LanternaGUI.java class, so we got a fast 
     solution by rounding the values. We plan to implement functions in Position.class that allow us to solve this problem. 
 
-3. Disk classes: We think that Disk1 and Disk2 are very similar classes and this is normally not a good sign. On the other hand
-    this was the way we thought was best for our game to work. As opposed to the previous code smells, we do not plan to make changes
-    on this one.
-
-4. The menu inputs: Since replacing the Lanterna's keystrokes for the java's key listeners as the way our game reads inputs we think that the 
-    menu inputs are not as responsive as we intended to. We changed the menu's frames per second so that it would be easier for the user to 
-    navigate. We plan to improve this.
-
-5. The game window: We found very difficult to create a game that does not break when we resize it. We would like to be able to fullscreen the game 
-    in any machine.
-
 ### TESTING
 
 ### Screenshot of coverage report
-![CoverageReport screenshot](docs/images/screenshots/coverageReport.png)
+![CoverageReport screenshot](docs/images/screenshots/final_coverageReport.png)
 
 ### Link to mutation testing report
 [Mutation tests](../build/reports/pitest/index.html)
@@ -92,6 +78,6 @@ The implementation of the MVC design pattern brought us the following benefits:
 
 After considering the work done by each of us, we think this is a fair distribution of how much each of us worked. Luís did have an urgency, so he couldn´t contribute more.
 
-- João Morete: 40%
-- Luís Sampaio: 20%
-- Tomás Vieira: 40%
+- João Morete: 33.3%
+- Luís Sampaio: 33.3%
+- Tomás Vieira: 33.3%
