@@ -27,6 +27,7 @@ class DiskControllerTest {
         Mockito.when(field.getDisk1()).thenReturn(disk);
         Mockito.when(field.isEmpty(Mockito.any())).thenReturn(true); // Simula campo vazio
         controller = new Disk1Controller(field);
+        game = Mockito.mock(Game.class);
     }
 
     @Test
