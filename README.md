@@ -15,14 +15,21 @@ The following images show the general look of our game and its menus:
 
 ### Menus
 
-![Menu screenshot](docs/images/screenshots/menu.png)
+![Main Menu screenshot](docs/images/screenshots/final_menu.png) 
+<br> *Fig. 1 - Main Menu*
 
-![Options screenshot](docs/images/screenshots/options.png)
+![Options screenshot](docs/images/screenshots/final_options.png)
+<br> *Fig. 2 - Options Menu*
 
 ### Game
 
-![Game screenshot](docs/images/screenshots/game.png)
+![Game screenshot](docs/images/screenshots/final_game.png)
+<br> *Fig. 3 - Game*
+
+![Overtime screenshot](docs/images/screenshots/final_overtime.png)
+<br> *Fig. 4 - Overtime*
 
 ### End Game
 
-> Since our game still has no scoring system, it does not reach the end, and thus it has no "End Game" screen.
+![Ènd Game screenshot](docs/images/screenshots/final_end_menu.png)
+<br> *Fig 5 - End Menu*
