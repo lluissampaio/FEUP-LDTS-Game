@@ -8,13 +8,20 @@ public class End {
     private final List<String> entries;
     private int currentEntry = 0;
     private int winner;
+    private int p1_score;
+    private int p2_score;
 
-    public End(int winner) {
+    public End(int winner, int p1_score, int p2_score) {
         this.entries = EndConfig.ENTRIES;
         this.winner = winner;
+        this.p1_score = p1_score;
+        this.p2_score = p2_score;
     }
 
     public int getWinner() { return this.winner; };
+
+    public int getP1_score() { return this.p1_score; };
+    public int getP2_score() { return this.p2_score; };
 
     public void nextEntry() {
         currentEntry++;

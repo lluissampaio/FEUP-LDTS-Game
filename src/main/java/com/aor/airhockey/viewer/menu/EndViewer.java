@@ -14,6 +14,10 @@ public class EndViewer extends Viewer<End> {
 
         gui.drawText(new Position(EndViewerConfig.TITLE_X_POS, EndViewerConfig.TITLE_Y_POS), String.format(EndViewerConfig.TITLE_TEXT, getModel().getWinner()), EndViewerConfig.TITLE_COLOR);
 
+        // draw the final score
+        gui.drawText(new Position(EndViewerConfig.FINAL_SCORE_X_POS, EndViewerConfig.FINAL_SCORE_Y_POS), String.format(EndViewerConfig.FINAL_SCORE, getModel().getP1_score(), getModel().getP2_score()), EndViewerConfig.SCORE_COLOR);
+
+
         for (int i = 0; i < getModel().getNumberEntries(); i++)
             gui.drawText(
                 new Position(EndViewerConfig.POSITIONS_LIST.get(i), EndViewerConfig.OPTIONS_Y_STARTING_POS + EndViewerConfig.OPTIONS_Y_DISTANCE * i),
