@@ -7,108 +7,109 @@ import com.aor.airhockey.model.game.elements.Goal;
 import com.aor.airhockey.model.game.elements.Halfline;
 import com.aor.airhockey.model.game.elements.Wall;
 import com.aor.airhockey.model.game.field.Field;
+import com.aor.airhockey.gui.GUI;
+import com.aor.airhockey.Game;
+import org.mockito.Mockito;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 class DiskControllerTest {
     private Disk1Controller controller;
     private Disk disk;
     private Field field;
+    private Game game;
 
     @BeforeEach
     void setUp() {
-        field = new Field(10, 10);
-
+        field = Mockito.mock(Field.class);
         disk = new Disk(5, 5, 2, 1);
-        field.setDisk1(disk);
-
-        field.setWalls(Arrays.asList());
-        field.setHalfline(Arrays.asList());
-        field.setGoals(Arrays.asList());
-
+        Mockito.when(field.getDisk1()).thenReturn(disk);
+        Mockito.when(field.isEmpty(Mockito.any())).thenReturn(true); // Simula campo vazio
         controller = new Disk1Controller(field);
+        game = Mockito.mock(Game.class);
     }
 
     @Test
     void moveDiskRightEmpty(){
-        controller.moveDisk1Right();
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_D), 0);
         Assertions.assertEquals(new Position(6, 5),  disk.getPosition());
     }
 
     @Test
     void moveDiskLeftEmpty(){
-        controller.moveDisk1Left();
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_A), 0);
         Assertions.assertEquals(new Position(4, 5),  disk.getPosition());
     }
 
     @Test
     void moveDiskUpEmpty(){
-        controller.moveDisk1Up();
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_W), 0);
         Assertions.assertEquals(new Position(5, 4),  disk.getPosition());
     }
 
     @Test
     void moveDiskDownEmpty(){
-        controller.moveDisk1Down();
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_S), 0);
         Assertions.assertEquals(new Position(5, 6),  disk.getPosition());
     }
 
     @Test
     void moveDiskRightGoal(){
-        field.setGoals(Arrays.asList(new Goal(6, 5)));
-        controller.moveDisk1Right();
+        Mockito.when(field.isEmpty(new Position(6, 5))).thenReturn(false); // Goal em (6,5)
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_D), 0);
         Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
     }
 
     @Test
     void moveDiskLeftGoal(){
-        field.setGoals(Arrays.asList(new Goal(4, 5)));
-        controller.moveDisk1Left();
+        Mockito.when(field.isEmpty(new Position(4, 5))).thenReturn(false); // Goal em (4,5)
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_A), 0);
         Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
     }
 
     @Test
     void moveDiskRightHalfline(){
-        field.setHalfline(Arrays.asList(new Halfline(6, 5)));
-        controller.moveDisk1Right();
+        Mockito.when(field.isEmpty(new Position(6, 5))).thenReturn(false); // Halfline em (5,6)
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_D), 0);
         Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
     }
 
     @Test
     void moveDiskLeftHalfline(){
-        field.setHalfline(Arrays.asList(new Halfline(4, 5)));
-        controller.moveDisk1Left();
+        Mockito.when(field.isEmpty(new Position(4, 5))).thenReturn(false); // Halfline em (5,4)
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_A), 0);
         Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
     }
 
     @Test
     void moveDiskUpWall(){
-        field.setWalls(Arrays.asList(new Wall(5, 4)));
-        controller.moveDisk1Up();
+        Mockito.when(field.isEmpty(new Position(5, 4))).thenReturn(false); // parede em (5,4)
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_W), 0);
         Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
     }
 
     @Test
     void moveDiskDownWall(){
-        field.setWalls(Arrays.asList(new Wall(5, 6)));
-        controller.moveDisk1Down();
+        Mockito.when(field.isEmpty(new Position(5, 6))).thenReturn(false); // parede em (5,6)
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_S), 0);
         Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
     }
 
     @Test
     void moveDiskLeftWall(){
-        field.setWalls(Arrays.asList(new Wall(4, 5)));
-        controller.moveDisk1Left();
+        Mockito.when(field.isEmpty(new Position(4, 5))).thenReturn(false); // parede em (4,5)
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_A), 0);
         Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
     }
 
     @Test
     void moveDiskRightWall(){
-        field.setWalls(Arrays.asList(new Wall(6, 5)));
-        controller.moveDisk1Right();
+        Mockito.when(field.isEmpty(new Position(6, 5))).thenReturn(false); // parede em (6,5)
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_D), 0);
         Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
     }
 
