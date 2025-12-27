@@ -55,6 +55,7 @@ public class Game {
             if (state.getClass() == MenuState.class || state.getClass() == OptionsState.class || state.getClass() == EndState.class) frameTime = frameTimeMENU;
             else if (state.getClass() == GameState.class) frameTime = frameTimeGame;
 
+
             long startTime = System.currentTimeMillis();
 
             state.step(this, gui, startTime);

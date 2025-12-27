@@ -2,114 +2,79 @@ package com.aor.airhockey.controller;
 
 import com.aor.airhockey.controller.game.Disk1Controller;
 import com.aor.airhockey.model.Position;
+import com.aor.airhockey.model.Velocity;
 import com.aor.airhockey.model.game.elements.Disk;
-import com.aor.airhockey.model.game.elements.Goal;
-import com.aor.airhockey.model.game.elements.Halfline;
-import com.aor.airhockey.model.game.elements.Wall;
 import com.aor.airhockey.model.game.field.Field;
+import com.aor.airhockey.gui.GUI;
+import com.aor.airhockey.Game;
+import org.mockito.Mockito;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-
-import java.util.Arrays;
+import java.util.Collections;
 
 class DiskControllerTest {
     private Disk1Controller controller;
     private Disk disk;
     private Field field;
+    private Game game;
 
     @BeforeEach
     void setUp() {
-        field = new Field(10, 10);
-
+        field = Mockito.mock(Field.class);
+        game = Mockito.mock(Game.class);
         disk = new Disk(5, 5, 2, 1);
-        field.setDisk1(disk);
-
-        field.setWalls(Arrays.asList());
-        field.setHalfline(Arrays.asList());
-        field.setGoals(Arrays.asList());
-
+        Mockito.when(field.getDisk1()).thenReturn(disk);
+        Mockito.when(field.isEmpty(Mockito.any())).thenReturn(true); // Simula campo vazio
         controller = new Disk1Controller(field);
     }
 
     @Test
-    void moveDiskRightEmpty(){
-        controller.moveDisk1Right();
-        Assertions.assertEquals(new Position(6, 5),  disk.getPosition());
+    void moveDiskRightEmpty() { //campo livre
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_D), 0);//simula movimento para a direita
+        Assertions.assertTrue(disk.getPosition().getX() > 5.0);
     }
 
     @Test
     void moveDiskLeftEmpty(){
-        controller.moveDisk1Left();
-        Assertions.assertEquals(new Position(4, 5),  disk.getPosition());
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_A), 0);
+        Assertions.assertTrue(disk.getPosition().getX() < 5.0);
     }
 
     @Test
     void moveDiskUpEmpty(){
-        controller.moveDisk1Up();
-        Assertions.assertEquals(new Position(5, 4),  disk.getPosition());
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_W), 0);
+        Assertions.assertTrue(disk.getPosition().getY() < 5.0);
     }
 
     @Test
     void moveDiskDownEmpty(){
-        controller.moveDisk1Down();
-        Assertions.assertEquals(new Position(5, 6),  disk.getPosition());
+        controller.step(game, Collections.singleton(GUI.ACTION.KEY_S), 0);
+        Assertions.assertTrue(disk.getPosition().getY() > 5.0);
+    }
+
+    // O Field trata Wall, Goal e Halfline como !isEmpty, logo o controller deve reagir igual.
+    @Test
+    void collisionWithWallRight() {
+        disk.setVelocity(new Velocity(1, 0)); //velocidade inicial para a direita
+        Mockito.when(field.isEmpty(new Position(8, 5))).thenReturn(false);  // X = 5 (pos) + 0.5 + 2 (raio) = 7.5 -> Arredonda para 8. Na posição (8,5) a posição nao está vazia
+        controller.step(game, Collections.emptySet(), 0);
+        Assertions.assertTrue(disk.getVelocity().getX() <= 0); //ao bater na parede a velocidade inverte ou para
     }
 
     @Test
-    void moveDiskRightGoal(){
-        field.setGoals(Arrays.asList(new Goal(6, 5)));
-        controller.moveDisk1Right();
-        Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
+    void collisionWithGoalLeft() {
+        disk.setVelocity(new Velocity(-1, 0));
+        Mockito.when(field.isEmpty(new Position(2, 5))).thenReturn(false);
+        controller.step(game, Collections.emptySet(), 0);
+        Assertions.assertTrue(disk.getVelocity().getX() >= 0);
     }
 
     @Test
-    void moveDiskLeftGoal(){
-        field.setGoals(Arrays.asList(new Goal(4, 5)));
-        controller.moveDisk1Left();
-        Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
+    void collisionWithHalflineDown() {
+        disk.setVelocity(new Velocity(0, 1));
+        Mockito.when(field.isEmpty(new Position(5, 8))).thenReturn(false); // Halfline aqui
+        controller.step(game, Collections.emptySet(), 0);
+        Assertions.assertTrue(disk.getVelocity().getY() <= 0);
     }
-
-    @Test
-    void moveDiskRightHalfline(){
-        field.setHalfline(Arrays.asList(new Halfline(6, 5)));
-        controller.moveDisk1Right();
-        Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
-    }
-
-    @Test
-    void moveDiskLeftHalfline(){
-        field.setHalfline(Arrays.asList(new Halfline(4, 5)));
-        controller.moveDisk1Left();
-        Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
-    }
-
-    @Test
-    void moveDiskUpWall(){
-        field.setWalls(Arrays.asList(new Wall(5, 4)));
-        controller.moveDisk1Up();
-        Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
-    }
-
-    @Test
-    void moveDiskDownWall(){
-        field.setWalls(Arrays.asList(new Wall(5, 6)));
-        controller.moveDisk1Down();
-        Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
-    }
-
-    @Test
-    void moveDiskLeftWall(){
-        field.setWalls(Arrays.asList(new Wall(4, 5)));
-        controller.moveDisk1Left();
-        Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
-    }
-
-    @Test
-    void moveDiskRightWall(){
-        field.setWalls(Arrays.asList(new Wall(6, 5)));
-        controller.moveDisk1Right();
-        Assertions.assertEquals(new Position(5, 5),  disk.getPosition());
-    }
-
 }
