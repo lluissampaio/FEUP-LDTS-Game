@@ -2,6 +2,8 @@ package com.aor.airhockey.controller.menu;
 
 import com.aor.airhockey.Game;
 import com.aor.airhockey.controller.Controller;
+import com.aor.airhockey.controller.InputHandler;
+import com.aor.airhockey.controller.MenuInputHandler;
 import com.aor.airhockey.controller.SoundManager;
 import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.model.menu.Menu;
@@ -11,14 +13,14 @@ import com.aor.airhockey.states.MenuState;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Set;
 
 public class OptionsController extends Controller<Options> {
-    private Set<GUI.ACTION> previousActions = new HashSet<>();
+    private InputHandler inputHandler;
     private SoundManager soundManager;
     public OptionsController(Options options) {
         super(options);
+        inputHandler = new MenuInputHandler();
         try {
             soundManager = new SoundManager();
         } catch (UnsupportedAudioFileException e) {
@@ -32,31 +34,32 @@ public class OptionsController extends Controller<Options> {
 
     @Override
     public void step(Game game, Set<GUI.ACTION> actionSet, long time) throws IOException {
-        for (GUI.ACTION action : actionSet) {
-            if (!previousActions.contains(action)) {
-                switch (action) {
-                    case ARR_UP, KEY_W:
-                        soundManager.playMenuScroll();
-                        getModel().previousEntry();
-                        break;
-                    case ARR_DOWN, KEY_S:
-                        soundManager.playMenuScroll();
-                        getModel().nextEntry();
-                        break;
-                    case ARR_RIGHT, KEY_D:
-                        soundManager.playMenuScroll();
-                        getModel().nextColor();
-                        break;
-                    case ARR_LEFT, KEY_A:
-                        soundManager.playMenuScroll();
-                        getModel().previousColor();
-                        break;
-                    case SELECT:
+        Set<GUI.ACTION> newActions = inputHandler.processActions(actionSet);
+        for (GUI.ACTION action : newActions) {
+            switch (action) {
+                case ARR_UP, KEY_W:
+                    soundManager.playMenuScroll();
+                    getModel().previousEntry();
+                    break;
+                case ARR_DOWN, KEY_S:
+                    soundManager.playMenuScroll();
+                    getModel().nextEntry();
+                    break;
+                case ARR_RIGHT, KEY_D:
+                    soundManager.playMenuScroll();
+                    getModel().nextColor();
+                    break;
+                case ARR_LEFT, KEY_A:
+                    soundManager.playMenuScroll();
+                    getModel().previousColor();
+                    break;
+                case SELECT:
+                    if (getModel().isSelectedExit()) {
                         soundManager.playMenuSelect();
-                        if (getModel().isSelectedExit()) game.setState(new MenuState(new Menu()));
-                }
+                        game.setState(new MenuState(new Menu()));
+                    }
             }
+
         }
-        previousActions = actionSet;
     }
 }
