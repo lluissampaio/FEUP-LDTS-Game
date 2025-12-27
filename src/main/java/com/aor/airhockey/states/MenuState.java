@@ -6,8 +6,12 @@ import com.aor.airhockey.model.menu.Menu;
 import com.aor.airhockey.viewer.Viewer;
 import com.aor.airhockey.viewer.menu.MenuViewer;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class MenuState extends State<Menu> {
-    public MenuState(Menu model) {
+    public MenuState(Menu model) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         super(model);
     }
 
@@ -17,7 +21,7 @@ public class MenuState extends State<Menu> {
     }
 
     @Override
-    protected Controller<Menu> getController() {
+    protected Controller<Menu> getController() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         return new MenuController(getModel());
     }
 }

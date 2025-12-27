@@ -5,6 +5,8 @@ import com.aor.airhockey.controller.Controller;
 import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.viewer.Viewer;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.Set;
 
@@ -13,7 +15,7 @@ public abstract class State<T> {
     private final Controller<T> controller;
     private final Viewer<T> viewer;
 
-    public State(T model) {
+    public State(T model) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         this.model = model;
         this.viewer = getViewer();
         this.controller = getController();
@@ -21,13 +23,13 @@ public abstract class State<T> {
 
     protected abstract Viewer<T> getViewer();
 
-    protected abstract Controller<T> getController();
+    protected abstract Controller<T> getController() throws UnsupportedAudioFileException, LineUnavailableException, IOException;
 
     public T getModel() {
         return model;
     }
 
-    public void step(Game game, GUI gui, long time) throws IOException {
+    public void step(Game game, GUI gui, long time) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         Set<GUI.ACTION> actionSet = gui.getNextActions();
         controller.step(game, actionSet, time);
         viewer.draw(gui);

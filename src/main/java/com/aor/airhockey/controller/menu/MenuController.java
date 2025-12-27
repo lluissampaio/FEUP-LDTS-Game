@@ -1,16 +1,13 @@
 package com.aor.airhockey.controller.menu;
 
 import com.aor.airhockey.Game;
-import com.aor.airhockey.controller.Controller;
-import com.aor.airhockey.controller.InputHandler;
-import com.aor.airhockey.controller.MenuInputHandler;
+import com.aor.airhockey.controller.*;
 import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.model.game.field.LoaderFieldBuilder;
 import com.aor.airhockey.model.menu.Menu;
 import com.aor.airhockey.model.menu.Options;
 import com.aor.airhockey.states.GameState;
 import com.aor.airhockey.states.OptionsState;
-import com.aor.airhockey.controller.SoundManager;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -19,36 +16,28 @@ import java.util.Set;
 
 public class MenuController extends Controller<Menu> {
     private InputHandler inputHandler;
-    private SoundManager soundManager;
-    public MenuController(Menu menu) {
+    private MenuSounds menuSounds;
+    public MenuController(Menu menu) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         super(menu);
         inputHandler = new MenuInputHandler();
-        try {
-            soundManager = new SoundManager();
-        } catch (UnsupportedAudioFileException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (LineUnavailableException e) {
-            throw new RuntimeException(e);
-        }
+        menuSounds = new SoundManager();
     }
 
     @Override
-    public void step(Game game, Set<GUI.ACTION> actionSet, long time) throws IOException {
+    public void step(Game game, Set<GUI.ACTION> actionSet, long time) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         Set<GUI.ACTION> newActions = inputHandler.processActions(actionSet);
         for (GUI.ACTION action : newActions) {
             switch (action) {
                 case ARR_UP, KEY_W:
-                    soundManager.playMenuScroll();
+                    menuSounds.playMenuScroll();
                     getModel().previousEntry();
                     break;
                 case ARR_DOWN, KEY_S:
-                    soundManager.playMenuScroll();
+                    menuSounds.playMenuScroll();
                     getModel().nextEntry();
                     break;
                 case SELECT:
-                    soundManager.playMenuSelect();
+                    menuSounds.playMenuSelect();
                     if (getModel().isSelectedExit()) game.setState(null);
                     // if (getModel().isSelectedSingleplayer()) game.setState(new GameState(new LoaderFieldBuilder().createField()));
                     // SINGLEPLAYER IS YET TO IMPLEMENT

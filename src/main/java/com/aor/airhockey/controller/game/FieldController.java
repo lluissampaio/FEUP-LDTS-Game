@@ -9,6 +9,8 @@ import com.aor.airhockey.model.menu.Menu;
 import com.aor.airhockey.states.EndState;
 import com.aor.airhockey.states.MenuState;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.Set;
 
@@ -18,7 +20,7 @@ public class FieldController extends GameController {
     private final BallController ballController;
     private final ScoreController scoreController;
 
-    public FieldController(Field field) {
+    public FieldController(Field field) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         super(field);
 
         this.disk1Controller = new Disk1Controller(field);
@@ -27,7 +29,7 @@ public class FieldController extends GameController {
         this.scoreController = new ScoreController(field);
     }
 
-    public void step(Game game, Set<GUI.ACTION> actionSet, long time) throws IOException {
+    public void step(Game game, Set<GUI.ACTION> actionSet, long time) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         if (actionSet.contains(GUI.ACTION.QUIT)) {
             game.setState(new MenuState(new Menu()));
         }

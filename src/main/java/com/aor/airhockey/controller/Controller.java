@@ -6,6 +6,9 @@ import java.util.Set;
 import com.aor.airhockey.Game;
 import com.aor.airhockey.gui.GUI;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 public abstract class Controller<T> {
     private final T model;
 
@@ -17,5 +20,5 @@ public abstract class Controller<T> {
         return model;
     }
 
-    public abstract void step(Game game, Set<GUI.ACTION> actionSet, long time) throws IOException;
+    public abstract void step(Game game, Set<GUI.ACTION> actionSet, long time) throws IOException, UnsupportedAudioFileException, LineUnavailableException;
 }

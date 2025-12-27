@@ -1,5 +1,6 @@
 package com.aor.airhockey;
 
+import com.aor.airhockey.controller.BackgroundMusic;
 import com.aor.airhockey.controller.SoundManager;
 import com.aor.airhockey.gui.LanternaGUI;
 import com.aor.airhockey.model.ColorSettings;
@@ -17,26 +18,20 @@ public class Game {
     private final LanternaGUI gui;
     private State state;
     private final ColorSettings  colorSettings;
-    private SoundManager soundManager;
+    private BackgroundMusic backgroundMusic;
 
-    public Game() throws FontFormatException, IOException, URISyntaxException {
+    public Game() throws FontFormatException, IOException, URISyntaxException, UnsupportedAudioFileException, LineUnavailableException {
         this.colorSettings = new ColorSettings();
         this.gui = new LanternaGUI(GameConfig.GAME_WIDTH, GameConfig.GAME_HEIGHT, getColorSettings());
         this.state = new MenuState(new Menu());
-        try {
-            this.soundManager = new SoundManager();
-        } catch (UnsupportedAudioFileException e) {
-            throw new RuntimeException(e);
-        } catch (LineUnavailableException e) {
-            throw new RuntimeException(e);
-        }
+        backgroundMusic = new SoundManager();
     }
 
     public ColorSettings getColorSettings() {
         return colorSettings;
     }
 
-    public static void main(String[] args) throws IOException, FontFormatException, URISyntaxException {
+    public static void main(String[] args) throws IOException, FontFormatException, URISyntaxException, UnsupportedAudioFileException, LineUnavailableException {
         new Game().start();
     }
 
@@ -44,7 +39,7 @@ public class Game {
         this.state = state;
     }
 
-    private void start() throws IOException {
+    private void start() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         int frameTimeGame = 1000 / GameConfig.GAME_FPS;
         int frameTimeMENU = 1000 / GameConfig.MENU_FPS;
 
@@ -67,7 +62,7 @@ public class Game {
                 if (sleepTime > 0) Thread.sleep(sleepTime);
             } catch (InterruptedException e) {
             }
-            soundManager.playBackground();
+            backgroundMusic.playBackground();
         }
 
         gui.close();

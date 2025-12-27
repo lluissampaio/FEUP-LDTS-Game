@@ -11,6 +11,8 @@ import com.aor.airhockey.model.menu.Menu;
 import com.aor.airhockey.states.GameState;
 import com.aor.airhockey.states.MenuState;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.Set;
 
@@ -22,7 +24,7 @@ public class EndController extends Controller<End> {
     }
 
     @Override
-    public void step(Game game, Set<GUI.ACTION> actionSet, long time) throws IOException {
+    public void step(Game game, Set<GUI.ACTION> actionSet, long time) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         Set<GUI.ACTION> newActions = inputHandler.processActions(actionSet);
         for (GUI.ACTION action : newActions) {
             switch (action) {

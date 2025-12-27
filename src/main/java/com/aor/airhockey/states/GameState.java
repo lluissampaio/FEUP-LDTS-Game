@@ -6,8 +6,12 @@ import com.aor.airhockey.model.game.field.Field;
 import com.aor.airhockey.viewer.Viewer;
 import com.aor.airhockey.viewer.game.GameViewer;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class GameState extends State<Field> {
-    public GameState(Field field) {
+    public GameState(Field field) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         super(field);
     }
 
@@ -15,5 +19,5 @@ public class GameState extends State<Field> {
     protected Viewer<Field> getViewer() { return new GameViewer(getModel()); }
 
     @Override
-    protected Controller<Field> getController() { return new FieldController(getModel()); }
+    protected Controller<Field> getController() throws UnsupportedAudioFileException, LineUnavailableException, IOException { return new FieldController(getModel()); }
 }

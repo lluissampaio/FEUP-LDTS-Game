@@ -2,53 +2,39 @@ package com.aor.airhockey.controller;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
+import com.aor.airhockey.config.controller.SoundConfig;
 
-public class SoundManager {
-    private Clip menuScrollClip;
-    private final Clip menuSelectClip;
-    private Clip goalClip;
-    private Clip backgroundClip;
+public class SoundManager implements BackgroundMusic, MenuSounds, GameSounds{
+    private final Sound menuScrollSound;
+    private final Sound menuSelectSound;
+    private final Sound backgroundMusic;
+    private final Sound goalSound;
 
     public SoundManager() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        AudioInputStream audioStream1 = AudioSystem.getAudioInputStream(SoundManager.class.getResource("/sounds/menuSelect.wav"));
-        menuSelectClip = AudioSystem.getClip();
-        menuSelectClip.open(audioStream1);
-        AudioInputStream audioStream2 = AudioSystem.getAudioInputStream(SoundManager.class.getResource("/sounds/menuScroll.wav"));
-        menuScrollClip = AudioSystem.getClip();
-        menuScrollClip.open(audioStream2);
-        AudioInputStream audioStream3 = AudioSystem.getAudioInputStream(SoundManager.class.getResource("/sounds/goal.wav"));
-        goalClip = AudioSystem.getClip();
-        goalClip.open(audioStream3);
-        AudioInputStream audioStream4 = AudioSystem.getAudioInputStream(SoundManager.class.getResource("/sounds/background.wav"));
-        backgroundClip = AudioSystem.getClip();
-        backgroundClip.open(audioStream4);
+        SoundLoader loader = new ClipSoundLoader();
+        this.menuScrollSound = loader.load(SoundConfig.SCROLL_SOUND_PATH);
+        this.menuSelectSound = loader.load(SoundConfig.SELECT_SOUND_PATH);
+        this.backgroundMusic = loader.load(SoundConfig.BACKGROUND_SOUND_PATH);
+        this.goalSound = loader.load(SoundConfig.GOAL_SOUND_PATH);
     }
 
+    @Override
     public void playMenuSelect() {
-        if (menuSelectClip.isRunning()) {
-            menuSelectClip.stop();
-        }
-        menuSelectClip.setFramePosition(0);
-        menuSelectClip.start();
+        menuSelectSound.play();
     }
 
+    @Override
     public void playMenuScroll() {
-        if (menuScrollClip.isRunning()) {
-            menuScrollClip.stop();
-        }
-        menuScrollClip.setFramePosition(0);
-        menuScrollClip.start();
+        menuScrollSound.play();
     }
 
+    @Override
     public void playGoal() {
-        if (goalClip.isRunning()) {
-            goalClip.stop();
-        }
-        goalClip.setFramePosition(0);
-        goalClip.start();
+        goalSound.play();
     }
 
+    @Override
     public void playBackground() {
-        backgroundClip.loop(Clip.LOOP_CONTINUOUSLY);
+        backgroundMusic.loop();
     }
 }
