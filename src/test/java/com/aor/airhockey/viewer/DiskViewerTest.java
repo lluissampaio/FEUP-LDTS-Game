@@ -26,9 +26,7 @@ class DiskViewerTest {
         Mockito.when(disk.getPosition()).thenReturn(position);
         Mockito.when(disk.getRadius()).thenReturn(2.0);
         Mockito.when(disk.getPlayerNumber()).thenReturn(1); //jogador 1
-
         viewer.draw(disk, gui);
-
         Mockito.verify(gui, Mockito.times(1)).drawDisk(position, 2.0, 1);
     }
 }
