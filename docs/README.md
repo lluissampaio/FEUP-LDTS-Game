@@ -10,6 +10,8 @@ This game was developed by João Morete (up202403406@up.pt), Luís Sampaio (up20
 - **Smooth in-game inputs** - Disks feel responsive, allowing for multiple key presses at the same time and key holding
 - **Ball collision with walls** - When the ball hits a wall, it will bounce off the wall, while losing some speed
 - **Disk bounds** - Disks aren't able to leave their halfcourts
+- **Game settings** - PLayers are allowed to change the colors of the game freely to what they like the most.
+- **Menus** - The player can easily navigate through the smooth menus in the game.
 
 ### PLANNED FEATURES
 
@@ -58,6 +60,42 @@ The implementation of the MVC design pattern brought us the following benefits:
 - Ease of maintaining and testing;
 - Separate responsibilities - also, it makes it more difficult the for us to break the Single Responsibility Principle from SOLID;
 
+#### STATE PATTERN
+
+**Problem in Context**
+
+States allow for better context in a point of (run)time and also allow us to have more control over what classes are being used and if they should be used in that state of the game. It also allows for better transitioning between game and all the menus.
+
+**The Pattern**
+
+The state pattern is a widely used pattern to address these types of problems. It is simple to implement and improves the quality of the development of the game.
+
+**Implementation**
+
+The Game class holds various state such as the GameState class and the MenuState class, and more. When the game starts, the game proceeds to the menu state and, from there, states change accordingly (as it is not possible to have more than one running at the same time).
+
+**Consequences**
+
+A clear, organized code that also allows for expansion with ease. It happened when we wanted to implement both que Options and the End screens to our game. We just created new states and called them in the right moment.
+
+#### FACADE PATTERN
+
+**Problem in Context**
+
+Lanterna provides good methods to manipulate the terminal, and we used it as base to our game. It is though not perfect and, most of the time, is way too low-level and seems to overcomplicate.
+
+**The Pattern**
+
+We used the Facade design pattern to address this problem. It consists of an interface that simplify some of the low-level tasks that are needed.
+
+**Implementation**
+
+In our implementation, there were some classes where we applied this design pattern. Both the GUI and the LanternaGUI classes constitute a good example of the use of this design pattern.
+
+**Consequences**
+
+With the implementation of this design pattern we saw our work get simplified as we didn't have to deal with the low-level Lanterna modules.
+
 #### KNOWN CODE SMELLS
 
 1. Hard-coded values: Throughout our code, at times we found the need to use some constant primitive data types to be able to build the game. 
@@ -90,7 +128,7 @@ The implementation of the MVC design pattern brought us the following benefits:
 
 ### SELF-EVALUATION
 
-After considering the work done by each of us, we think this is a fair distribution of how much each of us worked. Luís did have an urgency, so he couldn´t contribute more.
+The work was split evenly among the three of us: 
 
 - João Morete: 40%
 - Luís Sampaio: 20%
