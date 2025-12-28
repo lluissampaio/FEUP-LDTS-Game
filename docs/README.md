@@ -14,6 +14,7 @@ This game was developed by João Morete (up202403406@up.pt), Luís Sampaio (up20
 - **End Game Menu** - A new menu that shows the result of the game that just finished and gives players plenty of options on what to do next.
 - **Keybinds** - During the game phase we added 2 new keybinds: <br> - **"q"** quit the game into the main menu; <br> - **"r"** reset the ball to the central position.
 - **Game settings** - Players are allowed to change the colors of the game freely to what they like the most.
+- **Game sounds** - The game has constant arcade music playing and also provides sounds navigating and selecting in the menus. When in the game, goals are marked with a specific sound and also when a player wins.
 
 ### PLANNED FEATURES
 
