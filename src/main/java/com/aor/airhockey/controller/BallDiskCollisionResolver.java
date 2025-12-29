@@ -10,11 +10,13 @@ public class BallDiskCollisionResolver implements CollisionResolver {
     private Ball ball;
     private Disk disk;
     private CollisionInfo collisionInfo;
+    private Position collisionPosition;
 
-    public BallDiskCollisionResolver(Ball ball, Disk disk, CollisionInfo collisionInfo) {
+    public BallDiskCollisionResolver(Ball ball, Disk disk, CollisionInfo collisionInfo,  Position collisionPosition) {
         this.ball = ball;
         this.disk = disk;
         this.collisionInfo = collisionInfo;
+        this.collisionPosition = collisionPosition;
     }
 
     @Override
@@ -22,7 +24,7 @@ public class BallDiskCollisionResolver implements CollisionResolver {
         double overlap = collisionInfo.getOverlap();
         double nx = collisionInfo.getNx();
         double ny = collisionInfo.getNy();
-        Position ballPos = ball.getPosition();
+        Position ballPos = collisionPosition;
         Velocity ballVel = ball.getVelocity();
         Velocity diskVel = disk.getVelocity();
 
@@ -40,7 +42,10 @@ public class BallDiskCollisionResolver implements CollisionResolver {
         // a velocidade ao longo da normal (Produto Escalar)
         double velocityAlongNormal = relVx * nx + relVy * ny;
 
-        if (velocityAlongNormal > 0) return; //foi tangente
+        if (velocityAlongNormal > 0) {
+            applyEscape();
+            return; //foi tangente
+        }
 
         // Vnew = Vold - 2(Vold . Normal) * Normal : formula fisica para calcular reflexão com impulso
         double j = -2 * velocityAlongNormal; //o j corresponde  ao impulso
@@ -51,6 +56,11 @@ public class BallDiskCollisionResolver implements CollisionResolver {
         // apllicamos um multiplicador de impacto á nova velocidade
         ball.setVelocity(new Velocity(newVx * BallControllerConfig.IMPACT_MULTIPLIER, newVy * BallControllerConfig.IMPACT_MULTIPLIER));
 
+        applyEscape();
+
+    }
+
+    private void applyEscape() {
         Velocity newVel = ball.getVelocity();
 
         // Mexer a bola imediatamente para garantir que sai do disco

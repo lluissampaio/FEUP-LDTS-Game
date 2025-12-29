@@ -1,6 +1,7 @@
 package com.aor.airhockey.controller.game;
 
 import com.aor.airhockey.Game;
+import com.aor.airhockey.controller.*;
 import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.Velocity;
@@ -11,7 +12,11 @@ import com.aor.airhockey.config.controller.game.DiskControllerConfig;
 import java.util.Set;
 
 public class Disk2Controller extends GameController {
-    public Disk2Controller(Field field){ super(field); }
+    private final FieldCollisionDetector objectCollisionDetector;
+    public Disk2Controller(Field field){
+        super(field);
+        objectCollisionDetector = new DiskObjectCollisionDetector(field);
+    }
 
     private void moveDisk1() {
         Disk disk2 = getModel().getDisk2();
@@ -20,35 +25,14 @@ public class Disk2Controller extends GameController {
         double newX = diskPos.getX() + diskVel.getX();
         double newY = diskPos.getY() + diskVel.getY();
         Position newPosition = new Position(newX, newY);
-        if (collisionWithHorObject(newPosition, disk2.getRadius())){
-            diskVel.setVelY(disk2.getVelocity().getY() * DiskControllerConfig.FRICTION_MULTIPLIER);
-            disk2.setVelocity(diskVel);
-        }
-        if (collisionWithVerObject(newPosition, disk2.getRadius())){
-            diskVel.setVelX(disk2.getVelocity().getX() * DiskControllerConfig.FRICTION_MULTIPLIER);
-            disk2.setVelocity(diskVel);
+        CollisionAxis axis = objectCollisionDetector.collisionAxis(newPosition, disk2.getRadius());
+        if (axis != CollisionAxis.NONE) {
+            CollisionResolver objectCollisionResolver = new DiskObjectCollisionResolver(disk2, axis);
+            objectCollisionResolver.resolve();
         }
         double velX = disk2.getVelocity().getX();
         double velY = disk2.getVelocity().getY();
         disk2.setPosition(new Position(diskPos.getX() + velX, diskPos.getY() + velY));
-    }
-
-    private boolean collisionWithHorObject(Position position, double radius) {
-        Position roundDownPosition = new Position(Math.round(position.getX()), Math.round(position.getY() + 0.5 + radius));
-        Position roundUpPosition = new Position(Math.round(position.getX()), Math.round(position.getY() - 0.5 - radius));
-        if (!getModel().isEmpty(roundUpPosition) || !getModel().isEmpty(roundDownPosition)) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean collisionWithVerObject(Position position, double radius) {
-        Position roundLeftPosition = new Position(Math.round(position.getX() - 0.5 - radius), Math.round(position.getY()));
-        Position roundRightPosition = new Position(Math.round(position.getX() + 0.5 + radius), Math.round(position.getY()));
-        if (!getModel().isEmpty(roundLeftPosition) || !getModel().isEmpty(roundRightPosition)) {
-            return true;
-        }
-        return false;
     }
 
     @Override
