@@ -106,13 +106,36 @@ In our implementation, there were some classes where we applied this design patt
 With the implementation of this design pattern we saw our work get simplified as we didn't have to deal with the low-level Lanterna modules.
 
 ---
+#### STRATEGY PATTERN
+
+**Problem in Context**
+
+Since we implemented the Java key listeners as our input handlers, the menus were difficult to navigate through, since going down or up by only one option was almost impossible. 
+
+**The Pattern**
+
+To solve this problem we used the Strategy Pattern. This is a group of classes/algorithms that are interchangeable via a common interface.
+
+**Implementation**
+
+In our specific case, the implementation was done the following way: 
+
+* Interface : InputHandler ;
+
+* Classes implementing
+    * MenuInputHandler class;
+    * GameInputHandler class;
+
+When the game changes state, the InputHandler is changed using the interface.
+
+**Consequences**
+
+We achieved the desired outcome : better inputs for all states. This pattern also makes it easier to change the handlers or even add more (promotes Open-Closed principle).
+
+---
 #### KNOWN CODE SMELLS
 
 All the code smells mentioned before were solved.
-
-2. Position.java: We changed the primitive data type that holds the position from int to double so that it would be easier to calculate the balls 
-    movement. The problem is that we need the position in int data type to be able to represent in the LanternaGUI.java class, so we got a fast 
-    solution by rounding the values. We plan to implement functions in Position.class that allow us to solve this problem. 
 
 ---
 ### TESTING
