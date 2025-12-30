@@ -18,9 +18,13 @@ public class BallController extends GameController {
     private final FieldCollisionDetector wallCollisionDetector;
     private final CircleCollisionDetector diskCollisionDetector;
     public BallController(Field field){
+        this(field, new BallWallCollisionDetector(field), new DiskBallCollisionDetector());
+    }
+
+    public BallController(Field field, FieldCollisionDetector wallCollisionDetector, CircleCollisionDetector diskCollisionDetector) {
         super(field);
-        wallCollisionDetector = new BallWallCollisionDetector(field);
-        diskCollisionDetector = new DiskBallCollisionDetector();
+        this.wallCollisionDetector = wallCollisionDetector;
+        this.diskCollisionDetector = diskCollisionDetector;
     }
 
     public void moveBall() {

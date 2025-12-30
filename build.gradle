@@ -33,5 +33,5 @@ test {
 
 pitest {
     junit5PluginVersion = '1.2.1'
-    excludedClasses = ['com.aor.airhockey.controller.FieldController']
+    excludedClasses = ['com.aor.airhockey.controller.FieldController'] //field controller mutations caused issues in testing
 }
