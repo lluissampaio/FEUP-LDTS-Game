@@ -5,6 +5,7 @@ Best of 7 goals decide the winner. If, once the timer hits 1 minute of playing, 
 
 This game was developed by João Morete (up202403406@up.pt), Luís Sampaio (up202404078@up.pt) and Tomás Silva (up202403435@up.pt).
 
+---
 ### IMPLEMENTED FEATURES
 
 - **Smooth in-game inputs** - Disks feel responsive, allowing for multiple key presses at the same time and key holding
@@ -16,10 +17,12 @@ This game was developed by João Morete (up202403406@up.pt), Luís Sampaio (up20
 - **Game settings** - Players are allowed to change the colors of the game freely to what they like the most.
 - **Game sounds** - The game has constant arcade music playing and also provides sounds navigating and selecting in the menus. When in the game, goals are marked with a specific sound and also when a player wins.
 
+---
 ### PLANNED FEATURES
 
 We were able to implement all the pretended features apart from the pause menu.
 
+---
 ### DESIGN
 
 #### GENERAL DEVELOPMENT PATTERN - MVC
@@ -36,22 +39,26 @@ MVC is a very used pattern that separates the game into three components:
 - V (View) - is responsible for the visual representation of the objects created by Model.
 - C (Controller) - is responsible for the processing the elements movements during the game.
 
+
 **Implementation**
 
 Our implementation of this pattern was done as follows: 
 
-- Model -> (model) Position;
-            (model.game.elements) Ball, Disk, Element, Goal, Halfline, Wall;
-            (model.game.field) Field, FieldBuilder, LoaderFieldBuilder;
-            (model.menu) Menu, Options.
+* Model 
+    * (model) Position;<br>
+    * (model.game.elements) Ball, Disk, Element, Goal, Halfline, Wall;
+    * (model.game.field) Field, FieldBuilder, LoaderFieldBuilder;
+    * (model.menu) Menu, Options.
 
-- View -> (viewer) Viewer;
-           (viewer.game) BallViewer, DiskViewer, ElementViewer, GameViewer, HalflineViewer, WallViewer;
-           (viewer.menu) MenuViewer, OptionsViewer.
+* View
+    * (viewer) Viewer;<br>
+    * (viewer.game) BallViewer, DiskViewer, ElementViewer, GameViewer, HalflineViewer, WallViewer;<br>
+    * (viewer.menu) MenuViewer, OptionsViewer.
 
-- Controller -> (controller) Controller;
-                   (controller.game) BallController, Disk1Controller, Disk2Controller, FieldController, GameController;
-                   (controller.menu) MenuController, OptionsController.   
+* Controller
+    * (controller) Controller;<br>
+    * (controller.game) BallController, Disk1Controller, Disk2Controller, FieldController, GameController;<br>
+    * (controller.menu) MenuController, OptionsController.   
 
 **Consequences**
 
@@ -60,6 +67,7 @@ The implementation of the MVC design pattern brought us the following benefits:
 - Ease of maintaining and testing;
 - Separate responsibilities - also, it makes it more difficult the for us to break the Single Responsibility Principle from SOLID;
 
+---
 #### STATE PATTERN
 
 **Problem in Context**
@@ -78,6 +86,7 @@ The Game class holds various state such as the GameState class and the MenuState
 
 A clear, organized code that also allows for expansion with ease. It happened when we wanted to implement both que Options and the End screens to our game. We just created new states and called them in the right moment.
 
+---
 #### FACADE PATTERN
 
 **Problem in Context**
@@ -96,6 +105,7 @@ In our implementation, there were some classes where we applied this design patt
 
 With the implementation of this design pattern we saw our work get simplified as we didn't have to deal with the low-level Lanterna modules.
 
+---
 #### KNOWN CODE SMELLS
 
 All the code smells mentioned before were solved.
@@ -104,6 +114,7 @@ All the code smells mentioned before were solved.
     movement. The problem is that we need the position in int data type to be able to represent in the LanternaGUI.java class, so we got a fast 
     solution by rounding the values. We plan to implement functions in Position.class that allow us to solve this problem. 
 
+---
 ### TESTING
 
 ### Screenshot of coverage report
@@ -112,6 +123,7 @@ All the code smells mentioned before were solved.
 ### Link to mutation testing report
 [Mutation tests](../build/reports/pitest/index.html)
 
+---
 ### SELF-EVALUATION
 
 The work was split evenly among the three of us: 
