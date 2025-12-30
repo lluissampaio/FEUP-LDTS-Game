@@ -10,7 +10,7 @@ public class EndViewer extends Viewer<End> {
     public EndViewer(End end) { super(end); }
 
     @Override
-    protected void drawElements(GUI gui) {
+    public void drawElements(GUI gui) {
 
         gui.drawText(new Position(EndViewerConfig.TITLE_X_POS, EndViewerConfig.TITLE_Y_POS), String.format(EndViewerConfig.TITLE_TEXT, getModel().getWinner()), EndViewerConfig.TITLE_COLOR);
 
