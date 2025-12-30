@@ -1,4 +1,4 @@
-package com.aor.airhockey.controller;
+package com.aor.airhockey.controller.sounds;
 
 import javax.sound.sampled.*;
 import java.io.IOException;

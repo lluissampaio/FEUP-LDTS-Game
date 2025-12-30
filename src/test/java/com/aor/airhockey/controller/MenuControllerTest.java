@@ -2,6 +2,7 @@ package com.aor.airhockey.controller;
 
 import com.aor.airhockey.Game;
 import com.aor.airhockey.controller.menu.MenuController;
+import com.aor.airhockey.controller.sounds.MenuSounds;
 import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.model.ColorSettings;
 import com.aor.airhockey.model.menu.Menu;
@@ -10,6 +11,7 @@ import com.aor.airhockey.states.OptionsState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.mockito.Mockito;
 
 import java.util.Collections;
@@ -61,6 +63,11 @@ public class MenuControllerTest {
         stubInputHandler = new StubInputHandler();
         stubMenuSounds = new StubMenuSounds();
         controller = new MenuController(menu, stubInputHandler, stubMenuSounds);
+
+        Mockito.when(menu.isSelectedExit()).thenReturn(false);
+        Mockito.when(menu.isSelectedMultiplayer()).thenReturn(false);
+        Mockito.when(menu.isSelectedOptions()).thenReturn(false);
+        Mockito.when(game.getColorSettings()).thenReturn(Mockito.mock(ColorSettings.class));
     }
 
     @Test
@@ -88,6 +95,7 @@ public class MenuControllerTest {
     }
 
     @Test
+    @Timeout(1)
     void stepSelectMultiplayer() throws Exception{
         stubInputHandler.setReturnActions(GUI.ACTION.SELECT);
         Mockito.when(menu.isSelectedMultiplayer()).thenReturn(true);
@@ -103,7 +111,6 @@ public class MenuControllerTest {
     void stepSelectOptions() throws Exception{
         stubInputHandler.setReturnActions(GUI.ACTION.SELECT);
         Mockito.when(menu.isSelectedOptions()).thenReturn(true);
-        Mockito.when(game.getColorSettings()).thenReturn(Mockito.mock(ColorSettings.class));
 
         controller.step(game, Collections.emptySet(), 100);
 

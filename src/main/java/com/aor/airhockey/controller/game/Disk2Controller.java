@@ -1,7 +1,7 @@
 package com.aor.airhockey.controller.game;
 
 import com.aor.airhockey.Game;
-import com.aor.airhockey.controller.*;
+import com.aor.airhockey.controller.collision.*;
 import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.Velocity;

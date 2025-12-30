@@ -2,6 +2,8 @@ package com.aor.airhockey.controller.menu;
 
 import com.aor.airhockey.Game;
 import com.aor.airhockey.controller.*;
+import com.aor.airhockey.controller.sounds.MenuSounds;
+import com.aor.airhockey.controller.sounds.SoundManager;
 import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.model.game.field.LoaderFieldBuilder;
 import com.aor.airhockey.model.menu.Menu;

@@ -1,4 +1,4 @@
-package com.aor.airhockey.controller;
+package com.aor.airhockey.controller.sounds;
 
 public interface Sound {
     void play();

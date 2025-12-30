@@ -2,6 +2,7 @@ package com.aor.airhockey.controller;
 
 import com.aor.airhockey.Game;
 import com.aor.airhockey.controller.menu.EndController;
+import com.aor.airhockey.controller.sounds.MenuSounds;
 import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.model.menu.End;
 import com.aor.airhockey.states.GameState;
@@ -9,6 +10,7 @@ import com.aor.airhockey.states.MenuState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.mockito.Mockito;
 
 import java.util.Collections;
@@ -60,6 +62,10 @@ public class EndControllerTest {
         stubInputHandler = new StubInputHandler();
         stubMenuSounds = new StubMenuSounds();
         controller = new EndController(end, stubInputHandler, stubMenuSounds);
+
+//        Mockito.when(end.isSelectedExit()).thenReturn(false);
+//        Mockito.when(end.isSelectedPlayAgain()).thenReturn(false);
+//        Mockito.when(end.isSelectedGoToMenu()).thenReturn(false);
     }
 
     @Test
@@ -87,6 +93,7 @@ public class EndControllerTest {
     }
 
     @Test
+    @Timeout(1)
     void stepSelectPlayAgain() throws Exception{
         stubInputHandler.setReturnActions(GUI.ACTION.SELECT);
         Mockito.when(end.isSelectedPlayAgain()).thenReturn(true);

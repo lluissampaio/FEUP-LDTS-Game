@@ -2,9 +2,8 @@ package com.aor.airhockey.controller.game;
 
 import com.aor.airhockey.Game;
 import com.aor.airhockey.config.ConfigCalculator;
-import com.aor.airhockey.config.GameConfig;
 import com.aor.airhockey.config.model.game.elements.BallConfig;
-import com.aor.airhockey.controller.*;
+import com.aor.airhockey.controller.collision.*;
 import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.Velocity;

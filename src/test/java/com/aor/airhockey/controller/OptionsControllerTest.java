@@ -1,15 +1,11 @@
 package com.aor.airhockey.controller;
 
 import com.aor.airhockey.Game;
-import com.aor.airhockey.controller.menu.MenuController;
 import com.aor.airhockey.controller.menu.OptionsController;
+import com.aor.airhockey.controller.sounds.MenuSounds;
 import com.aor.airhockey.gui.GUI;
-import com.aor.airhockey.model.ColorSettings;
-import com.aor.airhockey.model.menu.Menu;
 import com.aor.airhockey.model.menu.Options;
-import com.aor.airhockey.states.GameState;
 import com.aor.airhockey.states.MenuState;
-import com.aor.airhockey.states.OptionsState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

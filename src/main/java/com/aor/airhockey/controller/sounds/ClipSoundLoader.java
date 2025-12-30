@@ -1,6 +1,4 @@
-package com.aor.airhockey.controller;
-
-import com.aor.airhockey.config.gui.FontRendererConfig;
+package com.aor.airhockey.controller.sounds;
 
 import javax.sound.sampled.*;
 import java.io.IOException;

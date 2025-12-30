@@ -1,4 +1,4 @@
-package com.aor.airhockey.controller;
+package com.aor.airhockey.controller.collision;
 
 import com.aor.airhockey.config.controller.game.DiskControllerConfig;
 import com.aor.airhockey.model.Velocity;

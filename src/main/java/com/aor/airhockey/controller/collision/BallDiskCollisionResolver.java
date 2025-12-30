@@ -1,4 +1,4 @@
-package com.aor.airhockey.controller;
+package com.aor.airhockey.controller.collision;
 
 import com.aor.airhockey.config.controller.game.BallControllerConfig;
 import com.aor.airhockey.model.Position;

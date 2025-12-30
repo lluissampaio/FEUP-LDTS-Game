@@ -1,12 +1,12 @@
-package com.aor.airhockey.controller;
+package com.aor.airhockey.controller.collision;
 
 import com.aor.airhockey.model.Position;
 import com.aor.airhockey.model.game.field.Field;
 
-public class DiskObjectCollisionDetector implements FieldCollisionDetector {
+public class BallWallCollisionDetector implements FieldCollisionDetector {
     private final Field field;
 
-    public DiskObjectCollisionDetector(Field field) {
+    public BallWallCollisionDetector(Field field) {
         this.field = field;
     }
 
@@ -27,7 +27,7 @@ public class DiskObjectCollisionDetector implements FieldCollisionDetector {
     private boolean checkHorizontalCollision(Position position, double radius) {
         Position roundDownPosition = new Position(Math.round(position.getX()), Math.round(position.getY() + 0.5 + radius));
         Position roundUpPosition = new Position(Math.round(position.getX()), Math.round(position.getY() - 0.5 - radius));
-        if (!field.isEmpty(roundUpPosition) || !field.isEmpty(roundDownPosition)) {
+        if (field.isWall(roundUpPosition) || field.isWall(roundDownPosition)) {
             return true;
         }
         return false;
@@ -36,7 +36,7 @@ public class DiskObjectCollisionDetector implements FieldCollisionDetector {
     private boolean checkVerticalCollision(Position position, double radius) {
         Position roundLeftPosition = new Position(Math.round(position.getX() - 0.5 - radius), Math.round(position.getY()));
         Position roundRightPosition = new Position(Math.round(position.getX() + 0.5 + radius), Math.round(position.getY()));
-        if (!field.isEmpty(roundLeftPosition) || !field.isEmpty(roundRightPosition)) {
+        if (field.isWall(roundLeftPosition) || field.isWall(roundRightPosition)) {
             return true;
         }
         return false;

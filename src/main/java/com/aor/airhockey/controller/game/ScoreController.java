@@ -1,12 +1,11 @@
 package com.aor.airhockey.controller.game;
 
 import com.aor.airhockey.Game;
-import com.aor.airhockey.controller.Controller;
-import com.aor.airhockey.controller.GameSounds;
+import com.aor.airhockey.controller.sounds.GameSounds;
 import com.aor.airhockey.gui.GUI;
 import com.aor.airhockey.config.GameConfig;
 import com.aor.airhockey.model.game.field.Field;
-import com.aor.airhockey.controller.SoundManager;
+import com.aor.airhockey.controller.sounds.SoundManager;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;

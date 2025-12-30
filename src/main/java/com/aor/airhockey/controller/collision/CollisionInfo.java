@@ -1,4 +1,4 @@
-package com.aor.airhockey.controller;
+package com.aor.airhockey.controller.collision;
 
 public class CollisionInfo {
     private double nx;

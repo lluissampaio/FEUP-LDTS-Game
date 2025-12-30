@@ -1,7 +1,7 @@
 package com.aor.airhockey;
 
-import com.aor.airhockey.controller.BackgroundMusic;
-import com.aor.airhockey.controller.SoundManager;
+import com.aor.airhockey.controller.sounds.BackgroundMusic;
+import com.aor.airhockey.controller.sounds.SoundManager;
 import com.aor.airhockey.gui.LanternaGUI;
 import com.aor.airhockey.model.ColorSettings;
 import com.aor.airhockey.model.menu.Menu;

@@ -13,6 +13,7 @@ import com.aor.airhockey.states.EndState;
 import com.aor.airhockey.states.MenuState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.mockito.Mockito;
 import java.util.Collections;
 import java.util.Set;
@@ -54,11 +55,13 @@ class FieldControllerTest {
         Mockito.when(field.getGoals()).thenReturn(Collections.emptyList());
         Mockito.when(field.getHalfline()).thenReturn(Collections.emptyList());
 
+        Mockito.when(field.getWinner()).thenReturn(0);
+
         controller = new FieldController(field);
     }
 
     @Test
-    void stepQuit() throws Exception { //ultilizador quer sair
+    void stepQuit() throws Exception { //utilizador quer sair
         Set<GUI.ACTION> actions = Set.of(GUI.ACTION.QUIT);
         controller.step(game, actions, 100);
         Mockito.verify(game, Mockito.times(1)).setState(any(MenuState.class));//o jogo deve mudar para o estado de Menu
