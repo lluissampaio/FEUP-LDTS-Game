@@ -20,7 +20,7 @@ This game was developed by João Morete (up202403406@up.pt), Luís Sampaio (up20
 ---
 ### PLANNED FEATURES
 
-We were able to implement all the pretended features apart from the pause menu.
+We were able to implement all the pretended features apart from the pause menu and the singleplayer game mode. Both due to time limitations.
 
 ---
 ### DESIGN
