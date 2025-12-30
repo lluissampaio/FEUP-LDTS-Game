@@ -25,7 +25,7 @@ public class EndState extends State<End> {
     }
 
     @Override
-    protected Controller<End> getController() {
+    protected Controller<End> getController() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         return new EndController(getModel());
     }
 }
