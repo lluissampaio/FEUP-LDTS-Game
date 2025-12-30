@@ -16,9 +16,13 @@ public class OptionsController extends Controller<Options> {
     private InputHandler inputHandler;
     private MenuSounds menuSounds;
     public OptionsController(Options options) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        this(options, new MenuInputHandler(), new SoundManager());
+    }
+
+    public OptionsController(Options options, InputHandler inputHandler, MenuSounds menuSounds) {
         super(options);
-        inputHandler = new MenuInputHandler();
-        menuSounds = new SoundManager();
+        this.inputHandler = inputHandler;
+        this.menuSounds = menuSounds;
     }
 
     @Override
