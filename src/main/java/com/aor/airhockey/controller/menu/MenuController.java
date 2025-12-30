@@ -18,9 +18,13 @@ public class MenuController extends Controller<Menu> {
     private InputHandler inputHandler;
     private MenuSounds menuSounds;
     public MenuController(Menu menu) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        this(menu, new MenuInputHandler(), new SoundManager());
+    }
+
+    public MenuController(Menu menu, InputHandler inputHandler, MenuSounds menuSounds) {
         super(menu);
-        inputHandler = new MenuInputHandler();
-        menuSounds = new SoundManager();
+        this.inputHandler = inputHandler;
+        this.menuSounds = menuSounds;
     }
 
     @Override
